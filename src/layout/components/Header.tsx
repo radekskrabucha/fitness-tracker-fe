@@ -4,7 +4,7 @@ import { InternalLink } from '~/config/app'
 import { HeaderMenu } from './HeaderMenu'
 
 export const Header: Component = () => (
-  <header class="layout-container bg-background sticky top-0 border-b border-white/10">
+  <header class="layout-container bg-background sticky top-0 z-10 border-b border-white/10">
     <div class="layout-section">
       <nav class="flex items-center gap-4">
         <Link

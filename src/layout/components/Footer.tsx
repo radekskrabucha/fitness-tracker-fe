@@ -13,12 +13,12 @@ export const Footer: Component = () => (
             class="text-4xl"
             href={InternalLink.home}
           >
-            😎
+            🏋️‍♀️
           </Link>
           <div>
             <h3 class="font-main text-lg">{AppName}</h3>
             <p class="font-secondary text-sm text-white/50 max-sm:max-w-none">
-              A starter for SolidStart with TypeScript and Tailwind CSS.
+              A Fitness Tracker app to track your workouts.
             </p>
           </div>
         </div>

@@ -1,10 +1,9 @@
 import { Meta, Title } from '@solidjs/meta'
 import { Show, type Component } from 'solid-js'
 import { AppName } from '~/config/app'
-import type { Undefinable } from '~/types/common'
 
 type SeoProps = {
-  title: Undefinable<string>
+  title: string | undefined
   description?: string
   imageUrl?: string
   siteUrl?: string

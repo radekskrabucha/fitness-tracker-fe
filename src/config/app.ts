@@ -1,23 +1,19 @@
 export const InternalLink = {
-  home: '/',
-  about: '/about'
+  home: '/'
 } as const
 
 export const ownerEmail = 'rskrabucha13@gmail.com'
 
 export const ExternalLink = {
   github: 'https://github.com/radekskrabucha',
-  linkedin: 'https://www.linkedin.com/in/radoslaw-skrabucha',
   twitter: 'https://twitter.com/radek_1313',
   email: `mailto:${ownerEmail}`,
-  sourceCode: 'https://github.com/radekskrabucha/solid-start-template',
-  solidJsSourceCode: 'https://github.com/solidjs/solid',
-  solidJsDocs: 'https://docs.solidjs.com'
+  sourceCode: 'https://github.com/radekskrabucha/fitness-tracker-fe'
 } as const
 
-export const AppName = 'SolidStart App Template'
+export const AppName = 'Fitness Tracker'
 
 export const defaultSeoTags = {
-  description: 'SolidStart Template app to quickly bootstrap your application.',
+  description: 'Fitness Tracker app to track your workouts',
   siteUrl: import.meta.env.VITE_APP_BASE_URL
 }

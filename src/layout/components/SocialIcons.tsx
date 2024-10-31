@@ -24,11 +24,11 @@ export const SocialIcons: Component = () => (
       />
     </Link>
     <Link
-      href={ExternalLink.linkedin}
-      aria-label="LinkedIn"
+      href={ExternalLink.sourceCode}
+      aria-label="Source Code"
     >
       <Icon
-        id="linkedin"
+        id="source-code"
         class="h-6 w-6 fill-current transition-colors duration-150 hover:text-white/50"
       />
     </Link>

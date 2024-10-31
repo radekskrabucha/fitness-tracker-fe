@@ -1,5 +1,5 @@
 {
-  "name": "solid-start-template",
+  "name": "fitness-tracker-fe",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
@@ -8,10 +8,8 @@
     "test": "vitest",
     "lint": "eslint \"src/**/*.+(ts|js|tsx)\"",
     "lint:fix": "eslint \"src/**/*.+(ts|js|tsx)\" --fix",
-    "format": "prettier . --write",
-    "type-check": "tsc --noEmit",
-    "commit": "cz",
-    "prepare": "husky"
+    "format": "prettier ./src --write",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@kobalte/core": "0.13.7",
@@ -28,8 +26,6 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.5.0",
-    "@commitlint/config-conventional": "19.5.0",
     "@eslint/js": "9.13.0",
     "@julr/vite-plugin-validate-env": "1.1.1",
     "@solidjs/testing-library": "0.8.10",
@@ -37,15 +33,11 @@
     "@testing-library/jest-dom": "6.6.2",
     "@testing-library/user-event": "14.5.2",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
-    "commitizen": "4.3.1",
-    "cz-conventional-changelog": "3.3.0",
     "eslint": "9.13.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-solid": "0.14.3",
     "globals": "15.11.0",
-    "husky": "9.1.6",
     "jsdom": "25.0.1",
-    "lint-staged": "15.2.10",
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "0.6.8",
     "tailwindcss": "4.0.0-alpha.31",
@@ -53,16 +45,5 @@
     "typescript-eslint": "8.12.2",
     "vite-plugin-solid": "2.10.2",
     "vitest": "2.1.4"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   }
 }

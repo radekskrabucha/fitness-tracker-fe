@@ -9,7 +9,9 @@ export const queryClient = new QueryClient({
     queries: {
       staleTime: QUERY_STALE_TIME,
       gcTime: QUERY_CACHE_TIME,
-      retry: false
+      retry: false,
+      throwOnError: true,
+      refetchOnWindowFocus: false
     },
     mutations: {
       gcTime: QUERY_CACHE_TIME

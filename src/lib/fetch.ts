@@ -1,11 +1,12 @@
-import ky, { type Options } from 'ky'
+import { ofetch, type FetchOptions } from 'ofetch'
 
 const FETCH_DEFAULT_TIMEOUT = 20000
-const FETCH_DEFAULT_CONFIG: Options = {
-  timeout: FETCH_DEFAULT_TIMEOUT
+const FETCH_DEFAULT_CONFIG: FetchOptions = {
+  timeout: FETCH_DEFAULT_TIMEOUT,
+  retry: 0
 }
 
-export const fetchBaseClient = ky.create({
+export const fetchBaseClient = ofetch.create({
   ...FETCH_DEFAULT_CONFIG
 })
 

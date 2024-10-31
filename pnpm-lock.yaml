@@ -29,9 +29,9 @@ importers:
       class-variance-authority:
         specifier: 0.7.0
         version: 0.7.0
-      ky:
-        specifier: 1.7.2
-        version: 1.7.2
+      ofetch:
+        specifier: 1.4.1
+        version: 1.4.1
       solid-js:
         specifier: 1.9.3
         version: 1.9.3
@@ -2347,10 +2347,6 @@ packages:
 
   known-css-properties@0.30.0:
     resolution: {integrity: sha512-VSWXYUnsPu9+WYKkfmJyLKtIvaRJi1kXUqVmBACORXZQxT5oZDsoZ2vQP+bQFDnWtpI/4eq3MLoRMjI2fnLzTQ==}
-
-  ky@1.7.2:
-    resolution: {integrity: sha512-OzIvbHKKDpi60TnF9t7UUVAF1B4mcqc02z5PIvrm08Wyb+yOcz63GRvEuVxNT18a9E1SrNouhB4W2NNLeD7Ykg==}
-    engines: {node: '>=18'}
 
   lazystream@1.0.1:
     resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
@@ -5874,8 +5870,6 @@ snapshots:
   knitwork@1.1.0: {}
 
   known-css-properties@0.30.0: {}
-
-  ky@1.7.2: {}
 
   lazystream@1.0.1:
     dependencies:

@@ -1,27 +1,29 @@
 import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { BetterAuthError } from 'better-auth'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
+import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { authClient } from '~/lib/auth'
-import { getSessionQueryOptions } from '../actions'
+import { getNameFromEmail } from '~/utils/email'
 import {
   Form,
   Field,
   emailValidation,
   passwordValidation,
   form
-} from '../form/signInForm'
+} from '../form/signUpForm'
 
-export const SignInForm = () => {
+export const SignUpForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  const signInMutation = createMutation(() => ({
-    mutationFn: authClient.signIn.email,
-    mutationKey: ['signIn'],
+  const signUpMutation = createMutation(() => ({
+    mutationFn: authClient.signUp.email,
+    mutationKey: ['signUp'],
     onSuccess: async () => {
       await queryClient.invalidateQueries(
         {
@@ -34,10 +36,12 @@ export const SignInForm = () => {
       reset(form)
       navigate(InternalLink.home, { replace: true })
     },
-    onError: () => {
+    onError: error => {
+      console.error(error)
+      console.log(error instanceof BetterAuthError)
       return toast.show({
         title: 'Oops! Something went wrong 🤓',
-        description: 'Please check your credentials and try again.',
+        description: 'Seems like account already exists, please log in.',
         variant: 'error',
         priority: 'high'
       })
@@ -46,7 +50,12 @@ export const SignInForm = () => {
 
   return (
     <Form
-      onSubmit={values => signInMutation.mutate(values)}
+      onSubmit={values =>
+        signUpMutation.mutate({
+          ...values,
+          name: getNameFromEmail(values.email) || values.email
+        })
+      }
       class="flex w-full max-w-80 flex-col gap-4"
     >
       <Field
@@ -57,7 +66,7 @@ export const SignInForm = () => {
           <TextInput
             label="Email"
             placeholder=" "
-            disabled={signInMutation.isPending}
+            disabled={signUpMutation.isPending}
             {...field}
             {...props}
             type="email"
@@ -73,7 +82,7 @@ export const SignInForm = () => {
           <TextInput
             label="Password"
             placeholder=" "
-            disabled={signInMutation.isPending}
+            disabled={signUpMutation.isPending}
             {...field}
             {...props}
             type="password"
@@ -83,10 +92,10 @@ export const SignInForm = () => {
       <Button
         type="submit"
         class="mt-8"
-        disabled={signInMutation.isPending}
+        disabled={signUpMutation.isPending}
       >
-        {signInMutation.isPending && <LoaderCircle />}
-        Sign in
+        {signUpMutation.isPending && <LoaderCircle />}
+        Create account
       </Button>
     </Form>
   )

@@ -4,8 +4,8 @@ import { Image } from '~/components/Image'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
+import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { authClient } from '~/lib/auth'
-import { getSessionQueryOptions } from '../actions'
 
 export const SessionUser = () => {
   const getSessionQuery = createQuery(getSessionQueryOptions)
@@ -20,17 +20,7 @@ export const SessionUser = () => {
   return (
     <QueryBoundary
       query={getSessionQuery}
-      loadingFallback={
-        <Image
-          img={{
-            src: undefined
-          }}
-          wrapper={{
-            class:
-              'p-1 size-10 flex items-center flex-shrink-0 justify-center rounded-full border-2 border-white/50'
-          }}
-        />
-      }
+      loadingFallback={<AvatarPlaceholder />}
       errorFallback={() => (
         <Link
           href={InternalLink.signIn}
@@ -51,12 +41,12 @@ export const SessionUser = () => {
                 img={{
                   src: user().image,
                   alt: user().name,
-                  class: 'rounded-full flex-shrink-0 object-cover'
+                  class: 'rounded-full flex-shrink-0 object-cover h-full w-full'
                 }}
                 wrapper={{
-                  // fallbackDelay: 500,
+                  fallbackDelay: 100,
                   class:
-                    'size-10 flex items-center  flex-shrink-0 justify-center rounded-full p-1 border-2 border-white/50 cursor-pointer',
+                    'size-10 flex items-center  flex-shrink-0 justify-center rounded-full p-0.5 border-2 border-white/50 cursor-pointer',
                   onClick: () => logOutMutation.mutate()
                 }}
                 fallback={{
@@ -72,3 +62,15 @@ export const SessionUser = () => {
     </QueryBoundary>
   )
 }
+
+export const AvatarPlaceholder = () => (
+  <Image
+    img={{
+      src: undefined
+    }}
+    wrapper={{
+      class:
+        'p-1 size-10 flex items-center flex-shrink-0 justify-center rounded-full border-2 border-white/50 bg-white/5 animate-pulse'
+    }}
+  />
+)

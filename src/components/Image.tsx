@@ -43,7 +43,7 @@ export const Image: Component<ImageProps> = props => (
       loading={props.img.loading || 'lazy'}
     />
     <Show when={props.fallback}>
-      {props => <ImageKobalte.Fallback {...props()} />}
+      {fallbackProps => <ImageKobalte.Fallback {...fallbackProps()} />}
     </Show>
   </ImageKobalte>
 )

@@ -1,12 +1,13 @@
 import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
-import { createMutation } from '@tanstack/solid-query'
+import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { authClient } from '~/lib/auth'
+import { getSessionQueryOptions } from '../actions'
 import {
   Form,
   Field,
@@ -16,11 +17,20 @@ import {
 } from '../form/signInForm'
 
 export const SignInForm = () => {
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
   const signInMutation = createMutation(() => ({
     mutationFn: authClient.signIn.email,
     mutationKey: ['signIn'],
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(
+        {
+          queryKey: getSessionQueryOptions().queryKey,
+          exact: true,
+          refetchType: 'all'
+        },
+        { throwOnError: true, cancelRefetch: true }
+      )
       reset(form)
       navigate(InternalLink.home, { replace: true })
     },

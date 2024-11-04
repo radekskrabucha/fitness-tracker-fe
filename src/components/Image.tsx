@@ -1,8 +1,8 @@
-import { type JSX, type Component } from 'solid-js'
+import { Image as ImageKobalte } from '@kobalte/core/image'
+import type { ImageRootProps } from '@kobalte/core/image'
+import { Show, type Component, type JSX } from 'solid-js'
 
-type ImageProps = {
-  src: string
-} & Pick<
+type ImgProps = Pick<
   JSX.ImgHTMLAttributes<HTMLImageElement>,
   | 'alt'
   | 'class'
@@ -16,12 +16,34 @@ type ImageProps = {
   | 'referrerpolicy'
   | 'sizes'
   | 'srcset'
+  | 'src'
 >
 
+type ImageProps = {
+  wrapper?: ImageRootProps & {
+    class?: string
+    onClick?: JSX.EventHandlerUnion<
+      HTMLSpanElement,
+      MouseEvent,
+      JSX.EventHandler<HTMLSpanElement, MouseEvent>
+    >
+  }
+  fallback?: {
+    class: string
+    children?: JSX.Element
+  }
+  img: ImgProps
+}
+
 export const Image: Component<ImageProps> = props => (
-  <img
-    {...props}
-    decoding={props.decoding || 'async'}
-    loading={props.loading || 'lazy'}
-  />
+  <ImageKobalte {...props.wrapper}>
+    <ImageKobalte.Img
+      {...props.img}
+      decoding={props.img.decoding || 'async'}
+      loading={props.img.loading || 'lazy'}
+    />
+    <Show when={props.fallback}>
+      {props => <ImageKobalte.Fallback {...props()} />}
+    </Show>
+  </ImageKobalte>
 )

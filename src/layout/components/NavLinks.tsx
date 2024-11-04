@@ -13,10 +13,5 @@ export const NavLinks: Component<NavLinksProps> = props => (
       text="Home"
       onClick={props.onNavLinkClick}
     />
-    <NavLink
-      href={InternalLink.signIn}
-      text="Sign In"
-      onClick={props.onNavLinkClick}
-    />
   </ul>
 )

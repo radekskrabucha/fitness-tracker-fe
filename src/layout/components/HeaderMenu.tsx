@@ -1,5 +1,7 @@
 import { cx } from 'class-variance-authority'
 import { type Component } from 'solid-js'
+import { ClientOnly } from '~/components/ClientOnly'
+import { SessionUser } from '~/features/signIn/components/SessionUser'
 import { useToggle } from '~/hooks/useToggle'
 import { Hamburger } from './Hamburger'
 import { NavLinks } from './NavLinks'
@@ -17,6 +19,9 @@ export const HeaderMenu: Component = () => {
       >
         <NavLinks onNavLinkClick={() => setOff()} />
       </div>
+      <ClientOnly>
+        <SessionUser />
+      </ClientOnly>
       <Hamburger
         isOpen={isOn()}
         onToggle={() => toggle()}

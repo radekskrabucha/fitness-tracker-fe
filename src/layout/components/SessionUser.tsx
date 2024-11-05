@@ -1,5 +1,4 @@
 import { createMutation, createQuery } from '@tanstack/solid-query'
-import { Show } from 'solid-js'
 import { Image } from '~/components/Image'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
@@ -33,31 +32,24 @@ export const SessionUser = () => {
     >
       {data => (
         <>
-          <br class="flex-shrink-0 flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-white/50 p-0.5" />
-          {/* TODO when types fixed update it  */}
-          {/* @ts-expect-error types are wrong */}
-          <Show when={data?.user}>
-            {user => (
-              <Image
-                img={{
-                  src: user().image,
-                  alt: user().name,
-                  class: 'flex-shrink-0 h-full w-full rounded-full object-cover'
-                }}
-                wrapper={{
-                  fallbackDelay: 100,
-                  class:
-                    'flex-shrink-0 flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-white/50 p-0.5',
-                  onClick: () => logOutMutation.mutate()
-                }}
-                fallback={{
-                  class:
-                    'rounded-full bg-white/10 flex-1 flex-shrink-0 h-full w-full flex items-center justify-center uppercase text-center text-white text-xl font-bold select-none',
-                  children: user().name.slice(0, 1)
-                }}
-              />
-            )}
-          </Show>
+          <Image
+            img={{
+              src: data.user.image,
+              alt: data.user.name,
+              class: 'flex-shrink-0 h-full w-full rounded-full object-cover'
+            }}
+            wrapper={{
+              fallbackDelay: 100,
+              class:
+                'flex-shrink-0 flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-white/50 p-0.5',
+              onClick: () => logOutMutation.mutate()
+            }}
+            fallback={{
+              class:
+                'rounded-full bg-white/10 flex-1 flex-shrink-0 h-full w-full flex items-center justify-center uppercase text-center text-white text-xl font-bold select-none',
+              children: data.user.name[0]
+            }}
+          />
         </>
       )}
     </QueryBoundary>

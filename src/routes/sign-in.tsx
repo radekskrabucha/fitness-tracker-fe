@@ -1,5 +1,5 @@
 import { SEOTitle } from '~/components/Seo'
-import { SignInPage } from '~/features/signIn'
+import { SignInPage } from '~/features/signIn/SignInPage'
 
 const SignIn = () => (
   <>

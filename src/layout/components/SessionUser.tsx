@@ -57,8 +57,10 @@ export const SessionUser = () => {
               />
             </Popover.Trigger>
             <Popover.Portal>
-              <Popover.Content class="popover origin-[var(--kb-hovercard-content-transform-origin)] bg-background/[0.03] flex w-full flex-col items-center gap-4 overflow-hidden rounded-md border border-current/50 px-6 py-4 text-black shadow-md backdrop-blur-2xl">
-                <Popover.Description class="font-secondary text-current/75">{user.email}</Popover.Description>
+              <Popover.Content class="popover bg-background/[0.03] flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-md border border-current/50 px-6 py-4 text-black shadow-md backdrop-blur-2xl">
+                <Popover.Description class="font-secondary text-current/75">
+                  {user.email}
+                </Popover.Description>
                 <Link
                   class={buttonVariants({ variant: 'link' })}
                   href={InternalLink.profile}

@@ -6,8 +6,7 @@ import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
-import { authClient } from '~/lib/auth'
-import { getSessionQueryOptions } from '../actions'
+import { getSessionQueryOptions, signInWithEmail } from '../actions'
 import {
   Form,
   Field,
@@ -20,7 +19,7 @@ export const SignInForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const signInMutation = createMutation(() => ({
-    mutationFn: authClient.signIn.email,
+    mutationFn: signInWithEmail,
     mutationKey: ['signIn'],
     onSuccess: async () => {
       await queryClient.invalidateQueries(

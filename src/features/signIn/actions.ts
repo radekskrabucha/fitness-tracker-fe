@@ -1,10 +1,6 @@
 import { queryOptions } from '@tanstack/solid-query'
 import { authClient } from '~/lib/auth'
-
-type SignInRequest = {
-  email: string
-  password: string
-}
+import type { SignInRequest } from './types/request'
 
 export const signInWithEmail = (values: SignInRequest) =>
   authClient.signIn.email(values)

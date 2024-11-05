@@ -33,6 +33,7 @@ export const SessionUser = () => {
     >
       {data => (
         <>
+          <br class="flex-shrink-0 flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-white/50 p-0.5" />
           {/* TODO when types fixed update it  */}
           {/* @ts-expect-error types are wrong */}
           <Show when={data?.user}>
@@ -41,12 +42,12 @@ export const SessionUser = () => {
                 img={{
                   src: user().image,
                   alt: user().name,
-                  class: 'rounded-full flex-shrink-0 object-cover h-full w-full'
+                  class: 'flex-shrink-0 h-full w-full rounded-full object-cover'
                 }}
                 wrapper={{
                   fallbackDelay: 100,
                   class:
-                    'size-10 flex items-center  flex-shrink-0 justify-center rounded-full p-0.5 border-2 border-white/50 cursor-pointer',
+                    'flex-shrink-0 flex size-10 cursor-pointer items-center justify-center rounded-full border-2 border-white/50 p-0.5',
                   onClick: () => logOutMutation.mutate()
                 }}
                 fallback={{

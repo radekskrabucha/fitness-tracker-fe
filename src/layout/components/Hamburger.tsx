@@ -9,7 +9,7 @@ type HamburgerProps = {
 export const Hamburger: Component<HamburgerProps> = props => (
   <button
     onClick={() => props.onToggle()}
-    class="relative z-[1001] hidden h-5 w-6 cursor-pointer max-md:block"
+    class="relative isolate hidden h-5 w-6 cursor-pointer max-md:block"
     type="button"
   >
     <div

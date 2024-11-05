@@ -1,7 +1,8 @@
 export const InternalLink = {
   home: '/',
   signIn: '/sign-in',
-  signUp: '/sign-up'
+  signUp: '/sign-up',
+  profile: '/profile'
 } as const
 
 export const ownerEmail = 'rskrabucha13@gmail.com'

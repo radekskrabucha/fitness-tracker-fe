@@ -23,14 +23,15 @@ export const EditFitnessProfileMenu: Component<
   const queryClient = useQueryClient()
   const deleteFitnessProfileMutation = createMutation(() => ({
     mutationFn: deleteFitnessProfile,
+    mutationKey: ['deleteFitnessProfile'],
     onSuccess: async () => {
+      navigate(InternalLink.profile, { replace: true })
       toast.show({
         title: 'Profile deleted successfully!',
         description: 'Your fitness profile has been deleted successfully.',
         variant: 'success',
         priority: 'high'
       })
-      navigate(InternalLink.profile, { replace: true })
       await queryClient.invalidateQueries(
         {
           queryKey: getUserFitnessProfileQueryOptions(props.userId).queryKey,

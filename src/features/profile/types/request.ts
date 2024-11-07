@@ -6,3 +6,7 @@ export type ChangePasswordRequest = {
 export type EditUserRequest = {
   name: string
 }
+
+export type DeleteUserRequest = {
+  password: string
+}

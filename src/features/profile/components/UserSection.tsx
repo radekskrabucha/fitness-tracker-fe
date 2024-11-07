@@ -43,6 +43,15 @@ export const UserSection: Component<UserSectionProps> = props => (
     >
       Change password
     </Link>
+    <Link
+      href={InternalLink.deleteProfile}
+      class={buttonVariants({
+        variant: 'link',
+        class: 'text-error self-start'
+      })}
+    >
+      Delete profile
+    </Link>
     <Separator class="border-t-black/10" />
   </section>
 )

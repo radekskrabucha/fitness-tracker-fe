@@ -10,7 +10,7 @@ export const Skeleton: Component<WithClass<SkeletonRootProps>> = props => (
   <KobalteSkeleton
     {...props}
     class={cn(
-      'flex-1 rounded-lg bg-white/[0.03] data-[animate=true]:animate-pulse data-[visible=false]:bg-transparent',
+      'flex-1 rounded-lg bg-black/5 data-[animate=true]:animate-pulse data-[visible=false]:bg-transparent',
       props.class
     )}
   />

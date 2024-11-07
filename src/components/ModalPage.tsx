@@ -1,10 +1,16 @@
-import type { FlowComponent } from 'solid-js'
+import {
+  Show,
+  type Component,
+  type FlowComponent,
+  type JSXElement
+} from 'solid-js'
 import { Icon } from './Icon'
 import { Link } from './Link'
 
 type ModalPageProps = {
   href: string
   title: string
+  icon?: JSXElement
 }
 
 export const ModalPage: FlowComponent<ModalPageProps> = props => (
@@ -19,20 +25,31 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
         <h2 class="line-clamp-2 text-3xl font-bold capitalize">
           {props.title}
         </h2>
-        <Link
-          href={props.href}
-          replace
-          class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/20 hover:text-current/50"
+        <Show
+          when={props.icon}
+          fallback={<DefaultIcon href={props.href} />}
         >
-          <Icon
-            id="close"
-            class="size-4 fill-current transition-colors duration-150"
-          />
-        </Link>
+          {props.icon}
+        </Show>
       </div>
       <div class="flex flex-1 flex-col gap-6 overflow-auto px-6 py-10">
         {props.children}
       </div>
     </div>
   </>
+)
+
+type DefaultIconProps = Pick<ModalPageProps, 'href'>
+
+const DefaultIcon: Component<DefaultIconProps> = props => (
+  <Link
+    href={props.href}
+    replace
+    class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/20 hover:text-current/50"
+  >
+    <Icon
+      id="close"
+      class="size-4 fill-current transition-colors duration-150"
+    />
+  </Link>
 )

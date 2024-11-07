@@ -57,7 +57,7 @@ export const SessionUser = () => {
               />
             </Popover.Trigger>
             <Popover.Portal>
-              <Popover.Content class="popover bg-white/20 flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-md border  border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+              <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-md border border-white bg-white/20 px-6 py-4 text-black shadow-lg backdrop-blur-lg">
                 <Popover.Description class="font-secondary text-current/75">
                   {user.email}
                 </Popover.Description>

@@ -29,3 +29,8 @@ export const editFitnessProfile = (req: Partial<CreateFitnessProfile>) =>
     method: 'PUT',
     body: req
   })
+
+export const deleteFitnessProfile = () =>
+  fetchApiClient<FitnessProfile>('/profile', {
+    method: 'DELETE'
+  })

@@ -1,14 +1,24 @@
 import { reset } from '@modular-forms/solid'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { editUser } from '../actions'
-import { Form, Field, nameValidation, form } from '../form/editUserForm'
+import {
+  nameValidation,
+  useEditUserForm,
+  type EditUserForm as FormValues
+} from '../form/editUserForm'
 
-export const EditUserForm = () => {
+type EditUserFormProps = {
+  initialValues: FormValues
+}
+
+export const EditUserForm: Component<EditUserFormProps> = props => {
+  const { form, Form, Field } = useEditUserForm(props.initialValues)
   const queryClient = useQueryClient()
   const editUserMutation = createMutation(() => ({
     mutationFn: editUser,
@@ -42,7 +52,11 @@ export const EditUserForm = () => {
 
   return (
     <Form
-      onSubmit={values => editUserMutation.mutate(values)}
+      onSubmit={values => {
+        if (form.touched) {
+          return editUserMutation.mutate(values)
+        }
+      }}
       class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
     >
       <Field

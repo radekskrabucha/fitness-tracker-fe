@@ -1,7 +1,7 @@
 import { ClientOnly } from '~/components/ClientOnly'
 import { ModalPage } from '~/components/ModalPage'
 import { InternalLink } from '~/config/app'
-import { EditUserForm } from './components/EditUserForm'
+import { EditUserFormWrapper } from './components/EditUserFormWrapper'
 
 export const EditUserPage = () => (
   <ClientOnly>
@@ -9,7 +9,7 @@ export const EditUserPage = () => (
       href={InternalLink.profile}
       title="Edit your profile"
     >
-      <EditUserForm />
+      <EditUserFormWrapper />
     </ModalPage>
   </ClientOnly>
 )

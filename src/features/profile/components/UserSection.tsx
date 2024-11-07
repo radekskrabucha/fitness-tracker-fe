@@ -16,8 +16,8 @@ export const UserSection = () => {
       <QueryBoundary
         query={getSessionQuery}
         loadingFallback={
-          <div class="grid min-h-72 w-full flex-1 grid-cols-[1fr_2fr] gap-6">
-            <Skeleton class="row-span-2" />
+          <div class="flex min-h-72 w-full flex-1 flex-col gap-6">
+            <Skeleton class="max-w-96" />
             <Skeleton />
             <Skeleton />
           </div>

@@ -34,7 +34,7 @@ export const SignUpForm = () => {
         { throwOnError: true, cancelRefetch: true }
       )
       reset(form)
-      navigate(InternalLink.createProfile, { replace: true })
+      navigate(InternalLink.createFitnessProfile, { replace: true })
     },
     onError: () => {
       return toast.show({

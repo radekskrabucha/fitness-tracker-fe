@@ -9,9 +9,7 @@ import { statusMessageVariants } from './StatusMessage'
 
 type NumberFieldProps = Pick<
   ComponentProps<typeof NumberField>,
-  | 'rawValue'
   | 'as'
-  | 'onRawValueChange'
   | 'minValue'
   | 'maxValue'
   | 'step'
@@ -28,6 +26,9 @@ type NumberFieldProps = Pick<
   | 'ref'
   | 'onBlur'
   | 'autofocus'
+  | 'value'
+  | 'onChange'
+  | 'autofocus'
 >
 
 type NumberInputProps = NumberFieldProps & {
@@ -39,14 +40,6 @@ type NumberInputProps = NumberFieldProps & {
 export const NumberInput: Component<NumberInputProps> = props => (
   <NumberField
     {...props}
-    onRawValueChange={value => {
-      if (isNaN(value)) {
-        //@ts-expect-error - we set empty string to avoid NaN
-        return props.onRawValueChange?.('')
-      }
-
-      return props.onRawValueChange?.(value)
-    }}
     validationState={props.error ? 'invalid' : 'valid'}
     class="flex flex-col items-stretch gap-2"
   >

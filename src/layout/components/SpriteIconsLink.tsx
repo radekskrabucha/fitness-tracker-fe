@@ -4,6 +4,6 @@ export const SpriteIconsLink = () => (
   <Link
     rel="preload"
     as="image"
-    href="/icon-sprite-1730963412.svg"
+    href="/icon-sprite-1730972645.svg"
   />
 )

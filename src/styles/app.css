@@ -113,3 +113,7 @@
 	}
 }
 /* Popover animations end */
+
+.show {
+	animation: contentShow 200ms ease-out;
+}

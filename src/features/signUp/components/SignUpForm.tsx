@@ -65,7 +65,6 @@ export const SignUpForm = () => {
         {(field, props) => (
           <TextInput
             label="Email"
-            placeholder=" "
             disabled={signUpMutation.isPending}
             {...field}
             {...props}
@@ -81,7 +80,6 @@ export const SignUpForm = () => {
         {(field, props) => (
           <TextInput
             label="Password"
-            placeholder=" "
             disabled={signUpMutation.isPending}
             {...field}
             {...props}
@@ -97,7 +95,6 @@ export const SignUpForm = () => {
         {(field, props) => (
           <TextInput
             label="Name"
-            placeholder=" "
             disabled={signUpMutation.isPending}
             {...field}
             {...props}

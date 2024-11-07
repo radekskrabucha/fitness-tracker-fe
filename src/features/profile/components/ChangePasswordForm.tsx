@@ -49,7 +49,6 @@ export const ChangePasswordForm = () => {
         {(field, props) => (
           <TextInput
             label="Current password"
-            placeholder=" "
             disabled={changePasswordMutation.isPending}
             {...field}
             {...props}
@@ -66,7 +65,6 @@ export const ChangePasswordForm = () => {
         {(field, props) => (
           <TextInput
             label="New password"
-            placeholder=" "
             disabled={changePasswordMutation.isPending}
             {...field}
             {...props}
@@ -83,7 +81,6 @@ export const ChangePasswordForm = () => {
         {(field, props) => (
           <TextInput
             label="Confirm password"
-            placeholder=" "
             disabled={changePasswordMutation.isPending}
             {...field}
             {...props}

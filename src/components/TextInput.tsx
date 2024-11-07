@@ -11,13 +11,7 @@ type TextInputProps = {
   wrapperRef?: TextFieldRootProps['ref']
 } & Pick<
   JSX.InputHTMLAttributes<HTMLInputElement>,
-  | 'onBlur'
-  | 'onFocus'
-  | 'placeholder'
-  | 'onChange'
-  | 'autofocus'
-  | 'ref'
-  | 'onInput'
+  'onBlur' | 'onFocus' | 'onChange' | 'autofocus' | 'ref' | 'onInput'
 > &
   Omit<TextFieldRootProps, 'validationState' | 'onChange' | 'ref'>
 
@@ -50,7 +44,7 @@ export const TextInput: Component<TextInputProps> = props => (
       onFocus={props.onFocus}
       // @ts-expect-error incompatible types
       onInput={props.onInput}
-      placeholder={props.placeholder}
+      placeholder=" "
       type={props.type}
       ref={props.ref}
       autofocus={props.autofocus}

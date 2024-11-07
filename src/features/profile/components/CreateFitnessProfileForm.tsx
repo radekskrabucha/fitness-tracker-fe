@@ -1,13 +1,16 @@
 import { reset, setValue } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
-import { createMutation } from '@tanstack/solid-query'
+import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInput } from '~/components/NumberInput'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
-import { createFitnessProfile } from '../actions'
+import {
+  createFitnessProfile,
+  getUserFitnessProfileQueryOptions
+} from '../actions'
 import {
   Form,
   Field,
@@ -28,10 +31,11 @@ import {
 
 export const CreateFitnessProfileForm = () => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const createFitnessProfileMutation = createMutation(() => ({
     mutationFn: createFitnessProfile,
     mutationKey: ['createFitnessProfile'],
-    onSuccess: () => {
+    onSuccess: data => {
       toast.show({
         title: 'Profile created successfully!',
         description: 'Your profile has been created successfully.',
@@ -39,6 +43,10 @@ export const CreateFitnessProfileForm = () => {
         priority: 'high'
       })
       reset(form)
+      queryClient.setQueryData(
+        getUserFitnessProfileQueryOptions(data.userId).queryKey,
+        () => data
+      )
       navigate(InternalLink.profile)
     },
     onError: () => {

@@ -1,28 +1,41 @@
-export type FitnessProfileGender =
-  | 'male'
-  | 'female'
-  | 'other'
-  | 'prefer_not_to_say'
+export const fitnessProfileGender = [
+  'male',
+  'female',
+  'other',
+  'prefer_not_to_say'
+] as const
+
+export const fitnessProfileActivityLevel = [
+  'sedentary',
+  'lightly_active',
+  'moderately_active',
+  'very_active',
+  'extra_active'
+] as const
+export const fitnessProfileFitnessGoal = [
+  'lose_weight',
+  'gain_muscle',
+  'maintain_weight',
+  'improve_endurance',
+  'increase_flexibility'
+] as const
+export const fitnessProfileDietaryPreference = [
+  'no_preference',
+  'vegetarian',
+  'vegan',
+  'pescatarian',
+  'keto',
+  'paleo',
+  'mediterranean'
+] as const
+
+export type FitnessProfileGender = (typeof fitnessProfileGender)[number]
 export type FitnessProfileActivityLevel =
-  | 'sedentary'
-  | 'lightly_active'
-  | 'moderately_active'
-  | 'very_active'
-  | 'extra_active'
+  (typeof fitnessProfileActivityLevel)[number]
 export type FitnessProfileFitnessGoal =
-  | 'lose_weight'
-  | 'gain_muscle'
-  | 'maintain_weight'
-  | 'improve_endurance'
-  | 'increase_flexibility'
+  (typeof fitnessProfileFitnessGoal)[number]
 export type FitnessProfileDietaryPreference =
-  | 'no_preference'
-  | 'vegetarian'
-  | 'vegan'
-  | 'pescatarian'
-  | 'keto'
-  | 'paleo'
-  | 'mediterranean'
+  (typeof fitnessProfileDietaryPreference)[number]
 
 export type FitnessProfile = {
   id: string
@@ -37,3 +50,14 @@ export type FitnessProfile = {
   fitnessGoal: FitnessProfileFitnessGoal
   dietaryPreference: FitnessProfileDietaryPreference | null
 }
+
+export type CreateFitnessProfile = Pick<
+  FitnessProfile,
+  | 'height'
+  | 'weight'
+  | 'age'
+  | 'gender'
+  | 'activityLevel'
+  | 'fitnessGoal'
+  | 'dietaryPreference'
+>

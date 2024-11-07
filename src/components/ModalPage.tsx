@@ -11,6 +11,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
   <>
     <Link
       href={props.href}
+      replace
       class="show bg-background/10 fixed inset-0 backdrop-blur-sm"
     />
     <div class="show fixed top-[50%] left-[50%] flex h-[min(80vh,var(--width-lg))] w-[min(calc(100vw-48px),var(--width-3xl))] translate-x-[-50%] translate-y-[-50%] flex-col overflow-hidden rounded-3xl border border-white shadow-lg backdrop-blur-md">
@@ -20,6 +21,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
         </h2>
         <Link
           href={props.href}
+          replace
           class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/20 hover:text-current/50"
         >
           <Icon

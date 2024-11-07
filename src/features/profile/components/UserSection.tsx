@@ -1,67 +1,48 @@
 import { Separator } from '@kobalte/core/separator'
-import { createQuery } from '@tanstack/solid-query'
+import type { Component } from 'solid-js'
 import { buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
-import { QueryBoundary } from '~/components/QueryBoundary'
-import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
-import { getSessionQueryOptions } from '~/features/signIn/actions'
+import type { User } from '~/models/user'
 
-export const UserSection = () => {
-  const getSessionQuery = createQuery(getSessionQueryOptions)
-
-  return (
-    <section class="layout-section gap-6">
-      <QueryBoundary
-        query={getSessionQuery}
-        loadingFallback={
-          <div class="flex min-h-72 w-full flex-1 flex-col gap-6">
-            <Skeleton class="max-w-96" />
-            <Skeleton />
-            <Skeleton />
-          </div>
-        }
-      >
-        {({ user }) => (
-          <>
-            <div class="flex flex-col gap-2">
-              <h2 class="text-3xl font-bold">Hello, {user.name}!</h2>
-              <p class="text text-lg">
-                Below you can see your profile details.
-              </p>
-            </div>
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">E-mail</h3>
-                <p class="text-lg">{user.email}</p>
-              </div>
-              <div class="flex flex-col gap-2">
-                <div class="inline-flex items-center gap-2">
-                  <h3 class="text-lg font-bold">Name</h3>
-                  <Link
-                    href={InternalLink.editProfile}
-                    class="flex size-7 shrink-0 items-center justify-center rounded-full hover:text-black/50"
-                  >
-                    <Icon
-                      id="copy"
-                      class="h-4 w-4 fill-current transition-colors duration-150"
-                    />
-                  </Link>
-                </div>
-                <p class="text-lg">{user.name}</p>
-              </div>
-            </div>
-            <Link
-              href={InternalLink.changePassword}
-              class={buttonVariants({ variant: 'link', class: 'self-start' })}
-            >
-              Change password
-            </Link>
-            <Separator class="border-t-black/10" />
-          </>
-        )}
-      </QueryBoundary>
-    </section>
-  )
+type UserSectionProps = {
+  user: User
 }
+
+export const UserSection: Component<UserSectionProps> = props => (
+  <section class="layout-section gap-6">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-3xl font-bold">Hello, {props.user.name}!</h2>
+      <p class="text text-lg">Below you can see your profile details.</p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <h3 class="text-lg font-bold">E-mail</h3>
+        <p class="text-lg">{props.user.email}</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="inline-flex items-center gap-2">
+          <h3 class="text-lg font-bold">Name</h3>
+          <Link
+            href={InternalLink.editProfile}
+            class="flex size-7 shrink-0 items-center justify-center rounded-full hover:text-black/50"
+          >
+            <Icon
+              id="copy"
+              class="h-4 w-4 fill-current transition-colors duration-150"
+            />
+          </Link>
+        </div>
+        <p class="text-lg">{props.user.name}</p>
+      </div>
+    </div>
+    <Link
+      href={InternalLink.changePassword}
+      class={buttonVariants({ variant: 'link', class: 'self-start' })}
+    >
+      Change password
+    </Link>
+    <Separator class="border-t-black/10" />
+  </section>
+)

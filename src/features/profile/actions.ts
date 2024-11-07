@@ -23,3 +23,9 @@ export const getUserFitnessProfileQueryOptions = (userId: string) =>
     queryKey: ['fitness-profile', userId],
     queryFn: getUserFitnessProfile
   })
+
+export const editFitnessProfile = (req: Partial<CreateFitnessProfile>) =>
+  fetchApiClient<FitnessProfile>('/profile', {
+    method: 'PUT',
+    body: req
+  })

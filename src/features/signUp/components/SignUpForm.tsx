@@ -1,7 +1,6 @@
 import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { BetterAuthError } from 'better-auth'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
@@ -15,7 +14,8 @@ import {
   Field,
   emailValidation,
   passwordValidation,
-  form
+  form,
+  nameValidation
 } from '../form/signUpForm'
 
 export const SignUpForm = () => {
@@ -36,9 +36,7 @@ export const SignUpForm = () => {
       reset(form)
       navigate(InternalLink.home, { replace: true })
     },
-    onError: error => {
-      console.error(error)
-      console.log(error instanceof BetterAuthError)
+    onError: () => {
       return toast.show({
         title: 'Oops! Something went wrong 🤓',
         description: 'Seems like account already exists, please log in.',
@@ -53,7 +51,9 @@ export const SignUpForm = () => {
       onSubmit={values =>
         signUpMutation.mutate({
           ...values,
-          name: getNameFromEmail(values.email) || values.email
+          name: values.name
+            ? values.name
+            : getNameFromEmail(values.email) || values.email
         })
       }
       class="flex w-full max-w-80 flex-col gap-4"
@@ -89,6 +89,23 @@ export const SignUpForm = () => {
           />
         )}
       </Field>
+
+      <Field
+        name="name"
+        validate={nameValidation}
+      >
+        {(field, props) => (
+          <TextInput
+            label="Name"
+            placeholder=" "
+            disabled={signUpMutation.isPending}
+            {...field}
+            {...props}
+            type="text"
+          />
+        )}
+      </Field>
+
       <Button
         type="submit"
         class="mt-8"

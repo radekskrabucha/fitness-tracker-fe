@@ -20,7 +20,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
         </h2>
         <Link
           href={props.href}
-          class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/75 hover:text-current/60"
+          class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/20 hover:text-current/50"
         >
           <Icon
             id="close"
@@ -28,7 +28,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
           />
         </Link>
       </div>
-      <div class="flex flex-col gap-6 px-6 py-10">{props.children}</div>
+      <div class="flex flex-1 flex-col gap-6 px-6 py-10">{props.children}</div>
     </div>
   </>
 )

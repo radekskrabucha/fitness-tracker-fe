@@ -22,7 +22,7 @@ export const StatusMessage: Component<StatusMessageProps> = props => (
 export const statusMessageVariants = cva('text-sm', {
   variants: {
     variant: {
-      info: 'text-white/50',
+      info: 'text-black/50',
       success: 'text-success',
       warning: 'text-warning',
       error: 'text-error'

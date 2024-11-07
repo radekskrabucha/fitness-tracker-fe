@@ -1,7 +1,8 @@
 import { ClientOnly } from '~/components/ClientOnly'
 import { ModalPage } from '~/components/ModalPage'
 import { InternalLink } from '~/config/app'
-import { EditUserFormWrapper } from './components/EditUserFormWrapper'
+import { EditUserForm } from './components/EditUserForm'
+import { SessionWrapper } from './components/SessionWrapper'
 
 export const EditUserPage = () => (
   <ClientOnly>
@@ -9,7 +10,9 @@ export const EditUserPage = () => (
       href={InternalLink.profile}
       title="Edit your profile"
     >
-      <EditUserFormWrapper />
+      <SessionWrapper>
+        {user => <EditUserForm initialValues={{ name: user.name }} />}
+      </SessionWrapper>
     </ModalPage>
   </ClientOnly>
 )

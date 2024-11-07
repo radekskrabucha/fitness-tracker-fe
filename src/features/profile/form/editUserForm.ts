@@ -1,8 +1,7 @@
 import { createForm, minLength, required } from '@modular-forms/solid'
+import type { User } from '~/models/user'
 
-export type EditUserForm = {
-  name: string
-}
+export type EditUserForm = Pick<User, 'name'>
 
 export const nameValidation = [
   required('Name is required'),

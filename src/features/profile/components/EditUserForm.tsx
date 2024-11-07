@@ -52,12 +52,10 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
 
   return (
     <Form
-      onSubmit={values => {
-        if (form.touched) {
-          return editUserMutation.mutate(values)
-        }
-      }}
+      onSubmit={values => editUserMutation.mutate(values)}
       class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
+      shouldTouched
+      shouldDirty
     >
       <Field
         name="name"

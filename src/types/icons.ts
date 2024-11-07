@@ -1,1 +1,8 @@
-export type IconId = 'close' | 'copy' | 'github' | 'source-code' | 'twitter'
+export type IconId =
+  | 'close'
+  | 'delete'
+  | 'edit'
+  | 'github'
+  | 'menu-dots'
+  | 'source-code'
+  | 'twitter'

@@ -29,7 +29,7 @@ export const UserSection: Component<UserSectionProps> = props => (
             class="flex size-7 shrink-0 items-center justify-center rounded-full hover:text-black/50"
           >
             <Icon
-              id="copy"
+              id="edit"
               class="h-4 w-4 fill-current transition-colors duration-150"
             />
           </Link>

@@ -39,10 +39,13 @@ export const UserSection = () => {
               <div class="flex flex-col gap-2">
                 <div class="inline-flex items-center gap-2">
                   <h3 class="text-lg font-bold">Name</h3>
-                  <Link href={InternalLink.editProfile}>
+                  <Link
+                    href={InternalLink.editProfile}
+                    class="flex size-7 shrink-0 items-center justify-center rounded-full hover:text-black/50"
+                  >
                     <Icon
                       id="copy"
-                      class="h-4 w-4 fill-current transition-colors duration-150 hover:text-current/50"
+                      class="h-4 w-4 fill-current transition-colors duration-150"
                     />
                   </Link>
                 </div>

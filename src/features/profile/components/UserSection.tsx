@@ -35,7 +35,7 @@ export const UserSection: Component<UserSectionProps> = props => (
         <Link
           href=""
           disabled
-          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed aria-[disabled=true]:opacity-80"
+          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed"
         >
           <h3 class="text-lg font-bold break-keep text-black/80">
             My workouts
@@ -44,7 +44,7 @@ export const UserSection: Component<UserSectionProps> = props => (
         <Link
           href=""
           disabled
-          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed aria-[disabled=true]:opacity-80"
+          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed"
         >
           <h3 class="text-lg font-bold break-keep text-black/80">
             Explore workouts
@@ -53,7 +53,7 @@ export const UserSection: Component<UserSectionProps> = props => (
         <Link
           href=""
           disabled
-          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed aria-[disabled=true]:opacity-80"
+          class="card flex flex-1 flex-col items-center justify-center gap-3 p-4 text-center aria-[disabled=true]:cursor-not-allowed"
         >
           <h3 class="text-lg font-bold break-keep text-black/80">
             Coming soon

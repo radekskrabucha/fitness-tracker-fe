@@ -1,10 +1,10 @@
-import { Popover } from '@kobalte/core/popover'
 import { createMutation, createQuery } from '@tanstack/solid-query'
 import { Show } from 'solid-js'
 import { Button, buttonVariants } from '~/components/Button'
 import { Image } from '~/components/Image'
 import { Link } from '~/components/Link'
 import { LoaderCircle } from '~/components/LoaderCircle'
+import { PopoverContent, Popover } from '~/components/Popover'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
@@ -57,9 +57,9 @@ export const SessionUser = () => {
               />
             </Popover.Trigger>
             <Popover.Portal>
-              <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-lg border border-white bg-white/20 px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+              <PopoverContent class="z-30">
                 <Popover.Description class="font-secondary text-current/75">
-                  {user.email}
+                  {user.name}
                 </Popover.Description>
                 <Link
                   class={buttonVariants({ variant: 'link' })}
@@ -77,7 +77,7 @@ export const SessionUser = () => {
                   </Show>
                   Log out
                 </Button>
-              </Popover.Content>
+              </PopoverContent>
             </Popover.Portal>
           </Popover>
         </>

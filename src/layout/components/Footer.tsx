@@ -4,7 +4,7 @@ import { ExternalLink, ownerEmail } from '~/config/app'
 import { SocialIcons } from './SocialIcons'
 
 export const Footer: Component = () => (
-  <footer class="layout-container">
+  <footer class="layout-container isolate">
     <div class="layout-section">
       <div class="border-background bg-background flex flex-wrap items-center justify-center gap-3 rounded-3xl border p-6 text-center shadow-lg">
         <SocialIcons />

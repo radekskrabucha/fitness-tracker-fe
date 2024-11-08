@@ -1,4 +1,3 @@
-import { Popover } from '@kobalte/core/popover'
 import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { Show, type Component } from 'solid-js'
@@ -6,6 +5,7 @@ import { Button, buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { LoaderCircle } from '~/components/LoaderCircle'
+import { PopoverContent, Popover } from '~/components/Popover'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import {
@@ -67,7 +67,7 @@ export const EditFitnessProfileMenu: Component<
       </Popover.Trigger>
 
       <Popover.Portal>
-        <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-lg border border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+        <PopoverContent>
           <Link
             href={InternalLink.editFitnessProfile}
             class={buttonVariants({
@@ -96,7 +96,7 @@ export const EditFitnessProfileMenu: Component<
             />
             Delete fitness profile
           </Button>
-        </Popover.Content>
+        </PopoverContent>
       </Popover.Portal>
     </Popover>
   )

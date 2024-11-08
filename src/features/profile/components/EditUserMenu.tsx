@@ -1,7 +1,7 @@
-import { Popover } from '@kobalte/core/popover'
 import { Button, buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
+import { PopoverContent, Popover } from '~/components/Popover'
 import { InternalLink } from '~/config/app'
 
 export const EditUserMenu = () => (
@@ -19,7 +19,7 @@ export const EditUserMenu = () => (
     </Popover.Trigger>
 
     <Popover.Portal>
-      <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col gap-4 overflow-hidden rounded-lg border border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+      <PopoverContent>
         <Link
           href={InternalLink.editProfile}
           class={buttonVariants({
@@ -59,7 +59,7 @@ export const EditUserMenu = () => (
           />
           Delete profile
         </Link>
-      </Popover.Content>
+      </PopoverContent>
     </Popover.Portal>
   </Popover>
 )

@@ -7,7 +7,8 @@ export const InternalLink = {
   changePassword: '/profile/change-password',
   createFitnessProfile: '/create-profile',
   editFitnessProfile: '/profile/edit-fitness',
-  deleteProfile: '/profile/delete'
+  deleteProfile: '/profile/delete',
+  deleteFitnessProfile: '/profile/delete-fitness'
 } as const
 
 export const ownerEmail = 'rskrabucha13@gmail.com'

@@ -33,7 +33,7 @@ export const FitnessProfileSection: Component<
           <h2 class="line-clamp-2 text-3xl font-bold text-black/80">
             Fitness profile
           </h2>
-          <EditFitnessProfileMenu userId={props.userId} />
+          <EditFitnessProfileMenu />
         </div>
         <QueryBoundary
           query={getUserFitnessProfileQuery}

@@ -13,5 +13,10 @@ export const NavLinks: Component<NavLinksProps> = props => (
       text="Home"
       onClick={props.onNavLinkClick}
     />
+    <NavLink
+      href={InternalLink.workoutPlans}
+      text="Workouts"
+      onClick={props.onNavLinkClick}
+    />
   </ul>
 )

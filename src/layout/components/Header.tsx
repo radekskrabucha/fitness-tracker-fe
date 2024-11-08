@@ -8,7 +8,7 @@ export const Header: Component = () => (
     <div class="layout-section">
       <nav class="border-background bg-background/80 flex items-center gap-4 rounded-3xl border p-6 shadow-lg backdrop-blur-lg">
         <Link
-          class="z-10 text-4xl"
+          class="text-4xl"
           href={InternalLink.home}
         >
           🏋️‍♀️

@@ -26,7 +26,7 @@ export const getUserFitnessProfile = () =>
 
 export const getUserFitnessProfileQueryOptions = (userId: string) =>
   queryOptions({
-    queryKey: ['fitness-profile', userId],
+    queryKey: ['getUserFitnessProfile', userId],
     queryFn: getUserFitnessProfile
   })
 

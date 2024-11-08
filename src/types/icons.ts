@@ -1,4 +1,5 @@
 export type IconId =
+  | 'arrow'
   | 'calendar'
   | 'close'
   | 'delete'

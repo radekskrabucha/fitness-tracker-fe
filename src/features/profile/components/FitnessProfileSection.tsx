@@ -75,7 +75,6 @@ export const FitnessProfileSection: Component<
                     class="size-5"
                   />
                 }
-                unit="years"
               />
 
               <Show when={getGenderName(profile.gender)}>

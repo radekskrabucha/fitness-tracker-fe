@@ -26,7 +26,7 @@ export const MainLayout: FlowComponent = props => (
         imageUrl="/images/shared/og-image.jpg"
       />
       <Header />
-      <main class="layout-container flex-1 overflow-x-hidden bg-white">
+      <main class="layout-container flex-1 overflow-x-hidden">
         <Suspense>
           <ErrorBoundary
             fallback={(error, onReset) => (

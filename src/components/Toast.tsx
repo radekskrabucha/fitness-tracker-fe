@@ -69,7 +69,7 @@ export const toast = {
 }
 
 export const toastVariants = cva(
-  'toast bg-background/50 relative flex w-full flex-col gap-2 overflow-hidden rounded-md border border-current/50 p-4 pt-3 shadow-2xl backdrop-blur-2xl',
+  'toast bg-background/50 relative flex w-full flex-col gap-2 overflow-hidden rounded-lg border border-current/50 p-4 pt-3 shadow-2xl backdrop-blur-2xl',
   {
     variants: {
       variant: {

@@ -66,7 +66,7 @@ export const EditFitnessProfileMenu: Component<
       </Popover.Trigger>
 
       <Popover.Portal>
-        <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-md border border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+        <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-lg border border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
           <Button
             onClick={() => deleteFitnessProfileMutation.mutate()}
             disabled={deleteFitnessProfileMutation.isPending}

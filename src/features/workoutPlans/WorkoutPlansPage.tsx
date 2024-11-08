@@ -1,16 +1,16 @@
 import { Header } from '~/components/Header'
-import WorkoutPlans from '~/routes/workout-plans'
+import { WorkoutPlans } from './components/WorkoutPlans'
 
-export const WorkoutPlansPage = () => {
-  return (
-    <>
-      <section class="layout-section">
-        <Header
-          title="Workouts"
-          description="Explore workouts and select one that suits you. Start tracking your progress today."
-        />
+export const WorkoutPlansPage = () => (
+  <>
+    <section class="layout-section gap-12">
+      <Header
+        title="Workout Plans"
+        description="Explore workouts and select one that suits you. Start tracking your progress today."
+      />
+      <div class="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
         <WorkoutPlans />
-      </section>
-    </>
-  )
-}
+      </div>
+    </section>
+  </>
+)

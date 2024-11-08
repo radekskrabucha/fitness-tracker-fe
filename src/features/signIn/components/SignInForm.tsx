@@ -55,7 +55,6 @@ export const SignInForm = () => {
         {(field, props) => (
           <TextInput
             label="Email"
-            placeholder=" "
             disabled={signInMutation.isPending}
             {...field}
             {...props}
@@ -71,7 +70,6 @@ export const SignInForm = () => {
         {(field, props) => (
           <TextInput
             label="Password"
-            placeholder=" "
             disabled={signInMutation.isPending}
             {...field}
             {...props}

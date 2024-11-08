@@ -75,14 +75,14 @@ const DefaultErrorFallback: Component<DefaultErrorFallbackProps> = props => (
     <Show
       when={props.errorUpdateCount < 4}
       fallback={
-        <p class="text-white/50">
+        <p class="text-current/50">
           Seems like an unexpected error has occurred during the data fetching.
           <br />
           Please try again later.
         </p>
       }
     >
-      <p class="text-white/50">
+      <p class="text-current/50">
         Seems like an unexpected error has occurred during the data fetching.
         <br />
         Click the button below or try again later.

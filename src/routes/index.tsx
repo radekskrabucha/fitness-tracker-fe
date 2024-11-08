@@ -1,5 +1,5 @@
 import { SEOTitle } from '~/components/Seo'
-import { HomePage } from '~/features/home'
+import { HomePage } from '~/features/home/HomePage'
 
 const Home = () => (
   <>

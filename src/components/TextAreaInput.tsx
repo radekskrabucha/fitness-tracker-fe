@@ -12,13 +12,7 @@ type TextAreaInputProps = {
   wrapperRef?: TextFieldRootProps['ref']
 } & Pick<
   JSX.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  | 'onBlur'
-  | 'onFocus'
-  | 'placeholder'
-  | 'onChange'
-  | 'autofocus'
-  | 'ref'
-  | 'onInput'
+  'onBlur' | 'onFocus' | 'onChange' | 'autofocus' | 'ref' | 'onInput'
 > &
   Omit<TextFieldRootProps, 'validationState' | 'onChange' | 'ref'>
 
@@ -51,7 +45,7 @@ export const TextAreaInput: Component<TextAreaInputProps> = props => (
       onFocus={props.onFocus}
       // @ts-expect-error incompatible types
       onInput={props.onInput}
-      placeholder={props.placeholder}
+      placeholder=" "
       autoResize={props.autoResize}
       submitOnEnter={props.submitOnEnter}
       autofocus={props.autofocus}

@@ -11,13 +11,7 @@ type TextInputProps = {
   wrapperRef?: TextFieldRootProps['ref']
 } & Pick<
   JSX.InputHTMLAttributes<HTMLInputElement>,
-  | 'onBlur'
-  | 'onFocus'
-  | 'placeholder'
-  | 'onChange'
-  | 'autofocus'
-  | 'ref'
-  | 'onInput'
+  'onBlur' | 'onFocus' | 'onChange' | 'autofocus' | 'ref' | 'onInput'
 > &
   Omit<TextFieldRootProps, 'validationState' | 'onChange' | 'ref'>
 
@@ -37,7 +31,7 @@ export const TextInput: Component<TextInputProps> = props => (
     <Show when={props.description}>
       <TextField.Description
         as="span"
-        class={statusMessageVariants({ class: 'order-1' })}
+        class={statusMessageVariants({ class: 'order-3' })}
       >
         {props.description}
       </TextField.Description>
@@ -50,15 +44,15 @@ export const TextInput: Component<TextInputProps> = props => (
       onFocus={props.onFocus}
       // @ts-expect-error incompatible types
       onInput={props.onInput}
-      placeholder={props.placeholder}
+      placeholder=" "
       type={props.type}
       ref={props.ref}
       autofocus={props.autofocus}
-      class="peer font-secondary data-[invalid]:!border-b-error order-3 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
+      class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
     />
 
     <Show when={props.label}>
-      <TextField.Label class="order-2 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
+      <TextField.Label class="order-1 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
         {props.label}
       </TextField.Label>
     </Show>

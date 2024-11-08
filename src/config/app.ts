@@ -9,7 +9,8 @@ export const InternalLink = {
   editFitnessProfile: '/profile/edit-fitness',
   deleteProfile: '/profile/delete',
   deleteFitnessProfile: '/profile/delete-fitness',
-  workoutPlans: '/workout-plans'
+  workoutPlans: '/workout-plans',
+  workoutPlan: (id: string) => `/workout-plans/${id}`
 } as const
 
 export const ownerEmail = 'rskrabucha13@gmail.com'

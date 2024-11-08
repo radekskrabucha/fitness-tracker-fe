@@ -7,8 +7,8 @@ import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
-import { authClient } from '~/lib/auth'
 import { getNameFromEmail } from '~/utils/email'
+import { signUp } from '../actions'
 import {
   Form,
   Field,
@@ -22,7 +22,7 @@ export const SignUpForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const signUpMutation = createMutation(() => ({
-    mutationFn: authClient.signUp.email,
+    mutationFn: signUp,
     mutationKey: ['signUp'],
     onSuccess: async () => {
       await queryClient.invalidateQueries(
@@ -74,21 +74,6 @@ export const SignUpForm = () => {
       </Field>
 
       <Field
-        name="password"
-        validate={passwordValidation}
-      >
-        {(field, props) => (
-          <TextInput
-            label="Password"
-            disabled={signUpMutation.isPending}
-            {...field}
-            {...props}
-            type="password"
-          />
-        )}
-      </Field>
-
-      <Field
         name="name"
         validate={nameValidation}
       >
@@ -99,6 +84,21 @@ export const SignUpForm = () => {
             {...field}
             {...props}
             type="text"
+          />
+        )}
+      </Field>
+
+      <Field
+        name="password"
+        validate={passwordValidation}
+      >
+        {(field, props) => (
+          <TextInput
+            label="Password"
+            disabled={signUpMutation.isPending}
+            {...field}
+            {...props}
+            type="password"
           />
         )}
       </Field>

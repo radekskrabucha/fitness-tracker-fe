@@ -9,7 +9,7 @@ export const EditUserMenu = () => (
     <Popover.Trigger>
       <Button
         variant="outline"
-        class="size-10 shrink-0 rounded-full border border-black/20 p-0 hover:border-black/10 hover:text-current/70"
+        class="size-10 shrink-0 rounded-full border border-black/20 bg-white p-0 shadow-md hover:border-black/10 hover:text-current/70"
       >
         <Icon
           id="menu-dots"
@@ -41,7 +41,7 @@ export const EditUserMenu = () => (
           })}
         >
           <Icon
-            id="delete"
+            id="password"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Change password

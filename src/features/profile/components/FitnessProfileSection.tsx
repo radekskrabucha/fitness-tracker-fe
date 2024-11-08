@@ -1,5 +1,6 @@
 import { createQuery } from '@tanstack/solid-query'
 import { Show, type Component } from 'solid-js'
+import { buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
@@ -11,6 +12,8 @@ import {
   getFitnessGoalName,
   getGenderName
 } from '../utils'
+import { EditFitnessProfileMenu } from './EditFitnessProfileMenu'
+import { FitnessTile } from './FitnessTile'
 
 type FitnessProfileSectionProps = {
   userId: string
@@ -24,80 +27,144 @@ export const FitnessProfileSection: Component<
   )
 
   return (
-    <section class="layout-section gap-6">
-      <div class="inline-flex items-center gap-2">
-        <h2 class="text-2xl font-bold">Fitness Profile</h2>
-        <Link
-          href={InternalLink.editFitnessProfile}
-          class="flex size-7 shrink-0 items-center justify-center rounded-full hover:text-black/50"
+    <section class="layout-section">
+      <div class="card flex flex-col gap-10 p-8">
+        <div class="flex items-center justify-between gap-2">
+          <h2 class="line-clamp-2 text-3xl font-bold text-black/80">
+            Fitness profile
+          </h2>
+          <EditFitnessProfileMenu userId={props.userId} />
+        </div>
+        <QueryBoundary
+          query={getUserFitnessProfileQuery}
+          errorFallback={() => <NotFoundProfile />}
+          notFoundFallback={<NotFoundProfile />}
         >
-          <Icon
-            id="edit"
-            class="h-4 w-4 fill-current transition-colors duration-150"
-          />
-        </Link>
+          {profile => (
+            <div class="flex flex-row flex-wrap gap-10">
+              <FitnessTile
+                label="Height"
+                value={profile.height}
+                icon={
+                  <Icon
+                    id="height"
+                    class="size-5"
+                  />
+                }
+                unit="cm"
+              />
+
+              <FitnessTile
+                label="Weight"
+                value={profile.weight}
+                icon={
+                  <Icon
+                    id="weight"
+                    class="size-5"
+                  />
+                }
+                unit="kg"
+              />
+
+              <FitnessTile
+                label="Age"
+                value={profile.age}
+                icon={
+                  <Icon
+                    id="calendar"
+                    class="size-5"
+                  />
+                }
+                unit="years"
+              />
+
+              <Show when={getGenderName(profile.gender)}>
+                {genderName => (
+                  <FitnessTile
+                    label="Gender"
+                    value={genderName()}
+                    icon={
+                      <Icon
+                        id="gender"
+                        class="size-5"
+                      />
+                    }
+                  />
+                )}
+              </Show>
+
+              <Show when={getActivityLevelName(profile.activityLevel)}>
+                {activityLevel => (
+                  <FitnessTile
+                    label="Activity Level"
+                    value={activityLevel()}
+                    icon={
+                      <Icon
+                        id="gym"
+                        class="size-5"
+                      />
+                    }
+                  />
+                )}
+              </Show>
+
+              <Show when={getFitnessGoalName(profile.fitnessGoal)}>
+                {fitnessGoal => (
+                  <FitnessTile
+                    label="Fitness Goal"
+                    value={fitnessGoal()}
+                    icon={
+                      <Icon
+                        id="target"
+                        class="size-5"
+                      />
+                    }
+                  />
+                )}
+              </Show>
+
+              <Show
+                when={
+                  profile.dietaryPreference &&
+                  getDietaryPreferenceName(profile.dietaryPreference)
+                }
+              >
+                {dietaryPreference => (
+                  <FitnessTile
+                    label="Dietary Preference"
+                    value={dietaryPreference()}
+                    icon={
+                      <Icon
+                        id="diet"
+                        class="size-5"
+                      />
+                    }
+                  />
+                )}
+              </Show>
+            </div>
+          )}
+        </QueryBoundary>
       </div>
-      <QueryBoundary query={getUserFitnessProfileQuery}>
-        {profile => (
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              <h3 class="text-lg font-bold">Age</h3>
-              <p class="text-lg">{profile.age}</p>
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <h3 class="text-lg font-bold">Height</h3>
-              <p class="text-lg">{profile.height}</p>
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <h3 class="text-lg font-bold">Weight</h3>
-              <p class="text-lg">{profile.weight}</p>
-            </div>
-
-            <Show when={getGenderName(profile.gender)}>
-              {genderName => (
-                <div class="flex flex-col gap-2">
-                  <h3 class="text-lg font-bold">Gender</h3>
-                  <p class="text-lg">{genderName()}</p>
-                </div>
-              )}
-            </Show>
-
-            <Show when={getActivityLevelName(profile.activityLevel)}>
-              {activityLevel => (
-                <div class="flex flex-col gap-2">
-                  <h3 class="text-lg font-bold">Activity Level</h3>
-                  <p class="text-lg">{activityLevel()}</p>
-                </div>
-              )}
-            </Show>
-
-            <Show when={getFitnessGoalName(profile.fitnessGoal)}>
-              {fitnessGoal => (
-                <div class="flex flex-col gap-2">
-                  <h3 class="text-lg font-bold">Fitness Goal</h3>
-                  <p class="text-lg">{fitnessGoal()}</p>
-                </div>
-              )}
-            </Show>
-
-            <Show
-              when={
-                profile.dietaryPreference &&
-                getDietaryPreferenceName(profile.dietaryPreference)
-              }
-            >
-              {dietaryPreference => (
-                <div class="flex flex-col gap-2">
-                  <h3 class="text-lg font-bold">Dietary Preference</h3>
-                  <p class="text-lg">{dietaryPreference()}</p>
-                </div>
-              )}
-            </Show>
-          </div>
-        )}
-      </QueryBoundary>
     </section>
   )
 }
+
+const NotFoundProfile = () => (
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <h3 class="text-lg font-bold text-black/80">
+        You don't have a fitness profile yet.
+      </h3>
+      <p class="text-lg text-black/50">
+        Create your fitness profile to start tracking your progress.
+      </p>
+    </div>
+    <Link
+      href={InternalLink.createFitnessProfile}
+      class={buttonVariants({ variant: 'primary' })}
+    >
+      Create fitness profile
+    </Link>
+  </div>
+)

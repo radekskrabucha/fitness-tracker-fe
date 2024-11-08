@@ -23,11 +23,11 @@ export const UserSection: Component<UserSectionProps> = props => (
         <div class="flex flex-col gap-4">
           <div class="flex flex-col gap-1">
             <h3 class="text-lg font-bold text-black/80">E-mail</h3>
-            <p class="text-lg">{props.user.email}</p>
+            <p class="text-lg text-current/50">{props.user.email}</p>
           </div>
           <div class="flex flex-col gap-1">
             <h3 class="text-lg font-bold text-black/80">Name</h3>
-            <p class="text-lg">{props.user.name}</p>
+            <p class="text-lg text-current/50">{props.user.name}</p>
           </div>
         </div>
       </div>

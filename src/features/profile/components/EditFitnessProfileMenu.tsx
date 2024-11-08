@@ -2,8 +2,9 @@ import { Popover } from '@kobalte/core/popover'
 import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { Show, type Component } from 'solid-js'
-import { Button } from '~/components/Button'
+import { Button, buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
+import { Link } from '~/components/Link'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
@@ -56,7 +57,7 @@ export const EditFitnessProfileMenu: Component<
       <Popover.Trigger>
         <Button
           variant="outline"
-          class="size-10 shrink-0 rounded-full border border-black/20 p-0 hover:border-black/10 hover:text-current/70"
+          class="size-10 shrink-0 rounded-full border border-black/20 bg-white p-0 shadow-md hover:border-black/10 hover:text-current/70"
         >
           <Icon
             id="menu-dots"
@@ -67,6 +68,19 @@ export const EditFitnessProfileMenu: Component<
 
       <Popover.Portal>
         <Popover.Content class="popover flex w-full origin-[var(--kb-hovercard-content-transform-origin)] flex-col items-center gap-4 overflow-hidden rounded-lg border border-white px-6 py-4 text-black shadow-lg backdrop-blur-lg">
+          <Link
+            href={InternalLink.editFitnessProfile}
+            class={buttonVariants({
+              variant: 'link',
+              class: 'justify-normal self-stretch'
+            })}
+          >
+            <Icon
+              id="edit"
+              class="h-4 w-4 fill-current transition-colors duration-150"
+            />
+            Edit profile
+          </Link>
           <Button
             onClick={() => deleteFitnessProfileMutation.mutate()}
             disabled={deleteFitnessProfileMutation.isPending}
@@ -76,11 +90,11 @@ export const EditFitnessProfileMenu: Component<
             <Show when={deleteFitnessProfileMutation.isPending}>
               <LoaderCircle />
             </Show>
-            Delete fitness profile
             <Icon
               id="delete"
               class="h-4 w-4 fill-current transition-colors duration-150"
             />
+            Delete fitness profile
           </Button>
         </Popover.Content>
       </Popover.Portal>

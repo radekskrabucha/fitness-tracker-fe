@@ -3,6 +3,7 @@ import { MetaProvider } from '@solidjs/meta'
 import { ErrorBoundary, Suspense, type FlowComponent } from 'solid-js'
 import { SEO } from '~/components/Seo'
 import { defaultSeoTags } from '~/config/app'
+import { Background } from './components/Background'
 import { ErrorBoundary as ErrorBoundaryFallback } from './components/ErrorBoundary'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -25,8 +26,9 @@ export const MainLayout: FlowComponent = props => (
         siteUrl={defaultSeoTags.siteUrl}
         imageUrl="/images/shared/og-image.jpg"
       />
+      <Background />
       <Header />
-      <main class="layout-container flex-1 overflow-x-hidden">
+      <main class="layout-container isolate flex-1">
         <Suspense>
           <ErrorBoundary
             fallback={(error, onReset) => (

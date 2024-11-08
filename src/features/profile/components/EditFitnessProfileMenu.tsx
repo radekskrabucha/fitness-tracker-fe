@@ -41,6 +41,7 @@ export const EditFitnessProfileMenu: Component<
         },
         { throwOnError: true, cancelRefetch: true }
       )
+      navigate(InternalLink.profile)
     },
     onError: () => {
       return toast.show({

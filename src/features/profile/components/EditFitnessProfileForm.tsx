@@ -9,7 +9,6 @@ import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import type { CreateFitnessProfile } from '~/models/profile'
-import { sleep } from '~/utils/common'
 import {
   editFitnessProfile,
   getUserFitnessProfileQueryOptions
@@ -55,7 +54,6 @@ export const EditFitnessProfileForm: Component<
         variant: 'success',
         priority: 'high'
       })
-      await sleep(3000)
       navigate(InternalLink.profile)
     },
     onError: () => {

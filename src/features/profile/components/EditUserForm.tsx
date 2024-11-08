@@ -1,10 +1,12 @@
 import { reset } from '@modular-forms/solid'
+import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
+import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { editUser } from '../actions'
 import {
@@ -18,6 +20,7 @@ type EditUserFormProps = {
 }
 
 export const EditUserForm: Component<EditUserFormProps> = props => {
+  const navigate = useNavigate()
   const { form, Form, Field } = useEditUserForm(props.initialValues)
   const queryClient = useQueryClient()
   const editUserMutation = createMutation(() => ({
@@ -33,12 +36,13 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
         { throwOnError: true, cancelRefetch: true }
       )
       reset(form)
-      return toast.show({
+      toast.show({
         title: 'Profile updated successfully!',
         description: 'Your profile has been updated successfully.',
         variant: 'success',
         priority: 'high'
       })
+      navigate(InternalLink.profile)
     },
     onError: () => {
       return toast.show({

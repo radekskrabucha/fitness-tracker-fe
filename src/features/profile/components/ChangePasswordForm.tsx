@@ -1,9 +1,11 @@
 import { getValue, reset } from '@modular-forms/solid'
+import { useNavigate } from '@solidjs/router'
 import { createMutation } from '@tanstack/solid-query'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
+import { InternalLink } from '~/config/app'
 import { changePassword } from '../actions'
 import {
   Form,
@@ -15,17 +17,19 @@ import {
 } from '../form/changePasswordForm'
 
 export const ChangePasswordForm = () => {
+  const navigate = useNavigate()
   const changePasswordMutation = createMutation(() => ({
     mutationFn: changePassword,
     mutationKey: ['changePassword'],
-    onSuccess: () => {
+    onSuccess: async () => {
       reset(form)
-      return toast.show({
+      toast.show({
         title: 'Password changed successfully!',
         description: 'Your password has been changed successfully.',
         variant: 'success',
         priority: 'high'
       })
+      navigate(InternalLink.profile)
     },
     onError: () => {
       return toast.show({

@@ -15,7 +15,7 @@ export const NavLinks: Component<NavLinksProps> = props => (
     />
     <NavLink
       href={InternalLink.workoutPlans}
-      text="Workouts"
+      text="Plans"
       onClick={props.onNavLinkClick}
     />
   </ul>

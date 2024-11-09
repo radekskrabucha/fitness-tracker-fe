@@ -9,6 +9,7 @@ import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import type { CreateFitnessProfile } from '~/models/profile'
+import { nonNullable } from '~/utils/common'
 import {
   editFitnessProfile,
   getUserFitnessProfileQueryOptions
@@ -70,15 +71,23 @@ export const EditFitnessProfileForm: Component<
     <Form
       onSubmit={values =>
         editFitnessProfileMutation.mutate({
-          height: values.height ? Number(values.height) : undefined,
-          age: values.age ? Number(values.age) : undefined,
-          weight: values.weight ? Number(values.weight) : undefined,
-          dietaryPreference: values.dietaryPreference
+          height: nonNullable(values.height)
+            ? Number(values.height)
+            : undefined,
+          age: nonNullable(values.age) ? Number(values.age) : undefined,
+          weight: nonNullable(values.weight)
+            ? Number(values.weight)
+            : undefined,
+          dietaryPreference: nonNullable(values.dietaryPreference)
             ? values.dietaryPreference
             : null,
-          fitnessGoal: values.fitnessGoal ? values.fitnessGoal : undefined,
-          gender: values.gender ? values.gender : undefined,
-          activityLevel: values.activityLevel ? values.activityLevel : undefined
+          fitnessGoal: nonNullable(values.fitnessGoal)
+            ? values.fitnessGoal
+            : undefined,
+          gender: nonNullable(values.gender) ? values.gender : undefined,
+          activityLevel: nonNullable(values.activityLevel)
+            ? values.activityLevel
+            : undefined
         })
       }
       class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"

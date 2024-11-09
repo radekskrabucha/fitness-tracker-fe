@@ -1,6 +1,7 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
 import { buttonVariants } from '~/components/Button'
+import { cardVariants } from '~/components/Card'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { InternalLink } from '~/config/app'
@@ -15,7 +16,9 @@ const WORKOUTS_LIMIT = 2
 export const WorkoutPlanCard: Component<WorkoutPlanCardProps> = props => (
   <Link
     href={InternalLink.workoutPlan(props.id)}
-    class="card flex flex-col overflow-hidden"
+    class={cardVariants({
+      class: 'overflow-hidden'
+    })}
   >
     <div class="flex flex-col gap-3 rounded-3xl bg-black px-8 py-4 text-white">
       <h2 class="line-clamp-2 text-4xl font-bold text-current/80 max-sm:text-3xl">

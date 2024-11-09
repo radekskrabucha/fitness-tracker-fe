@@ -1,6 +1,7 @@
 import { createQuery } from '@tanstack/solid-query'
 import { Show, type Component } from 'solid-js'
 import { buttonVariants } from '~/components/Button'
+import { Card } from '~/components/Card'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
@@ -28,9 +29,9 @@ export const FitnessProfileSection: Component<
 
   return (
     <section class="layout-section">
-      <div class="card flex flex-col gap-10 p-8">
+      <Card class="gap-10">
         <div class="flex items-center justify-between gap-2">
-          <h2 class="line-clamp-2 text-3xl font-bold text-black/80">
+          <h2 class="line-clamp-2 text-3xl font-bold text-current/80">
             Fitness profile
           </h2>
           <EditFitnessProfileMenu />
@@ -144,7 +145,7 @@ export const FitnessProfileSection: Component<
             </div>
           )}
         </QueryBoundary>
-      </div>
+      </Card>
     </section>
   )
 }
@@ -152,10 +153,10 @@ export const FitnessProfileSection: Component<
 const NotFoundProfile = () => (
   <div class="flex flex-col gap-6">
     <div class="flex flex-col gap-2">
-      <h3 class="text-lg font-bold text-black/80">
+      <h3 class="text-lg font-bold text-current/80">
         You don't have a fitness profile yet.
       </h3>
-      <p class="text-lg text-black/50">
+      <p class="text-lg text-current/50">
         Create your fitness profile to start tracking your progress.
       </p>
     </div>

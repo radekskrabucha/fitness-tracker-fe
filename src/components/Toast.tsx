@@ -13,7 +13,7 @@ type ToastProps = {
 
 type ToastActionProps = Omit<ToastProps, 'toastId'>
 
-const ToastA: Component<ToastProps> = props => {
+const Toaster: Component<ToastProps> = props => {
   const [localProps, others] = splitProps(props, [
     'title',
     'description',
@@ -58,7 +58,7 @@ const ToastA: Component<ToastProps> = props => {
 
 const show = (options: ToastActionProps) =>
   toaster.show(props => (
-    <ToastA
+    <Toaster
       {...options}
       toastId={props.toastId}
     />

@@ -4,6 +4,7 @@ import {
   type FlowComponent,
   type JSXElement
 } from 'solid-js'
+import { Card } from './Card'
 import { Icon } from './Icon'
 import { Link } from './Link'
 
@@ -18,9 +19,9 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
     <Link
       href={props.href}
       replace
-      class="show bg-background/10 fixed inset-0 backdrop-blur-sm"
+      class="animate-show bg-background/10 fixed inset-0 backdrop-blur-sm"
     />
-    <div class="show card fixed top-[50%] left-[50%] z-20 flex h-[min(80vh,var(--width-lg))] w-[min(calc(100vw-48px),var(--width-3xl))] translate-x-[-50%] translate-y-[-50%] flex-col overflow-hidden">
+    <Card class="animate-show fixed top-[50%] left-[50%] z-20 h-[min(80vh,var(--width-lg))] w-[min(calc(100vw-48px),var(--width-3xl))] translate-x-[-50%] translate-y-[-50%] overflow-hidden p-0">
       <div class="flex items-center justify-between gap-2 bg-white/50 px-6 py-8">
         <h2 class="line-clamp-2 text-3xl font-bold capitalize">
           {props.title}
@@ -35,7 +36,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
       <div class="flex flex-1 flex-col gap-6 overflow-auto px-6 py-10">
         {props.children}
       </div>
-    </div>
+    </Card>
   </>
 )
 

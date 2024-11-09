@@ -18,6 +18,7 @@ export type WorkoutPlan = {
   difficultyLevel: WorkoutPlanDifficultyLevel
 }
 
-export type WorkoutPlanWithWorkouts = WorkoutPlan & {
-  workouts: Array<Workout>
-}
+export type WorkoutPlanWithWorkouts<T extends Workout = Workout> =
+  WorkoutPlan & {
+    workouts: Array<T>
+  }

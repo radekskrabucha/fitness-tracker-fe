@@ -17,7 +17,7 @@ export const WorkoutPlanCard: Component<WorkoutPlanCardProps> = props => (
   <Link
     href={InternalLink.workoutPlan(props.id)}
     class={cardVariants({
-      class: 'overflow-hidden'
+      class: 'overflow-hidden !p-0'
     })}
   >
     <div class="flex flex-col gap-3 rounded-3xl bg-black px-8 py-4 text-white">

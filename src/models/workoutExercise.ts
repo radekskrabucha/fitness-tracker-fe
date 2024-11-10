@@ -12,12 +12,14 @@ export type WorkoutExercise<
 } & T
 
 export type WorkoutExerciseWithDetails<E extends Exercise = Exercise> =
-  WorkoutExercise<
-    WorkoutExerciseExtrasDetails<E> & WorkoutExerciseExtrasAttributes
-  >
-
+  WorkoutExercise<WorkoutExerciseExtrasDetails<E>>
 export type WorkoutExerciseWithAttributes =
   WorkoutExercise<WorkoutExerciseExtrasAttributes>
+export type WorkoutExerciseWithDetailsAndAttributes<
+  E extends Exercise = Exercise
+> = WorkoutExercise<
+  WorkoutExerciseExtrasDetails<E> & WorkoutExerciseExtrasAttributes
+>
 
 export const WorkoutExerciseAttributeNames = [
   'sets',

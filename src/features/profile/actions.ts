@@ -27,7 +27,7 @@ export const getUserFitnessProfile = () =>
 export const getUserFitnessProfileQueryOptions = (userId: string) =>
   queryOptions({
     queryKey: ['getUserFitnessProfile', userId],
-    queryFn: getUserFitnessProfile
+    queryFn: () => getUserFitnessProfile(),
   })
 
 export const editFitnessProfile = (req: Partial<CreateFitnessProfile>) =>

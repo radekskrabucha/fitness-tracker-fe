@@ -1,5 +1,6 @@
 export type IconId =
   | 'arrow'
+  | 'at'
   | 'calendar'
   | 'close'
   | 'delete'
@@ -11,6 +12,7 @@ export type IconId =
   | 'height'
   | 'menu-dots'
   | 'password'
+  | 'profile'
   | 'source-code'
   | 'target'
   | 'twitter'

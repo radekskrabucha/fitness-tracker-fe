@@ -1,6 +1,8 @@
-import type { Component } from 'solid-js'
+import type { Component, JSXElement } from 'solid-js'
 import { Card, cardVariants } from '~/components/Card'
+import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
+import { InternalLink } from '~/config/app'
 import type { User } from '~/models/user'
 import { EditUserMenu } from './EditUserMenu'
 
@@ -21,15 +23,27 @@ export const UserSection: Component<UserSectionProps> = props => (
           </div>
           <p class="text text-lg">Below you can see your profile details.</p>
         </div>
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-col gap-1">
-            <h3 class="text-lg font-bold text-current/80">E-mail</h3>
-            <p class="text-lg text-current/50">{props.user.email}</p>
-          </div>
-          <div class="flex flex-col gap-1">
-            <h3 class="text-lg font-bold text-current/80">Name</h3>
-            <p class="text-lg text-current/50">{props.user.name}</p>
-          </div>
+        <div class="flex flex-col gap-6">
+          <UserInfoTile
+            label="E-mail"
+            value={props.user.email}
+            icon={
+              <Icon
+                id="at"
+                class="size-5"
+              />
+            }
+          />
+          <UserInfoTile
+            label="Name"
+            value={props.user.name}
+            icon={
+              <Icon
+                id="profile"
+                class="size-5"
+              />
+            }
+          />
         </div>
       </Card>
       <div class="flex flex-1 flex-col gap-6 max-md:col-span-3 max-md:flex-row max-md:flex-wrap md:row-span-3">
@@ -46,8 +60,7 @@ export const UserSection: Component<UserSectionProps> = props => (
           </h3>
         </Link>
         <Link
-          href=""
-          disabled
+          href={InternalLink.workoutPlans}
           class={cardVariants({
             class:
               'flex-1 items-center justify-center gap-3 !p-4 text-center aria-[disabled=true]:cursor-not-allowed'
@@ -72,4 +85,22 @@ export const UserSection: Component<UserSectionProps> = props => (
       </div>
     </div>
   </section>
+)
+
+type UserInfoTileProps = {
+  label: string
+  value: string
+  icon: JSXElement
+}
+
+const UserInfoTile: Component<UserInfoTileProps> = props => (
+  <div class="flex flex-1 shrink-0 flex-wrap items-center gap-x-4 rounded-2xl bg-white px-6 py-3 shadow-sm">
+    <div class="flex flex-wrap items-center gap-x-3">
+      {props.icon}
+      <h3 class="text-lg font-bold text-current/80 capitalize">
+        {props.label}
+      </h3>
+    </div>
+    <p class="line-clamp-1 text-lg text-current/50">{props.value}</p>
+  </div>
 )

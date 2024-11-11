@@ -13,6 +13,17 @@ export const InternalLink = {
   workoutPlan: (id: string) => `/workout-plans/${id}`
 } as const
 
+export const RESTRICTED_ROUTES = [
+  InternalLink.profile,
+  InternalLink.editProfile,
+  InternalLink.changePassword,
+  InternalLink.createFitnessProfile,
+  InternalLink.editFitnessProfile,
+  InternalLink.deleteProfile,
+  InternalLink.deleteFitnessProfile
+]
+export const AUTH_RESTRICTED_ROUTES = [InternalLink.signIn, InternalLink.signUp]
+
 export const ownerEmail = 'rskrabucha13@gmail.com'
 
 export const ExternalLink = {

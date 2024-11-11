@@ -1,10 +1,7 @@
 import { redirect } from '@solidjs/router'
 import { createMiddleware } from '@solidjs/start/middleware'
-import {
-  InternalLink,
-  AUTH_RESTRICTED_ROUTES,
-  RESTRICTED_ROUTES
-} from '~/config/app'
+import { InternalLink } from '~/config/app'
+import { isAuthRestrictedRoute, isRestrictedRoute } from './url'
 
 export default createMiddleware({
   onRequest: [
@@ -25,9 +22,3 @@ export default createMiddleware({
     }
   ]
 })
-
-const isRestrictedRoute = (path: string) =>
-  (RESTRICTED_ROUTES as Array<string>).includes(path)
-
-const isAuthRestrictedRoute = (path: string) =>
-  (AUTH_RESTRICTED_ROUTES as Array<string>).includes(path)

@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from '@solidjs/router'
 import { createMutation, createQuery } from '@tanstack/solid-query'
 import { Show } from 'solid-js'
 import { Button, buttonVariants } from '~/components/Button'
@@ -9,13 +10,22 @@ import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { authClient } from '~/lib/auth'
+import { isRestrictedRoute } from '~/utils/url'
 
 export const SessionUser = () => {
   const getSessionQuery = createQuery(getSessionQueryOptions)
+  const location = useLocation()
+  const navigate = useNavigate()
   const logOutMutation = createMutation(() => ({
     mutationKey: ['signOut'],
     mutationFn: () => authClient.signOut(),
     onSuccess: () => {
+      const isProtectedRoute = isRestrictedRoute(location.pathname)
+
+      if (isProtectedRoute) {
+        navigate(InternalLink.home)
+      }
+
       getSessionQuery.refetch()
     }
   }))

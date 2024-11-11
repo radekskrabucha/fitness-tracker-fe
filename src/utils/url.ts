@@ -1,3 +1,6 @@
+import { AUTH_RESTRICTED_ROUTES } from '~/config/app'
+import { RESTRICTED_ROUTES } from '~/config/app'
+
 export const isActivePath = (
   currentPath: string,
   path: string,
@@ -15,3 +18,9 @@ export const isActivePath = (
 
   return normalizedCurrentPath.startsWith(normalizedPath)
 }
+
+export const isRestrictedRoute = (path: string) =>
+  (RESTRICTED_ROUTES as Array<string>).includes(path)
+
+export const isAuthRestrictedRoute = (path: string) =>
+  (AUTH_RESTRICTED_ROUTES as Array<string>).includes(path)

@@ -22,11 +22,8 @@ import {
   minHeight,
   maxHeight,
   weightValidation,
-  ageValidation,
   minWeight,
-  maxWeight,
-  minAge,
-  maxAge
+  maxWeight
 } from '../form/createFitnessProfileForm'
 
 export const CreateFitnessProfileForm = () => {
@@ -64,12 +61,12 @@ export const CreateFitnessProfileForm = () => {
       onSubmit={values =>
         createFitnessProfileMutation.mutate({
           ...values,
-          age: Number(values.age),
+          dateOfBirth: new Date(values.dateOfBirth),
           height: Number(values.height),
           weight: Number(values.weight)
         })
       }
-      class="my-auto flex w-full max-w-80 flex-col gap-4 self-center text-left"
+      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center text-left"
       shouldTouched
       shouldDirty
     >
@@ -126,29 +123,15 @@ export const CreateFitnessProfileForm = () => {
           />
         )}
       </Field>
-      <Field
-        name="age"
-        validate={ageValidation}
-      >
+
+      <Field name="dateOfBirth">
         {(field, props) => (
-          <NumberInput
-            label="Your age"
+          <TextInput
+            label="Date of birth"
             disabled={createFitnessProfileMutation.isPending}
-            minValue={minAge}
-            maxValue={maxAge}
-            step={1}
-            format
-            formatOptions={{
-              style: 'decimal',
-              maximumFractionDigits: 0,
-              useGrouping: false
-            }}
-            required
             {...field}
             {...props}
-            onChange={value => {
-              setValue(form, 'age', value)
-            }}
+            type="text"
           />
         )}
       </Field>

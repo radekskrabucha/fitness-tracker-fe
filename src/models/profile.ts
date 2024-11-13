@@ -44,7 +44,7 @@ export type FitnessProfile = {
   userId: string
   height: number
   weight: number
-  age: number
+  dateOfBirth: Date
   gender: FitnessProfileGender
   activityLevel: FitnessProfileActivityLevel
   fitnessGoal: FitnessProfileFitnessGoal
@@ -55,7 +55,7 @@ export type CreateFitnessProfile = Pick<
   FitnessProfile,
   | 'height'
   | 'weight'
-  | 'age'
+  | 'dateOfBirth'
   | 'gender'
   | 'activityLevel'
   | 'fitnessGoal'

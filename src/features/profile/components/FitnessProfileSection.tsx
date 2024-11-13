@@ -34,7 +34,9 @@ export const FitnessProfileSection: Component<
           <h2 class="line-clamp-2 text-3xl font-bold text-current/80">
             Fitness profile
           </h2>
-          <EditFitnessProfileMenu />
+          <EditFitnessProfileMenu
+            disabled={getUserFitnessProfileQuery.isError}
+          />
         </div>
         <QueryBoundary
           query={getUserFitnessProfileQuery}
@@ -68,8 +70,8 @@ export const FitnessProfileSection: Component<
               />
 
               <FitnessTile
-                label="Age"
-                value={profile.age}
+                label="Date of birth"
+                value={profile.dateOfBirth.toString()}
                 icon={
                   <Icon
                     id="calendar"

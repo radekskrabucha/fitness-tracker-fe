@@ -46,7 +46,7 @@ export const SignInForm = () => {
   return (
     <Form
       onSubmit={values => signInMutation.mutate(values)}
-      class="flex w-full max-w-80 flex-col gap-4"
+      class="flex w-full max-w-96 flex-col gap-4"
     >
       <Field
         name="email"

@@ -56,7 +56,7 @@ export const SignUpForm = () => {
             : getNameFromEmail(values.email) || values.email
         })
       }
-      class="flex w-full max-w-80 flex-col gap-4"
+      class="flex w-full max-w-96 flex-col gap-4"
     >
       <Field
         name="email"

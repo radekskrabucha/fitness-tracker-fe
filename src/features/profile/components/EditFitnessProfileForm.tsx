@@ -15,17 +15,14 @@ import {
   getUserFitnessProfileQueryOptions
 } from '../actions'
 import {
-  maxAge,
   maxHeight,
   maxWeight,
-  minAge,
   minHeight,
   minWeight
 } from '../form/createFitnessProfileForm'
 import {
   useEditFitnessProfileForm,
   heightValidation,
-  ageValidation,
   weightValidation
 } from '../form/editFitnessProfileForm'
 
@@ -74,7 +71,9 @@ export const EditFitnessProfileForm: Component<
           height: nonNullable(values.height)
             ? Number(values.height)
             : undefined,
-          age: nonNullable(values.age) ? Number(values.age) : undefined,
+          dateOfBirth: nonNullable(values.dateOfBirth)
+            ? new Date(values.dateOfBirth)
+            : undefined,
           weight: nonNullable(values.weight)
             ? Number(values.weight)
             : undefined,
@@ -90,7 +89,7 @@ export const EditFitnessProfileForm: Component<
             : undefined
         })
       }
-      class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
+      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
       shouldTouched
       shouldDirty
     >
@@ -150,29 +149,14 @@ export const EditFitnessProfileForm: Component<
         )}
       </Field>
 
-      <Field
-        name="age"
-        validate={ageValidation}
-      >
+      <Field name="dateOfBirth">
         {(field, props) => (
-          <NumberInput
-            label="Your age"
+          <TextInput
+            label="Date of birth"
             disabled={editFitnessProfileMutation.isPending}
-            minValue={minAge}
-            maxValue={maxAge}
-            step={1}
-            format
-            formatOptions={{
-              style: 'decimal',
-              maximumFractionDigits: 0,
-              useGrouping: false
-            }}
-            required
             {...field}
             {...props}
-            onChange={value => {
-              setValue(form, 'age', value)
-            }}
+            type="text"
           />
         )}
       </Field>

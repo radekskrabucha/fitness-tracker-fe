@@ -44,7 +44,7 @@ export const ChangePasswordForm = () => {
   return (
     <Form
       onSubmit={values => changePasswordMutation.mutate(values)}
-      class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
+      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
     >
       <Field
         name="currentPassword"

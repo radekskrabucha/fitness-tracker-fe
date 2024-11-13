@@ -1,9 +1,9 @@
-import { Index, type Component } from 'solid-js'
+import { Index, Show, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
-import type { GetWorkoutPlanResponse } from '../types/response'
+import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
 import { WorkoutExercise } from './WorkoutExercise'
 
-type WorkoutCardProps = GetWorkoutPlanResponse['workouts'][number]
+type WorkoutCardProps = WorkoutPlanWithWorkouts['workouts'][number]
 
 export const WorkoutCard: Component<WorkoutCardProps> = props => (
   <Card
@@ -14,11 +14,18 @@ export const WorkoutCard: Component<WorkoutCardProps> = props => (
       <h2 class="line-clamp-2 text-3xl font-bold text-current/80">
         {props.name}
       </h2>
-      <p class="text-lg text-current/50">{props.description}</p>
+      <Show when={props.description}>
+        {description => <p class="text-lg text-current/50">{description()}</p>}
+      </Show>
     </div>
     <div class="grid grid-cols-2 gap-8 p-8 max-md:grid-cols-1">
       <Index each={props.exercises}>
-        {exercise => <WorkoutExercise {...exercise()} />}
+        {(exercise, index) => (
+          <WorkoutExercise
+            {...exercise()}
+            order={index + 1}
+          />
+        )}
       </Index>
     </div>
   </Card>

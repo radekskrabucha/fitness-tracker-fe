@@ -1,10 +1,10 @@
 import { queryOptions } from '@tanstack/solid-query'
 import { fetchApiClient } from '~/lib/fetch'
-import type { GetWorkoutPlanResponse } from './types/response'
+import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
 
 export const getWorkoutPlan = (id: string) => {
   'use server'
-  return fetchApiClient<GetWorkoutPlanResponse>(`/workout-plans/${id}`)
+  return fetchApiClient<WorkoutPlanWithWorkouts>(`/workout-plans/${id}`)
 }
 
 export const getWorkoutPlanQueryOptions = (id: string) =>

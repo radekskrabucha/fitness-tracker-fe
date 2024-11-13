@@ -1,7 +1,9 @@
 import type { ExerciseCategory } from './exerciseCategory'
 import type { MuscleGroup } from './muscleGroup'
+import type { WorkoutExerciseAttribute } from './workoutExerciseAttributes'
 
-export type Exercise<T extends ExerciseExtras = ExerciseExtras> = {
+// @ts-expect-error - we use empty object to make it work
+export type Exercise<T extends ExerciseExtras = {}> = {
   description: string | null
   id: string
   name: string
@@ -10,20 +12,23 @@ export type Exercise<T extends ExerciseExtras = ExerciseExtras> = {
   categoryId: string
 } & T
 
-export type ExerciseWithCategory = Exercise<ExerciseExtrasCategory>
-
-export type ExerciseWithDetails = Exercise<
-  ExerciseExtrasMuscleGroups & ExerciseExtrasCategory
+export type ExerciseWithDetails = Exercise<ExerciseExtraDetails>
+export type ExerciseWithDetailsAndAttribute = Exercise<
+  ExerciseExtraDetails & ExerciseExtraAttributes
 >
 
 export type ExerciseExtras =
-  | (ExerciseExtrasMuscleGroups & ExerciseExtrasCategory)
-  | ExerciseExtrasMuscleGroups
-  | ExerciseExtrasCategory
+  | (ExerciseExtraDetails & ExerciseExtraAttributes)
+  | ExerciseExtraDetails
 
-export type ExerciseExtrasCategory = {
+export type ExerciseExtraDetails = ExerciseExtraMuscleGroups &
+  ExerciseExtraCategory
+export type ExerciseExtraCategory = {
   category: ExerciseCategory
 }
-export type ExerciseExtrasMuscleGroups = {
+export type ExerciseExtraMuscleGroups = {
   muscleGroups: Array<MuscleGroup>
+}
+export type ExerciseExtraAttributes = {
+  attributes: Array<WorkoutExerciseAttribute>
 }

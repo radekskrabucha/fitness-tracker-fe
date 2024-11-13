@@ -1,4 +1,7 @@
-import type { Workout } from './workout'
+import type {
+  WorkoutExtras,
+  WorkoutWithAttributesAndExercises
+} from './workout'
 
 export const workoutPlanDifficultyLevel = [
   'beginner',
@@ -9,16 +12,22 @@ export const workoutPlanDifficultyLevel = [
 export type WorkoutPlanDifficultyLevel =
   (typeof workoutPlanDifficultyLevel)[number]
 
-export type WorkoutPlan = {
-  description: string | null
+// @ts-expect-error - we use empty object to make it work
+export type WorkoutPlan<T extends WorkoutPlanExtras = {}> = {
   id: string
   name: string
+  description: string | null
+  difficultyLevel: WorkoutPlanDifficultyLevel
   createdAt: string
   updatedAt: string
-  difficultyLevel: WorkoutPlanDifficultyLevel
-}
+} & T
+export type WorkoutPlanWithWorkouts = WorkoutPlan<
+  WorkoutPlanExtraWorkouts<WorkoutWithAttributesAndExercises>
+>
 
-export type WorkoutPlanWithWorkouts<T extends Workout = Workout> =
-  WorkoutPlan & {
-    workouts: Array<T>
-  }
+export type WorkoutPlanExtras = WorkoutPlanExtraWorkouts
+
+// @ts-expect-error - we use empty object to make it work
+export type WorkoutPlanExtraWorkouts<W extends WorkoutExtras = {}> = {
+  workouts: Array<W>
+}

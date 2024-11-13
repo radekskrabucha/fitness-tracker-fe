@@ -61,7 +61,7 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
   return (
     <Form
       onSubmit={values => deleteUserMutation.mutate(values)}
-      class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
+      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
       shouldTouched
       shouldDirty
     >

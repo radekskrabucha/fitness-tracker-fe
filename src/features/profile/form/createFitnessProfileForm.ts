@@ -6,11 +6,11 @@ import type {
 
 export type CreateFitnessProfileForm = Omit<
   CreateFitnessProfile,
-  'height' | 'weight' | 'age' | 'dietaryPreference'
+  'height' | 'weight' | 'dietaryPreference' | 'dateOfBirth'
 > & {
+  dateOfBirth: string
   height: string
   weight: string
-  age: string
   dietaryPreference: FitnessProfileDietaryPreference
 }
 
@@ -29,13 +29,6 @@ export const weightValidation = [
   required('Weight is required'),
   minRange(minWeight, 'Weight must be at least 1 kg.'),
   maxRange(maxWeight, 'Weight must be at most 300 kg.')
-]
-export const minAge = 1
-export const maxAge = 120
-export const ageValidation = [
-  required('Age is required'),
-  minRange(minAge, 'Age must be at least 1 year.'),
-  maxRange(maxAge, 'Age must be at most 120 years.')
 ]
 export const genderValidation = [required('Gender is required')]
 export const activityLevelValidation = [required('Activity level is required')]

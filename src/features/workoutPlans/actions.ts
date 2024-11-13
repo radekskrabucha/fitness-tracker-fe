@@ -10,5 +10,6 @@ export const getWorkoutPlans = () => {
 export const getWorkoutPlansQueryOptions = () =>
   queryOptions({
     queryKey: ['getWorkoutPlans'],
-    queryFn: getWorkoutPlans
+    queryFn: () => getWorkoutPlans(),
+    deferStream: true
   })

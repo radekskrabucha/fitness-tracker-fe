@@ -8,7 +8,7 @@ export const WorkoutPlansPage = () => (
         title="Workout Plans"
         description="Explore workouts and select one that suits you. Start tracking your progress today."
       />
-      <div class="grid grid-cols-2 gap-6 max-lg:grid-cols-1">
+      <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
         <WorkoutPlans />
       </div>
     </section>

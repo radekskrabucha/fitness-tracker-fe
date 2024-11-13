@@ -16,7 +16,7 @@ export const Badge: Component<BadgeProps> = props => {
 }
 
 export const badgeVariants = cva(
-  'line-clamp-1 inline-flex w-min items-center rounded-md border px-3 py-1 text-xs font-semibold shadow-md transition-colors',
+  'line-clamp-1 inline-flex w-min shrink-0 items-center rounded-md border px-3 py-1 text-xs font-semibold shadow-md transition-colors',
   {
     variants: {
       variant: {

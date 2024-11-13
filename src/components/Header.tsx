@@ -25,7 +25,7 @@ export const Header: Component<HeaderSectionProps> = props => (
 )
 
 export const headerVariants = cva(
-  'flex items-center justify-between gap-8 rounded-3xl border px-8 py-4 shadow-lg backdrop-blur-2xl max-md:gap-6',
+  'flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl border px-8 py-4 shadow-lg backdrop-blur-2xl max-md:gap-6',
   {
     variants: {
       variant: {

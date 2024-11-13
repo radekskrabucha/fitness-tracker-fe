@@ -1,13 +1,13 @@
 export type User = {
   id: string
-  name: string
   email: string
   emailVerified: boolean
-  image: string | null
+  name: string
   createdAt: Date
   updatedAt: Date
-  role: 'user' | 'admin'
-  banned: boolean | null
-  banReason: string | null
-  banExpires: number | undefined
+  image?: string | undefined
+  banned: boolean | undefined
+  role?: string | undefined
+  banReason?: string | undefined
+  banExpires?: undefined
 }

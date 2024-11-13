@@ -62,7 +62,7 @@ export const TextInput: Component<TextInputProps> = props => (
         as="span"
         class={statusMessageVariants({
           variant: 'error',
-          class: 'animate-show order-4'
+          class: 'animate-reveal order-4'
         })}
       >
         {props.error}

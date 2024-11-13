@@ -9,22 +9,20 @@ import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import type { CreateFitnessProfile } from '~/models/profile'
+import { nonNullable } from '~/utils/common'
 import {
   editFitnessProfile,
   getUserFitnessProfileQueryOptions
 } from '../actions'
 import {
-  maxAge,
   maxHeight,
   maxWeight,
-  minAge,
   minHeight,
   minWeight
 } from '../form/createFitnessProfileForm'
 import {
   useEditFitnessProfileForm,
   heightValidation,
-  ageValidation,
   weightValidation
 } from '../form/editFitnessProfileForm'
 
@@ -70,18 +68,28 @@ export const EditFitnessProfileForm: Component<
     <Form
       onSubmit={values =>
         editFitnessProfileMutation.mutate({
-          height: values.height ? Number(values.height) : undefined,
-          age: values.age ? Number(values.age) : undefined,
-          weight: values.weight ? Number(values.weight) : undefined,
-          dietaryPreference: values.dietaryPreference
+          height: nonNullable(values.height)
+            ? Number(values.height)
+            : undefined,
+          dateOfBirth: nonNullable(values.dateOfBirth)
+            ? new Date(values.dateOfBirth)
+            : undefined,
+          weight: nonNullable(values.weight)
+            ? Number(values.weight)
+            : undefined,
+          dietaryPreference: nonNullable(values.dietaryPreference)
             ? values.dietaryPreference
             : null,
-          fitnessGoal: values.fitnessGoal ? values.fitnessGoal : undefined,
-          gender: values.gender ? values.gender : undefined,
-          activityLevel: values.activityLevel ? values.activityLevel : undefined
+          fitnessGoal: nonNullable(values.fitnessGoal)
+            ? values.fitnessGoal
+            : undefined,
+          gender: nonNullable(values.gender) ? values.gender : undefined,
+          activityLevel: nonNullable(values.activityLevel)
+            ? values.activityLevel
+            : undefined
         })
       }
-      class="my-auto flex w-full max-w-80 flex-col gap-4 self-center"
+      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
       shouldTouched
       shouldDirty
     >
@@ -141,29 +149,14 @@ export const EditFitnessProfileForm: Component<
         )}
       </Field>
 
-      <Field
-        name="age"
-        validate={ageValidation}
-      >
+      <Field name="dateOfBirth">
         {(field, props) => (
-          <NumberInput
-            label="Your age"
+          <TextInput
+            label="Date of birth"
             disabled={editFitnessProfileMutation.isPending}
-            minValue={minAge}
-            maxValue={maxAge}
-            step={1}
-            format
-            formatOptions={{
-              style: 'decimal',
-              maximumFractionDigits: 0,
-              useGrouping: false
-            }}
-            required
             {...field}
             {...props}
-            onChange={value => {
-              setValue(form, 'age', value)
-            }}
+            type="text"
           />
         )}
       </Field>

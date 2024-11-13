@@ -26,7 +26,7 @@ export const EditFitnessProfileFormWrapper: Component<
             gender: profile.gender,
             height: profile.height,
             weight: profile.weight,
-            age: profile.age
+            dateOfBirth: profile.dateOfBirth
           }}
           userId={props.userId}
         />

@@ -1,15 +1,23 @@
+import type { Component } from 'solid-js'
 import { Button, buttonVariants } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { PopoverContent, Popover } from '~/components/Popover'
 import { InternalLink } from '~/config/app'
 
-export const EditFitnessProfileMenu = () => (
+type EditFitnessProfileMenuProps = {
+  disabled?: boolean
+}
+
+export const EditFitnessProfileMenu: Component<
+  EditFitnessProfileMenuProps
+> = props => (
   <Popover gutter={8}>
     <Popover.Trigger>
       <Button
         variant="outline"
-        class="size-10 shrink-0 rounded-full border border-black/20 bg-white p-0 shadow-md hover:border-black/10 hover:text-current/70"
+        class="size-10 shrink-0 rounded-full border border-black/20 bg-white p-0 shadow-md hover:border-black/10 hover:text-black/70"
+        disabled={props.disabled}
       >
         <Icon
           id="menu-dots"

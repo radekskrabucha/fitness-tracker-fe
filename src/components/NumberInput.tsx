@@ -69,7 +69,7 @@ export const NumberInput: Component<NumberInputProps> = props => (
         <NumberField.ErrorMessage
           class={statusMessageVariants({
             variant: 'error',
-            class: 'animate-show order-4'
+            class: 'animate-reveal order-4'
           })}
         >
           {message()}

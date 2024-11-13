@@ -4,10 +4,8 @@ import type {
   FitnessProfileDietaryPreference
 } from '~/models/profile'
 import {
-  maxAge,
   maxHeight,
   maxWeight,
-  minAge,
   minHeight,
   minWeight
 } from './createFitnessProfileForm'
@@ -15,11 +13,11 @@ import {
 export type EditFitnessProfileForm = Partial<
   Omit<
     CreateFitnessProfile,
-    'height' | 'weight' | 'age' | 'dietaryPreference'
+    'height' | 'weight' | 'dateOfBirth' | 'dietaryPreference'
   > & {
     height: string
     weight: string
-    age: string
+    dateOfBirth: string
     dietaryPreference: FitnessProfileDietaryPreference
   }
 >
@@ -32,7 +30,7 @@ export const useEditFitnessProfileForm = (
       ...initialValues,
       height: initialValues.height.toString(),
       weight: initialValues.weight.toString(),
-      age: initialValues.age.toString(),
+      dateOfBirth: initialValues.dateOfBirth.toString(),
       dietaryPreference: initialValues.dietaryPreference
         ? initialValues.dietaryPreference
         : undefined
@@ -52,8 +50,4 @@ export const heightValidation = [
 export const weightValidation = [
   minRange(minWeight, 'Weight must be at least 1 kg.'),
   maxRange(maxWeight, 'Weight must be at most 300 kg.')
-]
-export const ageValidation = [
-  minRange(minAge, 'Age must be at least 1 year.'),
-  maxRange(maxAge, 'Age must be at most 120 years.')
 ]

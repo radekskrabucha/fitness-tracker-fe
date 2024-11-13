@@ -114,7 +114,7 @@ export const CreateFitnessProfileForm = () => {
             step={1}
             format
             formatOptions={{
-              maximumFractionDigits: 3,
+              maximumFractionDigits: 2,
               useGrouping: false
             }}
             required

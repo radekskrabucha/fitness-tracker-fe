@@ -1,6 +1,5 @@
 import { Popover } from '@kobalte/core/popover'
-import type { ComponentProps, FlowComponent } from 'solid-js'
-import { splitProps } from 'solid-js/types/server/index.js'
+import { splitProps, type ComponentProps, type FlowComponent } from 'solid-js'
 import type { WithClass } from '~/types/common'
 import { cn } from '~/utils/styles'
 import { cardVariants } from './Card'

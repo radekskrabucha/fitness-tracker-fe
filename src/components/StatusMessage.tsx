@@ -1,6 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import type { Component, ComponentProps } from 'solid-js'
-import { splitProps } from 'solid-js/types/server/index.js'
+import { splitProps, type Component, type ComponentProps } from 'solid-js'
 
 export type StatusMessageProps = VariantProps<typeof statusMessageVariants> &
   ComponentProps<'span'>

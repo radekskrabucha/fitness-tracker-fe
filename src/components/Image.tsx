@@ -1,6 +1,6 @@
 import { Image as ImageKobalte } from '@kobalte/core/image'
 import type { ImageRootProps } from '@kobalte/core/image'
-import { Show, type Component, type ComponentProps, type JSX } from 'solid-js'
+import { Show, type Component, type ComponentProps } from 'solid-js'
 
 type ImgProps = Pick<
   ComponentProps<'img'>,
@@ -18,20 +18,17 @@ type ImgProps = Pick<
   | 'srcset'
   | 'src'
 >
-
+type WrapperSpanProps = Pick<
+  ComponentProps<'span'>,
+  'onClick' | 'id' | 'ref' | 'class' | 'classList'
+>
+type FallbackSpanProps = Pick<
+  ComponentProps<'span'>,
+  'class' | 'classList' | 'children'
+>
 type ImageProps = {
-  wrapper?: ImageRootProps & {
-    class?: string
-    onClick?: JSX.EventHandlerUnion<
-      HTMLSpanElement,
-      MouseEvent,
-      JSX.EventHandler<HTMLSpanElement, MouseEvent>
-    >
-  }
-  fallback?: {
-    class: string
-    children?: JSX.Element
-  }
+  wrapper?: ImageRootProps & WrapperSpanProps
+  fallback?: FallbackSpanProps
   img: ImgProps
 }
 

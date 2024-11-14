@@ -4,24 +4,30 @@ import { ErrorBoundary, Match, Show, Suspense, Switch } from 'solid-js'
 import { Button } from './Button'
 import { LoaderCircle } from './LoaderCircle'
 
-export interface QueryBoundaryProps<T = unknown> {
-  query: CreateQueryResult<T, Error | unknown>
+export interface QueryBoundaryProps<T = unknown, E extends Error = Error> {
+  query: CreateQueryResult<T, E | unknown>
   loadingFallback?: JSXElement
   notFoundFallback?: JSXElement
-  errorFallback?: (err: Error, retry: () => void) => JSXElement
+  errorFallback?: (errorFallbackProps: ErrorFallbackProps<E>) => JSXElement
   children: (data: Exclude<T, null | false | undefined>) => JSXElement
 }
 
-export function QueryBoundary<T>(props: QueryBoundaryProps<T>) {
+export function QueryBoundary<T = unknown, E extends Error = Error>(
+  props: QueryBoundaryProps<T, E>
+) {
   return (
     <Suspense fallback={props.loadingFallback}>
       <ErrorBoundary
-        fallback={(error: Error, reset) =>
+        fallback={(error: E, reset) =>
           props.errorFallback ? (
-            // eslint-disable-next-line solid/reactivity
-            props.errorFallback(error, async () => {
-              await props.query.refetch()
-              reset()
+            props.errorFallback({
+              error,
+              retry: async () => {
+                await props.query.refetch()
+                reset()
+              },
+              errorUpdateCount: props.query.errorUpdateCount,
+              isRefetching: props.query.isFetching
             })
           ) : (
             <DefaultErrorFallback
@@ -62,14 +68,14 @@ export function QueryBoundary<T>(props: QueryBoundaryProps<T>) {
   )
 }
 
-type DefaultErrorFallbackProps = {
-  error: Error
+type ErrorFallbackProps<E extends Error = Error> = {
+  error: E
   retry: () => void
   errorUpdateCount: number
   isRefetching: boolean
 }
 
-const DefaultErrorFallback: Component<DefaultErrorFallbackProps> = props => (
+const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
     <h2 class="text-3xl font-bold">Oopss... we've got an error! 🚧</h2>
     <Show

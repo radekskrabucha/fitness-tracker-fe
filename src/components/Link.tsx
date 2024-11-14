@@ -18,7 +18,7 @@ type AElementProps = Pick<
   | 'rel'
 >
 type CommonProps = {
-  disabled: boolean | undefined
+  disabled?: boolean
 }
 type ExternalLinkProps = AElementProps & CommonProps
 

@@ -1,10 +1,10 @@
-import type { Component, JSX } from 'solid-js'
+import type { Component, ComponentProps } from 'solid-js'
 import type { IconId } from '~/types/icons'
 import { getIconHref } from '~/utils/icons'
 
 type IconProps = {
   id: IconId
-} & JSX.SvgSVGAttributes<SVGSVGElement>
+} & ComponentProps<'svg'>
 
 export const Icon: Component<IconProps> = props => (
   <svg {...props}>

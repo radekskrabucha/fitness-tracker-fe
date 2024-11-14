@@ -1,23 +1,29 @@
 import { type VariantProps, cva } from 'class-variance-authority'
-import type { Component, JSX } from 'solid-js'
+import type { Component, ComponentProps } from 'solid-js'
+import { splitProps } from 'solid-js/types/server/index.js'
 
 export type StatusMessageProps = VariantProps<typeof statusMessageVariants> &
-  Pick<
-    JSX.HTMLAttributes<HTMLSpanElement>,
-    'class' | 'id' | 'children' | 'ref' | 'aria-label' | 'role'
-  >
+  ComponentProps<'span'>
 
-export const StatusMessage: Component<StatusMessageProps> = props => (
-  <span
-    class={statusMessageVariants({
-      variant: props.variant,
-      class: props.class
-    })}
-    {...props}
-  >
-    {props.children}
-  </span>
-)
+export const StatusMessage: Component<StatusMessageProps> = props => {
+  const [localProps, others] = splitProps(props, [
+    'class',
+    'variant',
+    'children'
+  ])
+
+  return (
+    <span
+      class={statusMessageVariants({
+        variant: localProps.variant,
+        class: localProps.class
+      })}
+      {...others}
+    >
+      {localProps.children}
+    </span>
+  )
+}
 
 export const statusMessageVariants = cva('text-sm', {
   variants: {

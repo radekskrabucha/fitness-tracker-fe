@@ -1,38 +1,31 @@
-import { Link as KobalteLink, type LinkRootProps } from '@kobalte/core/link'
+import { Link as KobalteLink } from '@kobalte/core/link'
 import { A, type AnchorProps } from '@solidjs/router'
-import { type JSX, type Component, Show } from 'solid-js'
+import { type Component, Show, type ComponentProps } from 'solid-js'
 import { isExternalLink } from '~/utils/regexes'
 
-type ExternalLinkProps = {
-  href: string
-} & Pick<
-  JSX.AnchorHTMLAttributes<HTMLAnchorElement>,
+type AElementProps = Pick<
+  ComponentProps<'a'>,
   | 'class'
   | 'onClick'
   | 'onMouseEnter'
   | 'onTouchStart'
   | 'children'
   | 'id'
+  | 'aria-label'
+  | 'href'
+  | 'ref'
   | 'target'
   | 'rel'
-  | 'aria-label'
-> &
-  Omit<LinkRootProps, 'href'>
+>
+type CommonProps = {
+  disabled: boolean | undefined
+}
+type ExternalLinkProps = AElementProps & CommonProps
 
 type InternalLinkProps = {
   href: string
-  disabled?: false
-} & Pick<
-  JSX.AnchorHTMLAttributes<HTMLAnchorElement>,
-  | 'class'
-  | 'onClick'
-  | 'onMouseEnter'
-  | 'onTouchStart'
-  | 'children'
-  | 'id'
-  | 'aria-label'
-  | 'ref'
-> &
+} & CommonProps &
+  Omit<AElementProps, 'target' | 'rel' | 'href'> &
   Pick<
     AnchorProps,
     'replace' | 'noScroll' | 'state' | 'end' | 'activeClass' | 'inactiveClass'
@@ -42,7 +35,7 @@ type LinkProps = ExternalLinkProps | InternalLinkProps
 
 export const Link: Component<LinkProps> = props => (
   <Show
-    when={isExternalLink(props.href) || props.disabled}
+    when={(props.href && isExternalLink(props.href)) || props.disabled}
     fallback={<A {...(props as InternalLinkProps)} />}
   >
     <KobalteLink

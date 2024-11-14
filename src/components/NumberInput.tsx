@@ -27,7 +27,10 @@ type NumberFieldProps = Pick<
   | 'value'
   | 'onChange'
 >
-type InputProps = Pick<ComponentProps<'input'>, 'autofocus' | 'onBlur' | 'ref'>
+type InputProps = Pick<
+  ComponentProps<'input'>,
+  'ref' | 'onBlur' | 'onFocus' | 'autofocus'
+>
 
 type NumberInputProps = NumberFieldProps &
   InputProps & {
@@ -40,7 +43,7 @@ export const NumberInput: Component<NumberInputProps> = props => {
   const [inputProps, labelProps, descriptionProps, errorProps, rootProps] =
     splitProps(
       props,
-      ['autofocus', 'onBlur', 'ref'],
+      ['autofocus', 'ref', 'onBlur', 'onFocus'],
       ['label'],
       ['description'],
       ['error']

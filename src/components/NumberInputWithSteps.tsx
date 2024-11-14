@@ -30,7 +30,7 @@ type NumberFieldProps = Pick<
 >
 type InputProps = Pick<
   ComponentProps<'input'>,
-  'autofocus' | 'onBlur' | 'ref' | 'placeholder'
+  'ref' | 'onBlur' | 'onFocus' | 'autofocus' | 'placeholder'
 >
 
 type NumberInputWithStepsProps = NumberFieldProps &
@@ -46,7 +46,7 @@ export const NumberInputWithSteps: Component<
   const [inputProps, labelProps, descriptionProps, errorProps, rootProps] =
     splitProps(
       props,
-      ['placeholder', 'autofocus', 'ref', 'onBlur'],
+      ['placeholder', 'autofocus', 'ref', 'onBlur', 'onFocus'],
       ['label'],
       ['description'],
       ['error']

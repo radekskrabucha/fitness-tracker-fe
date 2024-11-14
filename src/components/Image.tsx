@@ -1,9 +1,9 @@
 import { Image as ImageKobalte } from '@kobalte/core/image'
 import type { ImageRootProps } from '@kobalte/core/image'
-import { Show, type Component, type JSX } from 'solid-js'
+import { Show, type Component, type ComponentProps, type JSX } from 'solid-js'
 
 type ImgProps = Pick<
-  JSX.ImgHTMLAttributes<HTMLImageElement>,
+  ComponentProps<'img'>,
   | 'alt'
   | 'class'
   | 'width'

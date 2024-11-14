@@ -3,15 +3,15 @@ import {
   type ButtonRootProps
 } from '@kobalte/core/button'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { type JSX, type Component, splitProps } from 'solid-js'
+import { splitProps, type Component, type ComponentProps } from 'solid-js'
 import { cn } from '~/utils/styles'
 
-type ButtonElementProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>
-
-type ButtonProps = Pick<
-  ButtonElementProps,
+type ButtonElementProps = Pick<
+  ComponentProps<'button'>,
   'class' | 'children' | 'onClick' | 'id'
-> &
+>
+
+type ButtonProps = ButtonElementProps &
   VariantProps<typeof buttonVariants> &
   ButtonRootProps
 

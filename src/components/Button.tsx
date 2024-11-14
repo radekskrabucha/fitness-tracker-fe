@@ -3,7 +3,7 @@ import {
   type ButtonRootProps
 } from '@kobalte/core/button'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { type JSX, type Component } from 'solid-js'
+import { type JSX, type Component, splitProps } from 'solid-js'
 import { cn } from '~/utils/styles'
 
 type ButtonElementProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>
@@ -15,20 +15,29 @@ type ButtonProps = Pick<
   VariantProps<typeof buttonVariants> &
   ButtonRootProps
 
-export const Button: Component<ButtonProps> = props => (
-  <KobalteButton
-    {...props}
-    type={props.type || 'button'}
-    class={cn(
-      buttonVariants({
-        variant: props.variant,
-        class: props.class
-      })
-    )}
-  >
-    {props.children}
-  </KobalteButton>
-)
+export const Button: Component<ButtonProps> = props => {
+  const [localProps, childrenProps, typeProps, others] = splitProps(
+    props,
+    ['variant', 'class'],
+    ['children'],
+    ['type']
+  )
+
+  return (
+    <KobalteButton
+      {...others}
+      type={typeProps.type || 'button'}
+      class={cn(
+        buttonVariants({
+          variant: localProps.variant,
+          class: localProps.class
+        })
+      )}
+    >
+      {childrenProps.children}
+    </KobalteButton>
+  )
+}
 
 export const buttonVariants = cva(
   'inline-flex cursor-pointer items-center justify-center gap-1 rounded-md text-sm font-medium capitalize ring-offset-white transition-colors focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed',

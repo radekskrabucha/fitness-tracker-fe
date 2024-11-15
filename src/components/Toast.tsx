@@ -38,7 +38,7 @@ const Toaster: Component<ToastProps> = props => {
         </Toast.Title>
         <Toast.CloseButton class="cursor-pointer self-start text-white/50 hover:text-white">
           <Icon
-            id="close"
+            icon="close"
             class="h-5 w-5 translate-x-2 fill-current transition-colors"
           />
         </Toast.CloseButton>

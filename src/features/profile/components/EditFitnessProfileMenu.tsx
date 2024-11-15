@@ -20,7 +20,7 @@ export const EditFitnessProfileMenu: Component<
         disabled={props.disabled}
       >
         <Icon
-          id="menu-dots"
+          icon="menu-dots"
           class="size-5 fill-current transition-colors duration-150"
         />
       </Button>
@@ -36,7 +36,7 @@ export const EditFitnessProfileMenu: Component<
           })}
         >
           <Icon
-            id="edit"
+            icon="edit"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Edit profile
@@ -49,7 +49,7 @@ export const EditFitnessProfileMenu: Component<
           })}
         >
           <Icon
-            id="delete"
+            icon="delete"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Delete fitness profile

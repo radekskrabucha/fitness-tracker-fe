@@ -50,7 +50,7 @@ export const FitnessProfileSection: Component<
                 value={profile.height}
                 icon={
                   <Icon
-                    id="height"
+                    icon="height"
                     class="size-5"
                   />
                 }
@@ -62,7 +62,7 @@ export const FitnessProfileSection: Component<
                 value={profile.weight}
                 icon={
                   <Icon
-                    id="weight"
+                    icon="weight"
                     class="size-5"
                   />
                 }
@@ -74,7 +74,7 @@ export const FitnessProfileSection: Component<
                 value={profile.dateOfBirth.toString()}
                 icon={
                   <Icon
-                    id="calendar"
+                    icon="calendar"
                     class="size-5"
                   />
                 }
@@ -87,7 +87,7 @@ export const FitnessProfileSection: Component<
                     value={genderName()}
                     icon={
                       <Icon
-                        id="gender"
+                        icon="gender"
                         class="size-5"
                       />
                     }
@@ -102,7 +102,7 @@ export const FitnessProfileSection: Component<
                     value={activityLevel()}
                     icon={
                       <Icon
-                        id="gym"
+                        icon="gym"
                         class="size-5"
                       />
                     }
@@ -117,7 +117,7 @@ export const FitnessProfileSection: Component<
                     value={fitnessGoal()}
                     icon={
                       <Icon
-                        id="target"
+                        icon="target"
                         class="size-5"
                       />
                     }
@@ -137,7 +137,7 @@ export const FitnessProfileSection: Component<
                     value={dietaryPreference()}
                     icon={
                       <Icon
-                        id="diet"
+                        icon="diet"
                         class="size-5"
                       />
                     }

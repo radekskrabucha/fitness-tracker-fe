@@ -49,7 +49,7 @@ const DefaultIcon: Component<DefaultIconProps> = props => (
     class="flex size-10 shrink-0 items-center justify-center rounded-full border border-black/20 hover:text-current/50"
   >
     <Icon
-      id="close"
+      icon="close"
       class="size-4 fill-current transition-colors duration-150"
     />
   </Link>

@@ -29,7 +29,7 @@ export const UserSection: Component<UserSectionProps> = props => (
             value={props.user.email}
             icon={
               <Icon
-                id="at"
+                icon="at"
                 class="size-5"
               />
             }
@@ -39,7 +39,7 @@ export const UserSection: Component<UserSectionProps> = props => (
             value={props.user.name}
             icon={
               <Icon
-                id="profile"
+                icon="profile"
                 class="size-5"
               />
             }

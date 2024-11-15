@@ -49,7 +49,7 @@ export const WorkoutPlanCard: Component<WorkoutPlanCardProps> = props => (
         <span class={buttonVariants({ variant: 'link', class: 'ml-auto' })}>
           See details{' '}
           <Icon
-            id="arrow"
+            icon="arrow"
             class="size-4"
           />
         </span>

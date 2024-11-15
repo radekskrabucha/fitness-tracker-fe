@@ -12,7 +12,7 @@ export const EditUserMenu = () => (
         class="size-10 shrink-0 rounded-full border border-black/20 bg-white p-0 shadow-md hover:border-black/10 hover:text-black/70"
       >
         <Icon
-          id="menu-dots"
+          icon="menu-dots"
           class="size-5 fill-current transition-colors duration-150"
         />
       </Button>
@@ -28,7 +28,7 @@ export const EditUserMenu = () => (
           })}
         >
           <Icon
-            id="edit"
+            icon="edit"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Edit profile
@@ -41,7 +41,7 @@ export const EditUserMenu = () => (
           })}
         >
           <Icon
-            id="password"
+            icon="password"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Change password
@@ -54,7 +54,7 @@ export const EditUserMenu = () => (
           })}
         >
           <Icon
-            id="delete"
+            icon="delete"
             class="h-4 w-4 fill-current transition-colors duration-150"
           />
           Delete profile

@@ -40,14 +40,11 @@ type NumberInputProps = NumberFieldProps &
   }
 
 export const NumberInput: Component<NumberInputProps> = props => {
-  const [inputProps, labelProps, descriptionProps, errorProps, rootProps] =
-    splitProps(
-      props,
-      ['autofocus', 'ref', 'onBlur', 'onFocus'],
-      ['label'],
-      ['description'],
-      ['error']
-    )
+  const [inputProps, localProps, rootProps] = splitProps(
+    props,
+    ['autofocus', 'ref', 'onBlur', 'onFocus'],
+    ['label', 'description', 'error']
+  )
 
   return (
     <NumberField
@@ -60,14 +57,14 @@ export const NumberInput: Component<NumberInputProps> = props => {
         placeholder=" "
         class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
       />
-      <Show when={labelProps.label}>
+      <Show when={localProps.label}>
         {label => (
           <NumberField.Label class="order-1 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
             {label()}
           </NumberField.Label>
         )}
       </Show>
-      <Show when={descriptionProps.description}>
+      <Show when={localProps.description}>
         {description => (
           <NumberField.Description
             as="span"
@@ -77,7 +74,7 @@ export const NumberInput: Component<NumberInputProps> = props => {
           </NumberField.Description>
         )}
       </Show>
-      <Show when={errorProps.error}>
+      <Show when={localProps.error}>
         {message => (
           <NumberField.ErrorMessage
             class={statusMessageVariants({

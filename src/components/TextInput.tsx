@@ -45,7 +45,7 @@ type TextInputProps = {
   TextFieldInputProps
 
 export const TextInput: Component<TextInputProps> = props => {
-  const [inputProps, labelProps, descriptionProps, errorProps, rootProps] =
+  const [inputProps, localProps, rootProps] =
     splitProps(
       props,
       [
@@ -59,18 +59,16 @@ export const TextInput: Component<TextInputProps> = props => {
         'autocorrect',
         'onInput'
       ],
-      ['label'],
-      ['description'],
-      ['error']
+      ['label', 'description', 'error']
     )
 
   return (
     <TextField
       {...rootProps}
-      validationState={errorProps.error ? 'invalid' : 'valid'}
+      validationState={localProps.error ? 'invalid' : 'valid'}
       class="flex flex-col gap-2"
     >
-      <Show when={descriptionProps.description}>
+      <Show when={localProps.description}>
         {description => (
           <TextField.Description
             as="span"
@@ -87,7 +85,7 @@ export const TextInput: Component<TextInputProps> = props => {
         class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
       />
 
-      <Show when={labelProps.label}>
+      <Show when={localProps.label}>
         {label => (
           <TextField.Label class="order-1 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
             {label()}
@@ -95,7 +93,7 @@ export const TextInput: Component<TextInputProps> = props => {
         )}
       </Show>
 
-      <Show when={errorProps.error}>
+      <Show when={localProps.error}>
         {error => (
           <TextField.ErrorMessage
             as="span"

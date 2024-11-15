@@ -44,33 +44,30 @@ type TextAreaProps = {
   TextFieldTextAreaProps
 
 export const TextAreaInput: Component<TextAreaProps> = props => {
-  const [textAreaProps, labelProps, descriptionProps, errorProps, rootProps] =
-    splitProps(
-      props,
-      [
-        'autofocus',
-        'onBlur',
-        'ref',
-        'onFocus',
-        'autoCapitalize',
-        'autocomplete',
-        'onInput',
-        'autoResize',
-        'submitOnEnter',
-        'rows'
-      ],
-      ['label'],
-      ['description'],
-      ['error']
-    )
+  const [textAreaProps, localProps, rootProps] = splitProps(
+    props,
+    [
+      'autofocus',
+      'onBlur',
+      'ref',
+      'onFocus',
+      'autoCapitalize',
+      'autocomplete',
+      'onInput',
+      'autoResize',
+      'submitOnEnter',
+      'rows'
+    ],
+    ['label', 'description', 'error']
+  )
 
   return (
     <TextField
       {...rootProps}
-      validationState={errorProps.error ? 'invalid' : 'valid'}
+      validationState={localProps.error ? 'invalid' : 'valid'}
       class="flex flex-col gap-2"
     >
-      <Show when={descriptionProps.description}>
+      <Show when={localProps.description}>
         {description => (
           <TextField.Description
             as="span"
@@ -87,7 +84,7 @@ export const TextAreaInput: Component<TextAreaProps> = props => {
         class="peer data-[invalid]:!border-b-error font-secondary order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
       />
 
-      <Show when={labelProps.label}>
+      <Show when={localProps.label}>
         {label => (
           <TextField.Label class="order-1 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
             {label()}
@@ -95,7 +92,7 @@ export const TextAreaInput: Component<TextAreaProps> = props => {
         )}
       </Show>
 
-      <Show when={errorProps.error}>
+      <Show when={localProps.error}>
         {error => (
           <TextField.ErrorMessage
             as="span"

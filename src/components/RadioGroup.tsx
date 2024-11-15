@@ -21,17 +21,22 @@ type RadioGroupProps<T extends string = string> = {
 export function RadioGroup<T extends string = string>(
   props: RadioGroupProps<T>
 ) {
-  const [labelProps, descriptionProps, errorProps, transformProps, rootProps] =
-    splitProps(props, ['label'], ['description'], ['error'], ['transformLabel'])
+  const [localProps, rootProps] = splitProps(props, [
+    'label',
+    'description',
+    'error',
+    'transformLabel',
+    'options'
+  ])
 
   return (
     // @ts-expect-error - we use T as value that extend string e.g. string union
     <KRadioGroup
       {...rootProps}
-      validationState={errorProps.error ? 'invalid' : 'valid'}
+      validationState={localProps.error ? 'invalid' : 'valid'}
       class="flex flex-col gap-2"
     >
-      <Show when={labelProps.label}>
+      <Show when={localProps.label}>
         {label => (
           <KRadioGroup.Label class="self-start text-black/50">
             {label()}
@@ -40,7 +45,7 @@ export function RadioGroup<T extends string = string>(
       </Show>
 
       <div class="flex flex-row flex-wrap gap-4">
-        <For each={props.options}>
+        <For each={localProps.options}>
           {option => (
             <KRadioGroup.Item value={option}>
               <KRadioGroup.ItemInput />
@@ -49,7 +54,7 @@ export function RadioGroup<T extends string = string>(
                   <KRadioGroup.ItemIndicator class="animate-show h-full w-full flex-1 shrink-0 rounded-full bg-black transition-colors duration-100" />
                 </KRadioGroup.ItemControl>
                 <Show
-                  when={transformProps.transformLabel}
+                  when={localProps.transformLabel}
                   fallback={option}
                 >
                   {transformLabel => (
@@ -64,7 +69,7 @@ export function RadioGroup<T extends string = string>(
         </For>
       </div>
 
-      <Show when={descriptionProps.description}>
+      <Show when={localProps.description}>
         {description => (
           <KRadioGroup.Description
             as="span"
@@ -74,7 +79,7 @@ export function RadioGroup<T extends string = string>(
           </KRadioGroup.Description>
         )}
       </Show>
-      <Show when={errorProps.error}>
+      <Show when={localProps.error}>
         {message => (
           <KRadioGroup.ErrorMessage
             class={statusMessageVariants({

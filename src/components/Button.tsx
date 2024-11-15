@@ -16,17 +16,17 @@ type ButtonProps = ButtonElementProps &
   ButtonRootProps
 
 export const Button: Component<ButtonProps> = props => {
-  const [localProps, childrenProps, typeProps, others] = splitProps(
-    props,
-    ['variant', 'class'],
-    ['children'],
-    ['type']
-  )
+  const [localProps, others] = splitProps(props, [
+    'variant',
+    'class',
+    'children',
+    'type'
+  ])
 
   return (
     <KobalteButton
       {...others}
-      type={typeProps.type || 'button'}
+      type={localProps.type || 'button'}
       class={cn(
         buttonVariants({
           variant: localProps.variant,
@@ -34,7 +34,7 @@ export const Button: Component<ButtonProps> = props => {
         })
       )}
     >
-      {childrenProps.children}
+      {localProps.children}
     </KobalteButton>
   )
 }

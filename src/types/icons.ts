@@ -2,6 +2,7 @@ export type IconId =
   | 'arrow'
   | 'at'
   | 'calendar'
+  | 'chevron'
   | 'close'
   | 'delete'
   | 'diet'

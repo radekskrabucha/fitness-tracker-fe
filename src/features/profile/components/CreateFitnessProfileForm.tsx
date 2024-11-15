@@ -3,10 +3,17 @@ import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
-import { NumberInput } from '~/components/NumberInput'
-import { TextInput } from '~/components/TextInput'
+import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
+import { RadioGroup } from '~/components/RadioGroup'
 import { toast } from '~/components/Toast'
+import { DatePicker } from '~/components/datePicker/DatePicker'
 import { InternalLink } from '~/config/app'
+import {
+  fitnessProfileActivityLevel,
+  fitnessProfileDietaryPreference,
+  fitnessProfileFitnessGoal,
+  fitnessProfileGender
+} from '~/models/profile'
 import {
   createFitnessProfile,
   getUserFitnessProfileQueryOptions
@@ -23,8 +30,16 @@ import {
   maxHeight,
   weightValidation,
   minWeight,
-  maxWeight
+  maxWeight,
+  maxDateOfBirthDate,
+  minDateOfBirthDate
 } from '../form/createFitnessProfileForm'
+import {
+  getActivityLevelName,
+  getDietaryPreferenceName,
+  getFitnessGoalName,
+  getGenderName
+} from '../utils'
 
 export const CreateFitnessProfileForm = () => {
   const navigate = useNavigate()
@@ -58,96 +73,104 @@ export const CreateFitnessProfileForm = () => {
 
   return (
     <Form
-      onSubmit={values =>
+      onSubmit={values => {
         createFitnessProfileMutation.mutate({
           ...values,
           dateOfBirth: new Date(values.dateOfBirth),
           height: Number(values.height),
           weight: Number(values.weight)
         })
-      }
-      class="my-auto flex w-full max-w-96 flex-col gap-4 self-center text-left"
-      shouldTouched
-      shouldDirty
+      }}
+      class="my-auto flex w-full max-w-xl flex-col gap-8 self-center text-left"
     >
-      <Field
-        name="height"
-        validate={heightValidation}
-      >
-        {(field, props) => (
-          <NumberInput
-            label="Your height"
-            description="In centimeters"
-            disabled={createFitnessProfileMutation.isPending}
-            minValue={minHeight}
-            maxValue={maxHeight}
-            step={1}
-            format
-            formatOptions={{
-              style: 'decimal',
-              maximumFractionDigits: 0,
-              useGrouping: false
-            }}
-            required
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'height', value)
-            }}
-          />
-        )}
-      </Field>
-      <Field
-        name="weight"
-        validate={weightValidation}
-      >
-        {(field, props) => (
-          <NumberInput
-            label="Your weight"
-            description="In kilograms"
-            disabled={createFitnessProfileMutation.isPending}
-            minValue={minWeight}
-            maxValue={maxWeight}
-            step={1}
-            format
-            formatOptions={{
-              maximumFractionDigits: 2,
-              useGrouping: false
-            }}
-            required
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'weight', value)
-            }}
-          />
-        )}
-      </Field>
+      <div class="flex flex-1 flex-wrap gap-6">
+        <Field
+          name="height"
+          validate={heightValidation}
+        >
+          {(field, props) => (
+            <NumberInputWithSteps
+              label="Your height"
+              description="In centimeters"
+              placeholder="0"
+              disabled={createFitnessProfileMutation.isPending}
+              minValue={minHeight}
+              maxValue={maxHeight}
+              step={1}
+              format
+              formatOptions={{
+                style: 'decimal',
+                maximumFractionDigits: 0,
+                useGrouping: false
+              }}
+              required
+              {...field}
+              {...props}
+              onChange={value => {
+                setValue(form, 'height', value)
+              }}
+            />
+          )}
+        </Field>
 
-      <Field name="dateOfBirth">
-        {(field, props) => (
-          <TextInput
-            label="Date of birth"
-            disabled={createFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            type="text"
-          />
-        )}
-      </Field>
+        <Field
+          name="weight"
+          validate={weightValidation}
+        >
+          {(field, props) => (
+            <NumberInputWithSteps
+              label="Your weight"
+              description="In kilograms"
+              placeholder="0"
+              disabled={createFitnessProfileMutation.isPending}
+              minValue={minWeight}
+              maxValue={maxWeight}
+              step={1}
+              format
+              formatOptions={{
+                maximumFractionDigits: 2,
+                useGrouping: false
+              }}
+              required
+              {...field}
+              {...props}
+              onChange={value => {
+                setValue(form, 'weight', value)
+              }}
+            />
+          )}
+        </Field>
+
+        <Field name="dateOfBirth">
+          {field => (
+            <DatePicker
+              value={field.value}
+              onValueChange={value => {
+                setValue(form, 'dateOfBirth', value)
+              }}
+              min={minDateOfBirthDate}
+              max={maxDateOfBirthDate}
+              label="Date of Birth"
+            />
+          )}
+        </Field>
+      </div>
 
       <Field
         name="gender"
         validate={genderValidation}
       >
         {(field, props) => (
-          <TextInput
-            description="Male, female, other, prefer not to say"
+          <RadioGroup
             label="Gender"
             disabled={createFitnessProfileMutation.isPending}
             {...field}
             {...props}
-            type="text"
+            onChange={value => {
+              setValue(form, 'gender', value)
+            }}
+            options={fitnessProfileGender}
+            transformLabel={getGenderName}
           />
         )}
       </Field>
@@ -157,12 +180,16 @@ export const CreateFitnessProfileForm = () => {
         validate={activityLevelValidation}
       >
         {(field, props) => (
-          <TextInput
+          <RadioGroup
             label="Activity level"
             disabled={createFitnessProfileMutation.isPending}
             {...field}
             {...props}
-            type="text"
+            onChange={value => {
+              setValue(form, 'activityLevel', value)
+            }}
+            options={fitnessProfileActivityLevel}
+            transformLabel={getActivityLevelName}
           />
         )}
       </Field>
@@ -172,24 +199,32 @@ export const CreateFitnessProfileForm = () => {
         validate={fitnessGoalValidation}
       >
         {(field, props) => (
-          <TextInput
+          <RadioGroup
             label="Fitness goal"
             disabled={createFitnessProfileMutation.isPending}
             {...field}
             {...props}
-            type="text"
+            onChange={value => {
+              setValue(form, 'fitnessGoal', value)
+            }}
+            options={fitnessProfileFitnessGoal}
+            transformLabel={getFitnessGoalName}
           />
         )}
       </Field>
 
       <Field name="dietaryPreference">
         {(field, props) => (
-          <TextInput
-            label="dietaryPreference"
+          <RadioGroup
+            label="Dietary preference (optional)"
             disabled={createFitnessProfileMutation.isPending}
             {...field}
             {...props}
-            type="text"
+            onChange={value => {
+              setValue(form, 'dietaryPreference', value)
+            }}
+            options={fitnessProfileDietaryPreference}
+            transformLabel={getDietaryPreferenceName}
           />
         )}
       </Field>

@@ -123,7 +123,7 @@ const writeIconComponent = async (
   const imports = `import { Link } from '@solidjs/meta'\nimport { splitProps, type Component, type ComponentProps } from 'solid-js'\nimport { getIconHref } from '~/utils/icons'`
   const timestampVar = `export const timestamp = ${timestamp}`
   const iconComponent = `export const Icon: Component<IconProps> = props => {\n  const [localProps, others] = splitProps(props, ['icon'])\n\n  return (\n    <svg {...others}>\n      <use href={getIconHref(localProps.icon, timestamp)} />\n    </svg>\n  )\n}`
-  const spriteIconsLink = `export const SpriteIconsLink = () => (\n  <Link\n    rel="preload"\n    as="image"\n    href={\`/${prefix}-\${timestamp}.svg\`}\n  />\n)\n` 
+  const spriteIconsLink = `export const SpriteIconsLink = () => (\n  <Link\n    rel="preload"\n    as="image"\n    href={\`/${prefix}-\${timestamp}.svg\`}\n  />\n)` 
   const iconProps = `type IconProps = {\n  icon: IconId\n} & ComponentProps<'svg'>`
   const types = `export type IconId =\n${idTypes}`
 

@@ -24,7 +24,6 @@ export const SpriteIconsLink = () => (
   />
 )
 
-
 export const timestamp = 1731687054
 
 export type IconId =

@@ -45,22 +45,21 @@ type TextInputProps = {
   TextFieldInputProps
 
 export const TextInput: Component<TextInputProps> = props => {
-  const [inputProps, localProps, rootProps] =
-    splitProps(
-      props,
-      [
-        'autofocus',
-        'onBlur',
-        'ref',
-        'onFocus',
-        'type',
-        'autoCapitalize',
-        'autocomplete',
-        'autocorrect',
-        'onInput'
-      ],
-      ['label', 'description', 'error']
-    )
+  const [inputProps, localProps, rootProps] = splitProps(
+    props,
+    [
+      'autofocus',
+      'onBlur',
+      'ref',
+      'onFocus',
+      'type',
+      'autoCapitalize',
+      'autocomplete',
+      'autocorrect',
+      'onInput'
+    ],
+    ['label', 'description', 'error']
+  )
 
   return (
     <TextField

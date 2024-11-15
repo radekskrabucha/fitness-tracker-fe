@@ -1,5 +1,4 @@
-import type { Component, ComponentProps } from 'solid-js'
-import { splitProps } from 'solid-js/types/server/index.js'
+import { splitProps, type Component, type ComponentProps } from 'solid-js'
 import type { IconId } from '~/types/icons'
 import { getIconHref } from '~/utils/icons'
 

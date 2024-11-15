@@ -6,6 +6,8 @@ import {
   type ComponentProps,
   type JSXElement
 } from 'solid-js'
+import type { WithClass } from '~/types/common'
+import { cn } from '~/utils/styles'
 import { buttonVariants } from './Button'
 import { statusMessageVariants } from './StatusMessage'
 
@@ -38,27 +40,24 @@ type NumberInputWithStepsProps = NumberFieldProps &
     label?: JSXElement
     error?: JSXElement
     description?: JSXElement
-  }
+  } & WithClass
 
 export const NumberInputWithSteps: Component<
   NumberInputWithStepsProps
 > = props => {
-  const [inputProps, labelProps, descriptionProps, errorProps, rootProps] =
-    splitProps(
-      props,
-      ['placeholder', 'autofocus', 'ref', 'onBlur', 'onFocus'],
-      ['label'],
-      ['description'],
-      ['error']
-    )
+  const [inputProps, localProps, rootProps] = splitProps(
+    props,
+    ['placeholder', 'autofocus', 'ref', 'onBlur', 'onFocus'],
+    ['class', 'label', 'description', 'error']
+  )
 
   return (
     <NumberField
       {...rootProps}
       validationState={props.error ? 'invalid' : 'valid'}
-      class="flex flex-col items-stretch gap-2"
+      class={cn('flex flex-1 flex-col gap-2', localProps.class)}
     >
-      <Show when={labelProps.label}>
+      <Show when={localProps.label}>
         {label => (
           <NumberField.Label class="self-start text-black/50">
             {label()}
@@ -71,13 +70,13 @@ export const NumberInputWithSteps: Component<
         </NumberField.DecrementTrigger>
         <NumberField.Input
           placeholder={inputProps.placeholder}
-          class="font-secondary flex-1 shrink rounded-md border-transparent bg-white px-4 py-2 text-sm font-medium outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          class="font-secondary w-16 min-w-0 flex-1 shrink rounded-md border-transparent bg-white px-4 py-2 text-sm font-medium outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
         <NumberField.IncrementTrigger class={buttonVariants()}>
           +
         </NumberField.IncrementTrigger>
       </div>
-      <Show when={descriptionProps.description}>
+      <Show when={localProps.description}>
         {description => (
           <NumberField.Description
             as="span"
@@ -87,7 +86,7 @@ export const NumberInputWithSteps: Component<
           </NumberField.Description>
         )}
       </Show>
-      <Show when={errorProps.error}>
+      <Show when={localProps.error}>
         {message => (
           <NumberField.ErrorMessage
             class={statusMessageVariants({

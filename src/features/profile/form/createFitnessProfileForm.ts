@@ -14,7 +14,12 @@ export type CreateFitnessProfileForm = Omit<
   dietaryPreference: FitnessProfileDietaryPreference
 }
 
-export const [form, { Form, Field }] = createForm<CreateFitnessProfileForm>()
+export const [form, { Form, Field }] = createForm<CreateFitnessProfileForm>({
+  initialValues: {
+    height: '170',
+    weight: '70'
+  }
+})
 
 export const minHeight = 1
 export const maxHeight = 300

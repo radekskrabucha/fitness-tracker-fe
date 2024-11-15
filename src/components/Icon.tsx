@@ -1,5 +1,5 @@
+import { Link } from '@solidjs/meta'
 import { splitProps, type Component, type ComponentProps } from 'solid-js'
-import type { IconId } from '~/types/icons'
 import { getIconHref } from '~/utils/icons'
 
 type IconProps = {
@@ -11,7 +11,39 @@ export const Icon: Component<IconProps> = props => {
 
   return (
     <svg {...others}>
-      <use href={getIconHref(localProps.icon)} />
+      <use href={getIconHref(localProps.icon, timestamp)} />
     </svg>
   )
 }
+
+export const SpriteIconsLink = () => (
+  <Link
+    rel="preload"
+    as="image"
+    href={`/icon-sprite-${timestamp}.svg`}
+  />
+)
+
+
+export const timestamp = 1731687054
+
+export type IconId =
+  | 'arrow'
+  | 'at'
+  | 'calendar'
+  | 'chevron'
+  | 'close'
+  | 'delete'
+  | 'diet'
+  | 'edit'
+  | 'gender'
+  | 'github'
+  | 'gym'
+  | 'height'
+  | 'menu-dots'
+  | 'password'
+  | 'profile'
+  | 'source-code'
+  | 'target'
+  | 'twitter'
+  | 'weight'

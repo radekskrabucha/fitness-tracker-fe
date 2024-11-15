@@ -1,3 +1,4 @@
-import type { IconId } from '~/types/icons'
+import type { IconId } from '~/components/Icon'
 
-export const getIconHref = (id: IconId) => `/icon-sprite-1731672260.svg#${id}`
+export const getIconHref = (id: IconId, timestamp: number) =>
+  `/icon-sprite-${timestamp}.svg#${id}`

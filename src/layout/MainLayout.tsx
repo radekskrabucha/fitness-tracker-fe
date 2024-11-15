@@ -1,13 +1,13 @@
 import { Toast } from '@kobalte/core/toast'
 import { MetaProvider } from '@solidjs/meta'
 import { ErrorBoundary, Suspense, type FlowComponent } from 'solid-js'
+import { SpriteIconsLink } from '~/components/Icon'
 import { SEO } from '~/components/Seo'
 import { defaultSeoTags } from '~/config/app'
 import { Background } from './components/Background'
 import { ErrorBoundary as ErrorBoundaryFallback } from './components/ErrorBoundary'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
-import { SpriteIconsLink } from './components/SpriteIconsLink'
 
 export const MainLayout: FlowComponent = props => (
   <ErrorBoundary

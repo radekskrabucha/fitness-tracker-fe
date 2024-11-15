@@ -13,7 +13,7 @@ export const SessionWrapper: Component<SessionWrapperProps> = props => {
 
   return (
     <QueryBoundary query={getSessionQuery}>
-      {({ user }) => props.children(user as User)}
+      {({ user }) => props.children(user)}
     </QueryBoundary>
   )
 }

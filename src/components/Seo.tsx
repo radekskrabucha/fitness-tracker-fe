@@ -15,11 +15,11 @@ export const SEO: Component<SeoProps> = props => (
       when={props.title}
       fallback={<Title>{getTitle()}</Title>}
     >
-      <SEOTitle title={getTitle(props.title)} />
+      {title => <SEOTitle title={getTitle(title())} />}
     </Show>
 
     <Show when={props.description}>
-      <SEODescription description={props.description as string} />
+      {description => <SEODescription description={description()} />}
     </Show>
 
     <Show when={props.imageUrl}>

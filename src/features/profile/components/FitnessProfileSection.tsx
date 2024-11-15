@@ -6,6 +6,7 @@ import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
+import { calculateAge } from '~/utils/date'
 import { getUserFitnessProfileQueryOptions } from '../actions'
 import {
   getActivityLevelName,
@@ -70,8 +71,8 @@ export const FitnessProfileSection: Component<
               />
 
               <FitnessTile
-                label="Date of birth"
-                value={profile.dateOfBirth.toString()}
+                label="Age"
+                value={calculateAge(profile.dateOfBirth)}
                 icon={
                   <Icon
                     icon="calendar"

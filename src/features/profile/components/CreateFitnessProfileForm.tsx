@@ -76,7 +76,7 @@ export const CreateFitnessProfileForm = () => {
       onSubmit={values => {
         createFitnessProfileMutation.mutate({
           ...values,
-          dateOfBirth: new Date(values.dateOfBirth),
+          dateOfBirth: new Date(values.dateOfBirth).toString(),
           height: Number(values.height),
           weight: Number(values.weight)
         })
@@ -151,6 +151,7 @@ export const CreateFitnessProfileForm = () => {
               min={minDateOfBirthDate}
               max={maxDateOfBirthDate}
               label="Date of Birth"
+              disabled={createFitnessProfileMutation.isPending}
             />
           )}
         </Field>

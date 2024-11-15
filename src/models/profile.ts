@@ -44,7 +44,7 @@ export type FitnessProfile = {
   userId: string
   height: number
   weight: number
-  dateOfBirth: Date
+  dateOfBirth: string
   gender: FitnessProfileGender
   activityLevel: FitnessProfileActivityLevel
   fitnessGoal: FitnessProfileFitnessGoal

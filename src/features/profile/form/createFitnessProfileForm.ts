@@ -3,6 +3,7 @@ import type {
   CreateFitnessProfile,
   FitnessProfileDietaryPreference
 } from '~/models/profile'
+import { getNow } from '~/utils/date'
 
 export type CreateFitnessProfileForm = Omit<
   CreateFitnessProfile,
@@ -40,4 +41,4 @@ export const activityLevelValidation = [required('Activity level is required')]
 export const fitnessGoalValidation = [required('Fitness goal is required')]
 
 export const minDateOfBirthDate = new Date(1900, 0, 1)
-export const maxDateOfBirthDate = new Date()
+export const maxDateOfBirthDate = getNow()

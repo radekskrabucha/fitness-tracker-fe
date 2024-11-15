@@ -3,7 +3,7 @@ import type {
   CreateFitnessProfile,
   FitnessProfileDietaryPreference
 } from '~/models/profile'
-import { getInitialDateValue } from '~/utils/date'
+import { getFormattedDate } from '~/utils/date'
 import {
   maxHeight,
   maxWeight,
@@ -31,7 +31,7 @@ export const useEditFitnessProfileForm = (
       ...initialValues,
       height: initialValues.height.toString(),
       weight: initialValues.weight.toString(),
-      dateOfBirth: getInitialDateValue(initialValues.dateOfBirth),
+      dateOfBirth: getFormattedDate(initialValues.dateOfBirth),
       dietaryPreference: initialValues.dietaryPreference
         ? initialValues.dietaryPreference
         : undefined

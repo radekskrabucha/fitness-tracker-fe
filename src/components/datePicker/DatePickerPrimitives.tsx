@@ -17,6 +17,7 @@ import type {
 import { DatePicker as DatePickerPrimitive } from '@ark-ui/solid/date-picker'
 import type { VoidProps } from 'solid-js'
 import { splitProps } from 'solid-js'
+import { getFormattedDate } from '~/utils/date'
 import { cn } from '~/utils/styles'
 import { buttonVariants } from '../Button'
 import { cardVariants } from '../Card'
@@ -35,19 +36,7 @@ export const DatePickerPositioner = DatePickerPrimitive.Positioner
 export const DatePicker = (props: DatePickerRootProps) => {
   return (
     <DatePickerPrimitive.Root
-      format={e => {
-        const parsedDate = new Date(Date.parse(e.toString()))
-
-        const normalizedDate = new Date(
-          parsedDate.getUTCFullYear(),
-          parsedDate.getUTCMonth(),
-          parsedDate.getUTCDate()
-        )
-
-        const test = normalizedDate.toLocaleDateString()
-
-        return test
-      }}
+      format={e => getFormattedDate(e.toString())}
       {...props}
     />
   )

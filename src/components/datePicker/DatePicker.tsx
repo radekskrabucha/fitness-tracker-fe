@@ -74,7 +74,7 @@ export const DatePicker: Component<DatePickerProps> = props => {
         )}
       </Show>
       <DatePickerControl>
-        <DatePickerInput placeholder="mm/dd/yyyy" />
+        <DatePickerInput placeholder="yyyy/mm/dd" />
         <DatePickerTrigger />
       </DatePickerControl>
       <Portal>

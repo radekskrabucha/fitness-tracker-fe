@@ -18,8 +18,10 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
   return (
     <Suspense fallback={props.loadingFallback}>
       <ErrorBoundary
-        fallback={(error: E, reset) =>
-          props.errorFallback ? (
+        fallback={(error: E, reset) => {
+          console.error(error)
+
+          return props.errorFallback ? (
             props.errorFallback({
               error,
               retry: async () => {
@@ -39,7 +41,7 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
               isRefetching={props.query.isFetching}
             />
           )
-        }
+        }}
       >
         <Switch>
           <Match

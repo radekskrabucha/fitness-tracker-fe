@@ -1,6 +1,7 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
 import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import { WorkoutExerciseAttributeTile } from './WorkoutExerciseAttributeTile'
 
 type WorkoutExerciseProps =
   WorkoutPlanWithWorkouts['workouts'][number]['exercises'][number] & {
@@ -23,6 +24,11 @@ export const WorkoutExercise: Component<WorkoutExerciseProps> = props => (
     <div class="flex flex-wrap gap-4">
       <Index each={props.muscleGroups}>
         {muscleGroup => <Badge>{muscleGroup().name}</Badge>}
+      </Index>
+    </div>
+    <div class="mt-6 flex flex-row flex-wrap gap-6 text-black">
+      <Index each={props.attributes}>
+        {attribute => <WorkoutExerciseAttributeTile {...attribute()} />}
       </Index>
     </div>
   </div>

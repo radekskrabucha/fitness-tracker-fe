@@ -1,4 +1,4 @@
-import { Match, Show, Switch, type Component, type JSXElement } from 'solid-js'
+import { Match, Switch, type Component } from 'solid-js'
 import { Icon } from '~/components/Icon'
 import type { WorkoutAttribute } from '~/models/workoutAttributes'
 import {
@@ -6,12 +6,13 @@ import {
   getWorkoutAttributeIntensityLevelName,
   getWorkoutAttributeName
 } from '../utils'
+import { AttributeBadge } from './AttributeBadge'
 
 export const WorkoutAttributeBadge: Component<WorkoutAttribute> = props => (
   <Switch>
     <Match when={props.name === 'days_of_week' && props}>
       {attribute => (
-        <Badge
+        <AttributeBadge
           shouldExpand
           icon={
             <Icon
@@ -26,7 +27,7 @@ export const WorkoutAttributeBadge: Component<WorkoutAttribute> = props => (
     </Match>
     <Match when={props.name === 'intensity_level' && props}>
       {attribute => (
-        <Badge
+        <AttributeBadge
           icon={
             <Icon
               icon="speedometer"
@@ -46,7 +47,7 @@ export const WorkoutAttributeBadge: Component<WorkoutAttribute> = props => (
       }
     >
       {attribute => (
-        <Badge
+        <AttributeBadge
           icon={
             <Icon
               icon="timer"
@@ -67,7 +68,7 @@ export const WorkoutAttributeBadge: Component<WorkoutAttribute> = props => (
       }
     >
       {attribute => (
-        <Badge
+        <AttributeBadge
           icon={
             <Icon
               icon="termometer"
@@ -80,32 +81,4 @@ export const WorkoutAttributeBadge: Component<WorkoutAttribute> = props => (
       )}
     </Match>
   </Switch>
-)
-
-type BadgeProps = {
-  icon: JSXElement
-  label: JSXElement
-  value: JSXElement
-  unit?: JSXElement
-  shouldExpand?: boolean
-}
-
-const Badge: Component<BadgeProps> = props => (
-  <div
-    class="flex shrink-0 items-center gap-4 rounded-lg bg-white px-4 py-2 shadow-sm max-sm:flex-1"
-    classList={{
-      'flex-1': props.shouldExpand
-    }}
-  >
-    {props.icon}
-    <div class="flex flex-col">
-      <span class="text-sm whitespace-nowrap text-black/50">{props.label}</span>
-      <h3 class="text-xl font-bold whitespace-nowrap text-black/80">
-        {props.value}
-        <Show when={props.unit}>
-          {unit => <span class="text-sm text-black/50"> {unit()}</span>}
-        </Show>
-      </h3>
-    </div>
-  </div>
 )

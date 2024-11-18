@@ -3,6 +3,7 @@ import type {
   WorkoutAttributeIntensityLevel,
   WorkoutAttributeName
 } from '~/models/workoutAttributes'
+import type { WorkoutExerciseAttributeName } from '~/models/workoutExerciseAttributes'
 
 export const workoutAttributeNameMap: Record<WorkoutAttributeName, string> = {
   days_of_week: 'Day of week',
@@ -45,3 +46,18 @@ export const workoutAttributeIntensityLevelMap: Record<
 export const getWorkoutAttributeIntensityLevelName = (
   intensityLevel: WorkoutAttributeIntensityLevel
 ) => workoutAttributeIntensityLevelMap[intensityLevel]
+
+export const workoutExerciseAttributeNameMap: Record<
+  WorkoutExerciseAttributeName,
+  string
+> = {
+  sets: 'Sets',
+  distance: 'Distance',
+  duration: 'Duration',
+  reps: 'Reps',
+  weight: 'Weight'
+} as const
+
+export const getWorkoutExerciseAttributeName = (
+  name: WorkoutExerciseAttributeName
+) => workoutExerciseAttributeNameMap[name]

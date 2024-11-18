@@ -35,7 +35,7 @@ export const WorkoutAttributes: Component<WorkoutAttributesProps> = props => {
   const [daysOfWeek, intensityLevel, others] = sortedAttributes()
 
   return (
-    <div class="my-4 flex flex-col gap-6">
+    <div class="my-4 flex flex-col gap-8">
       <Show when={daysOfWeek.length}>
         <div class="flex flex-row flex-wrap gap-6">
           <Index each={daysOfWeek}>

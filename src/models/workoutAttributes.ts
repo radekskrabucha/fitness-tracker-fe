@@ -1,12 +1,6 @@
 type WorkoutAttributeNameValuePair =
-  | {
-      name: 'days_of_week'
-      value: string
-    }
-  | {
-      name: 'intensity_level'
-      value: string
-    }
+  | WorkoutAttributeDaysOfWeekValuePair
+  | WorkoutAttributeIntensityLevelValuePair
   | {
       name: 'duration_goal'
       value: number
@@ -23,10 +17,20 @@ type WorkoutAttributeNameValuePair =
       name: 'rest_period_between_sets'
       value: number
     }
+export type WorkoutAttributeDaysOfWeekValuePair = {
+  name: 'days_of_week'
+  value: WorkoutAttributeDaysOfWeek
+}
+export type WorkoutAttributeIntensityLevelValuePair = {
+  name: 'intensity_level'
+  value: WorkoutAttributeIntensityLevel
+}
 
-export type WorkoutAttribute = {
+export type WorkoutAttribute<
+  T extends WorkoutAttributeNameValuePair = WorkoutAttributeNameValuePair
+> = {
   id: string
-} & WorkoutAttributeNameValuePair
+} & T
 
 export const WorkoutAttributeNames = [
   'days_of_week',
@@ -37,3 +41,14 @@ export const WorkoutAttributeNames = [
   'rest_period_between_sets'
 ] as const
 export type WorkoutAttributeName = (typeof WorkoutAttributeNames)[number]
+
+export type WorkoutAttributeDaysOfWeek =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday'
+
+export type WorkoutAttributeIntensityLevel = 'easy' | 'medium' | 'high'

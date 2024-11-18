@@ -1,6 +1,7 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
 import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
 
 type WorkoutCardProps = WorkoutPlanWithWorkouts['workouts'][number]
@@ -17,13 +18,14 @@ export const WorkoutCard: Component<WorkoutCardProps> = props => (
       <Show when={props.description}>
         {description => <p class="text-lg text-current/50">{description()}</p>}
       </Show>
+      <WorkoutAttributes attributes={props.attributes} />
     </div>
     <div class="grid grid-cols-2 gap-8 p-8 max-md:grid-cols-1">
       <Index each={props.exercises}>
         {(exercise, index) => (
           <WorkoutExercise
             {...exercise()}
-            order={index + 1}
+            order={index}
           />
         )}
       </Index>

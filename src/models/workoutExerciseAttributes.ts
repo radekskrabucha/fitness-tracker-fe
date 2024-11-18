@@ -1,9 +1,7 @@
 export type WorkoutExerciseAttribute = {
   id: string
-  attributeName: WorkoutExerciseAttributeName
+  name: WorkoutExerciseAttributeName
   value: number
-  createdAt: string
-  updatedAt: string
 }
 
 export const WorkoutExerciseAttributeNames = [

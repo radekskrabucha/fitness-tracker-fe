@@ -38,10 +38,6 @@ export type FitnessProfileDietaryPreference =
   (typeof fitnessProfileDietaryPreference)[number]
 
 export type FitnessProfile = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  userId: string
   height: number
   weight: number
   dateOfBirth: string

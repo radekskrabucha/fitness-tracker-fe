@@ -1,33 +1,31 @@
 type WorkoutAttributeNameValuePair =
   | {
-      attributeName: 'days_of_week'
+      name: 'days_of_week'
       value: string
     }
   | {
-      attributeName: 'intensity_level'
+      name: 'intensity_level'
       value: string
     }
   | {
-      attributeName: 'duration_goal'
+      name: 'duration_goal'
       value: number
     }
   | {
-      attributeName: 'warmup_required'
+      name: 'warmup_required'
       value: boolean
     }
   | {
-      attributeName: 'cooldown_required'
+      name: 'cooldown_required'
       value: boolean
     }
   | {
-      attributeName: 'rest_period_between_sets'
+      name: 'rest_period_between_sets'
       value: number
     }
 
 export type WorkoutAttribute = {
   id: string
-  createdAt: string
-  updatedAt: string
 } & WorkoutAttributeNameValuePair
 
 export const WorkoutAttributeNames = [

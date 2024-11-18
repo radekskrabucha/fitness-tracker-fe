@@ -10,8 +10,6 @@ export type Workout<T extends WorkoutExtras = {}> = {
   id: string
   name: string
   description: string | null
-  createdAt: string
-  updatedAt: string
 } & T
 export type WorkoutWithExercises = Workout<
   WorkoutExtraExercises<ExerciseWithDetails>

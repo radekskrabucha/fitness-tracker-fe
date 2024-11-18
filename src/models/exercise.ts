@@ -7,9 +7,6 @@ export type Exercise<T extends ExerciseExtras = {}> = {
   description: string | null
   id: string
   name: string
-  createdAt: string
-  updatedAt: string
-  categoryId: string
 } & T
 
 export type ExerciseWithDetails = Exercise<ExerciseExtraDetails>
@@ -31,4 +28,5 @@ export type ExerciseExtraMuscleGroups = {
 }
 export type ExerciseExtraAttributes = {
   attributes: Array<WorkoutExerciseAttribute>
+  workoutExerciseId: string
 }

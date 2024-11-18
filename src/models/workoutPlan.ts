@@ -18,8 +18,6 @@ export type WorkoutPlan<T extends WorkoutPlanExtras = {}> = {
   name: string
   description: string | null
   difficultyLevel: WorkoutPlanDifficultyLevel
-  createdAt: string
-  updatedAt: string
 } & T
 export type WorkoutPlanWithWorkouts = WorkoutPlan<
   WorkoutPlanExtraWorkouts<WorkoutWithAttributesAndExercises>

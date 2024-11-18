@@ -24,8 +24,7 @@ export const SpriteIconsLink = () => (
   />
 )
 
-
-export const timestamp = 1731919898
+export const timestamp = 1731921727
 
 export type IconId =
   | 'arrow'
@@ -35,6 +34,7 @@ export type IconId =
   | 'close'
   | 'delete'
   | 'diet'
+  | 'dumbbell'
   | 'edit'
   | 'gender'
   | 'github'
@@ -43,6 +43,8 @@ export type IconId =
   | 'menu-dots'
   | 'password'
   | 'profile'
+  | 'repeat'
+  | 'ruler'
   | 'source-code'
   | 'speedometer'
   | 'target'

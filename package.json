@@ -14,13 +14,13 @@
   "dependencies": {
     "@ark-ui/solid": "4.5.0",
     "@kobalte/core": "0.13.7",
-    "@modular-forms/solid": "0.24.1",
+    "@modular-forms/solid": "0.25.0",
     "@solid-primitives/lifecycle": "0.0.102",
     "@solidjs/meta": "0.29.4",
     "@solidjs/router": "0.15.1",
     "@solidjs/start": "1.0.10",
-    "@tanstack/solid-query": "5.59.20",
-    "better-auth": "0.8.2",
+    "@tanstack/solid-query": "5.60.5",
+    "better-auth": "0.8.5",
     "class-variance-authority": "0.7.0",
     "date-fns": "4.1.0",
     "ofetch": "1.4.1",
@@ -30,7 +30,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@eslint/js": "9.14.0",
+    "@eslint/js": "9.15.0",
     "@julr/vite-plugin-validate-env": "1.1.1",
     "@solidjs/testing-library": "0.8.10",
     "@tailwindcss/vite": "4.0.0-alpha.31",
@@ -49,6 +49,6 @@
     "typescript": "5.6.3",
     "typescript-eslint": "8.14.0",
     "vite-plugin-solid": "2.10.2",
-    "vitest": "2.1.4"
+    "vitest": "2.1.5"
   }
 }

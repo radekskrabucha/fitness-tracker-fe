@@ -10,7 +10,8 @@ export const InternalLink = {
   deleteProfile: '/profile/delete',
   deleteFitnessProfile: '/profile/delete-fitness',
   workoutPlans: '/workout-plans',
-  workoutPlan: (id: string) => `/workout-plans/${id}`
+  workoutPlan: (id: string) => `/workout-plans/${id}`,
+  selectWorkoutPlan: (id: string) => `/workout-plans/${id}/select`
 } as const
 
 export const RESTRICTED_ROUTES = [

@@ -1,6 +1,7 @@
 import type { RouteDefinition } from '@solidjs/router'
 import { useQueryClient } from '@tanstack/solid-query'
-import { WorkoutPlanPage } from '~/features/workoutPlan/WorkoutPlanPage'
+import { SEOTitle } from '~/components/Seo'
+import { SelectWorkoutPlanPage } from '~/features/workoutPlan/SelectWorkoutPlanPage'
 import { getWorkoutPlanQueryOptions } from '~/features/workoutPlan/actions'
 
 export const route: RouteDefinition = {
@@ -12,4 +13,11 @@ export const route: RouteDefinition = {
   }
 }
 
-export default WorkoutPlanPage
+const SelectWorkoutPlan = () => (
+  <>
+    <SEOTitle title="Select Workout Plan" />
+    <SelectWorkoutPlanPage />
+  </>
+)
+
+export default SelectWorkoutPlan

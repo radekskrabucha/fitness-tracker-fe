@@ -26,10 +26,12 @@ export const WorkoutExercise: Component<WorkoutExerciseProps> = props => (
         {muscleGroup => <Badge>{muscleGroup().name}</Badge>}
       </Index>
     </div>
-    <div class="mt-6 flex flex-row flex-wrap gap-6 text-black">
-      <Index each={props.attributes}>
-        {attribute => <WorkoutExerciseAttributeTile {...attribute()} />}
-      </Index>
-    </div>
+    <Show when={props.attributes.length}>
+      <div class="mt-6 flex flex-row flex-wrap gap-6 text-black">
+        <Index each={props.attributes}>
+          {attribute => <WorkoutExerciseAttributeTile {...attribute()} />}
+        </Index>
+      </div>
+    </Show>
   </div>
 )

@@ -18,7 +18,9 @@ export const WorkoutCard: Component<WorkoutCardProps> = props => (
       <Show when={props.description}>
         {description => <p class="text-lg text-current/50">{description()}</p>}
       </Show>
-      <WorkoutAttributes attributes={props.attributes} />
+      <Show when={props.attributes.length}>
+        <WorkoutAttributes attributes={props.attributes} />
+      </Show>
     </div>
     <div class="grid grid-cols-2 gap-8 p-8 max-md:grid-cols-1">
       <Index each={props.exercises}>

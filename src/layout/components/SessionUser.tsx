@@ -10,6 +10,7 @@ import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { authClient } from '~/lib/auth'
+import { nonNullable } from '~/utils/common'
 import { isRestrictedRoute } from '~/utils/url'
 
 export const SessionUser = () => {
@@ -50,7 +51,7 @@ export const SessionUser = () => {
             <Popover.Trigger>
               <Image
                 img={{
-                  src: user.image,
+                  src: nonNullable(user.image) ? user.image : undefined,
                   alt: user.name,
                   class: 'flex-shrink-0 h-full w-full rounded-full object-cover'
                 }}

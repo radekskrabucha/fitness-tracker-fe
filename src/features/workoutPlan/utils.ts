@@ -1,9 +1,12 @@
 import type {
   WorkoutAttributeDaysOfWeek,
   WorkoutAttributeIntensityLevel,
-  WorkoutAttributeName
+  WorkoutAttributeName,
+  WorkoutAttributeNameValuePair
 } from '~/models/workoutAttributes'
 import type { WorkoutExerciseAttributeName } from '~/models/workoutExerciseAttributes'
+import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import type { ChooseWorkoutPlanForm } from './form/chooseWorkoutPlanForm'
 
 export const workoutAttributeNameMap: Record<WorkoutAttributeName, string> = {
   days_of_week: 'Day of week',
@@ -61,3 +64,26 @@ export const workoutExerciseAttributeNameMap: Record<
 export const getWorkoutExerciseAttributeName = (
   name: WorkoutExerciseAttributeName
 ) => workoutExerciseAttributeNameMap[name]
+
+export const workoutPlanToChooseWorkoutPlanFormInitialValues = (
+  workoutPlan: WorkoutPlanWithWorkouts
+) =>
+  ({
+    workouts: workoutPlan.workouts.map(workout => ({
+      id: workout.id,
+      attributes: workout.attributes.map(
+        attribute =>
+          ({
+            name: attribute.name,
+            value: attribute.value
+          }) as WorkoutAttributeNameValuePair
+      ),
+      exercises: workout.exercises.map(exercise => ({
+        id: exercise.id,
+        attributes: exercise.attributes.map(attribute => ({
+          name: attribute.name,
+          value: attribute.value
+        }))
+      }))
+    }))
+  }) satisfies ChooseWorkoutPlanForm

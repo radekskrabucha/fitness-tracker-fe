@@ -36,7 +36,9 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
           </Show>
         </div>
         <Show when={props.description}>
-          {description => <p class="text-current/50">{description()}</p>}
+          {description => (
+            <p class="line-clamp-3 text-current/50">{description()}</p>
+          )}
         </Show>
       </div>
       <div class="flex flex-1 flex-col gap-6 overflow-auto px-6 py-10">

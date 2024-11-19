@@ -3,8 +3,7 @@ import { useQueryClient } from '@tanstack/solid-query'
 import { createMutation } from '@tanstack/solid-query'
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
-import { Button, buttonVariants } from '~/components/Button'
-import { Link } from '~/components/Link'
+import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
@@ -55,17 +54,7 @@ export const DeleteFitnessProfile: Component<
 
   return (
     <div class="my-auto flex flex-col items-center gap-8 self-center">
-      <p class="text-center text-lg text-black/50">
-        Are you sure you want to delete your fitness profile? This action is
-        irreversible.
-      </p>
       <div class="flex w-full max-w-48 flex-col gap-4">
-        <Link
-          href={InternalLink.profile}
-          class={buttonVariants({ variant: 'primary' })}
-        >
-          Go back
-        </Link>
         <Button
           onClick={() => deleteFitnessProfileMutation.mutate()}
           disabled={deleteFitnessProfileMutation.isPending}

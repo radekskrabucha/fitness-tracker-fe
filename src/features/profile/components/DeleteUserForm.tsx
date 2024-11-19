@@ -2,8 +2,7 @@ import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import type { Component } from 'solid-js'
-import { Button, buttonVariants } from '~/components/Button'
-import { Link } from '~/components/Link'
+import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
@@ -65,10 +64,6 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
       shouldTouched
       shouldDirty
     >
-      <p class="text-center text-lg text-black/50">
-        Are you sure you want to delete your account? This action is
-        irreversible.
-      </p>
       <Field
         name="password"
         validate={passwordValidation}
@@ -83,13 +78,6 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
           />
         )}
       </Field>
-      <Link
-        href={InternalLink.profile}
-        class={buttonVariants({ variant: 'primary', class: 'mt-8' })}
-      >
-        Go back
-      </Link>
-
       <Button
         type="submit"
         variant="primaryDanger"

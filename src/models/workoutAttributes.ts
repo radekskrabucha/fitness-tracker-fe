@@ -1,4 +1,4 @@
-type WorkoutAttributeNameValuePair =
+export type WorkoutAttributeNameValuePair =
   | WorkoutAttributeDaysOfWeekValuePair
   | WorkoutAttributeIntensityLevelValuePair
   | {

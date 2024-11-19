@@ -20,6 +20,7 @@ export const SelectWorkoutPlanPage = () => {
             <ModalPage
               href={InternalLink.workoutPlan(params.id)}
               title={data.name}
+              description={data.description}
             >
               <p>{data.description}</p>
             </ModalPage>

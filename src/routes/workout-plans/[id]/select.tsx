@@ -4,14 +4,14 @@ import { SEOTitle } from '~/components/Seo'
 import { SelectWorkoutPlanPage } from '~/features/workoutPlan/SelectWorkoutPlanPage'
 import { getWorkoutPlanQueryOptions } from '~/features/workoutPlan/actions'
 
-export const route: RouteDefinition = {
+export const route = {
   load: ({ params }) => {
     if (params.id) {
       const queryClient = useQueryClient()
       queryClient.prefetchQuery(getWorkoutPlanQueryOptions(params.id))
     }
   }
-}
+} satisfies RouteDefinition
 
 const SelectWorkoutPlan = () => (
   <>

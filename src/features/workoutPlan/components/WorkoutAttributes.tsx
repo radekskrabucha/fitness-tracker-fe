@@ -28,27 +28,25 @@ export const WorkoutAttributes: Component<WorkoutAttributesProps> = props => {
         }
         return [daysOfWeek, intensityLevel, others.concat(attribute)]
       },
-      [[], [], []] as SortedWorkoutAttributes
+      [[], [], []]
     )
   })
 
-  const [daysOfWeek, intensityLevel, others] = sortedAttributes()
-
   return (
     <div class="my-4 flex flex-col gap-8">
-      <Show when={daysOfWeek.length}>
+      <Show when={sortedAttributes()[0].length}>
         <div class="flex flex-row flex-wrap gap-6">
-          <Index each={daysOfWeek}>
+          <Index each={sortedAttributes()[0]}>
             {attribute => <WorkoutAttributeBadge {...attribute()} />}
           </Index>
         </div>
       </Show>
-      <Show when={intensityLevel.length || others.length}>
+      <Show when={sortedAttributes()[1].length || sortedAttributes()[2].length}>
         <div class="flex flex-row flex-wrap gap-6">
-          <Index each={intensityLevel}>
+          <Index each={sortedAttributes()[1]}>
             {attribute => <WorkoutAttributeBadge {...attribute()} />}
           </Index>
-          <Index each={others}>
+          <Index each={sortedAttributes()[2]}>
             {attribute => <WorkoutAttributeBadge {...attribute()} />}
           </Index>
         </div>

@@ -5,6 +5,8 @@ import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import type { WorkoutPlanPageParams } from './WorkoutPlanPage'
 import { getWorkoutPlanQueryOptions } from './actions'
+import { ChooseWorkoutPlanForm } from './components/ChooseWorkoutPlanForm'
+import { workoutPlanToChooseWorkoutPlanFormInitialValues } from './utils'
 
 export const SelectWorkoutPlanPage = () => {
   const params = useParams<WorkoutPlanPageParams>()
@@ -22,7 +24,12 @@ export const SelectWorkoutPlanPage = () => {
               title={data.name}
               description={data.description}
             >
-              <p>{data.description}</p>
+              <ChooseWorkoutPlanForm
+                initialValues={workoutPlanToChooseWorkoutPlanFormInitialValues(
+                  data
+                )}
+                workoutPlanId={data.id}
+              />
             </ModalPage>
           </>
         )}

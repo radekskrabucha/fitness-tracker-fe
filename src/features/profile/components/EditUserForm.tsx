@@ -1,6 +1,7 @@
-import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -9,19 +10,18 @@ import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { editUser } from '../actions'
-import {
-  nameValidation,
-  useEditUserForm,
-  type EditUserForm as FormValues
-} from '../form/editUserForm'
+import { nameSchema, type Form } from '../form/editUserForm'
 
 type EditUserFormProps = {
-  initialValues: FormValues
+  initialValues: Form
 }
 
 export const EditUserForm: Component<EditUserFormProps> = props => {
   const navigate = useNavigate()
-  const { form, Form, Field } = useEditUserForm(props.initialValues)
+  const form = createForm<Form>(() => ({
+    defaultValues: props.initialValues,
+    onSubmit: ({ value }) => editUserMutation.mutate(value)
+  }))
   const queryClient = useQueryClient()
   const editUserMutation = createMutation(() => ({
     mutationFn: editUser,
@@ -35,7 +35,7 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
         },
         { throwOnError: true, cancelRefetch: true }
       )
-      reset(form)
+      form.reset()
       toast.show({
         title: 'Profile updated successfully!',
         description: 'Your profile has been updated successfully.',
@@ -55,27 +55,36 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
   }))
 
   return (
-    <Form
-      onSubmit={values => editUserMutation.mutate(values)}
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (form.state.isDirty) {
+          form.handleSubmit()
+        }
+      }}
       class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
-      shouldTouched
-      shouldDirty
     >
-      <Field
+      <form.Field
         name="name"
-        validate={nameValidation}
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: nameSchema
+        }}
       >
-        {(field, props) => (
+        {field => (
           <TextInput
             label="Name"
             disabled={editUserMutation.isPending}
-            {...field}
-            {...props}
-            type="text"
+            id={field().name}
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
-
+      </form.Field>
       <Button
         type="submit"
         class="mt-8"
@@ -84,6 +93,6 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
         {editUserMutation.isPending && <LoaderCircle />}
         Update your profile
       </Button>
-    </Form>
+    </form>
   )
 }

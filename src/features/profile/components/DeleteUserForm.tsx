@@ -1,6 +1,7 @@
-import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -9,7 +10,7 @@ import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { deleteUser, getUserFitnessProfileQueryOptions } from '../actions'
-import { Form, Field, form, passwordValidation } from '../form/deleteUserForm'
+import { passwordSchema, type Form } from '../form/deleteUserForm'
 
 type DeleteUserFormProps = {
   userId: string
@@ -18,6 +19,9 @@ type DeleteUserFormProps = {
 export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const form = createForm<Form>(() => ({
+    onSubmit: ({ value }) => deleteUserMutation.mutate(value)
+  }))
   const deleteUserMutation = createMutation(() => ({
     mutationFn: deleteUser,
     mutationKey: ['deleteUser'],
@@ -45,7 +49,7 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
         },
         { throwOnError: true, cancelRefetch: true }
       )
-      reset(form)
+      form.reset()
     },
     onError: () => {
       return toast.show({
@@ -58,26 +62,35 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
   }))
 
   return (
-    <Form
-      onSubmit={values => deleteUserMutation.mutate(values)}
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        form.handleSubmit()
+      }}
       class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
-      shouldTouched
-      shouldDirty
     >
-      <Field
+      <form.Field
         name="password"
-        validate={passwordValidation}
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: passwordSchema
+        }}
       >
-        {(field, props) => (
+        {field => (
           <TextInput
+            type="password"
             label="Password"
             disabled={deleteUserMutation.isPending}
-            {...field}
-            {...props}
-            type="text"
+            id={field().name}
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
+      </form.Field>
       <Button
         type="submit"
         variant="primaryDanger"
@@ -86,6 +99,6 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
         {deleteUserMutation.isPending && <LoaderCircle />}
         Delete your profile
       </Button>
-    </Form>
+    </form>
   )
 }

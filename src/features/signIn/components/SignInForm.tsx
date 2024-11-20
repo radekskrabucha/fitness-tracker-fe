@@ -14,10 +14,6 @@ export const SignInForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const form = createForm<Form>(() => ({
-    defaultValues: {
-      email: '',
-      password: ''
-    },
     onSubmit: ({ value }) => signInMutation.mutate(value)
   }))
   const signInMutation = createMutation(() => ({

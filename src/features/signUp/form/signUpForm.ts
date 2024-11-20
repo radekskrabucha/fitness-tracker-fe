@@ -5,10 +5,10 @@ export const passwordSchema = z
   .string()
   .min(8, 'Password must be at least 8 characters')
 export const nameSchema = z.string().optional()
-export const signInSchema = z.object({
+export const signUpSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   name: nameSchema
 })
 
-export type Form = z.infer<typeof signInSchema>
+export type Form = z.infer<typeof signUpSchema>

@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator } from '@tanstack/zod-form-adapter'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
@@ -10,20 +10,20 @@ import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { getNameFromEmail } from '~/utils/email'
 import { signUp } from '../actions'
-import {
-  emailSchema,
-  nameSchema,
-  passwordSchema,
-  type Form
-} from '../form/signUpForm'
+import { signUpSchema, type Form } from '../form/signUpForm'
 
 export const SignUpForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  const form = createForm<Form>(() => ({
+  const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: {
       email: '',
       password: ''
+    },
+
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: signUpSchema
     },
     onSubmit: ({ value }) =>
       signUpMutation.mutate({
@@ -67,13 +67,7 @@ export const SignUpForm = () => {
       }}
       class="flex w-full max-w-96 flex-col gap-4 text-left"
     >
-      <form.Field
-        name="name"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: nameSchema
-        }}
-      >
+      <form.Field name="name">
         {field => (
           <TextInput
             type="text"
@@ -89,13 +83,7 @@ export const SignUpForm = () => {
           />
         )}
       </form.Field>
-      <form.Field
-        name="email"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: emailSchema
-        }}
-      >
+      <form.Field name="email">
         {field => (
           <TextInput
             type="email"
@@ -110,13 +98,7 @@ export const SignUpForm = () => {
           />
         )}
       </form.Field>
-      <form.Field
-        name="password"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: passwordSchema
-        }}
-      >
+      <form.Field name="password">
         {field => (
           <TextInput
             type="password"

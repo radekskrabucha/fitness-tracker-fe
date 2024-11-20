@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator } from '@tanstack/zod-form-adapter'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -10,7 +10,7 @@ import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { editUser } from '../actions'
-import { nameSchema, type Form } from '../form/editUserForm'
+import { editUserSchema, type Form } from '../form/editUserForm'
 
 type EditUserFormProps = {
   initialValues: Form
@@ -18,9 +18,13 @@ type EditUserFormProps = {
 
 export const EditUserForm: Component<EditUserFormProps> = props => {
   const navigate = useNavigate()
-  const form = createForm<Form>(() => ({
+  const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: props.initialValues,
-    onSubmit: ({ value }) => editUserMutation.mutate(value)
+    onSubmit: ({ value }) => editUserMutation.mutate(value),
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: editUserSchema
+    }
   }))
   const queryClient = useQueryClient()
   const editUserMutation = createMutation(() => ({
@@ -65,13 +69,7 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
       }}
       class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
     >
-      <form.Field
-        name="name"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: nameSchema
-        }}
-      >
+      <form.Field name="name">
         {field => (
           <TextInput
             label="Name"

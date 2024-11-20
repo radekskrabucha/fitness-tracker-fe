@@ -1,20 +1,24 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator } from '@tanstack/zod-form-adapter'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions, signInWithEmail } from '../actions'
-import { emailSchema, passwordSchema, type Form } from '../form/signInForm'
+import { signInSchema, type Form } from '../form/signInForm'
 
 export const SignInForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  const form = createForm<Form>(() => ({
-    onSubmit: ({ value }) => signInMutation.mutate(value)
+  const form = createForm<Form, ZodValidator>(() => ({
+    onSubmit: ({ value }) => signInMutation.mutate(value),
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: signInSchema
+    }
   }))
   const signInMutation = createMutation(() => ({
     mutationFn: signInWithEmail,
@@ -50,13 +54,7 @@ export const SignInForm = () => {
       }}
       class="flex w-full max-w-96 flex-col gap-4 text-left"
     >
-      <form.Field
-        name="email"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: emailSchema
-        }}
-      >
+      <form.Field name="email">
         {field => (
           <TextInput
             type="email"
@@ -72,13 +70,7 @@ export const SignInForm = () => {
         )}
       </form.Field>
 
-      <form.Field
-        name="password"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: passwordSchema
-        }}
-      >
+      <form.Field name="password">
         {field => (
           <TextInput
             type="password"

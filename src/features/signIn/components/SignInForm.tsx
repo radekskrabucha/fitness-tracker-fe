@@ -1,23 +1,25 @@
-import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions, signInWithEmail } from '../actions'
-import {
-  Form,
-  Field,
-  emailValidation,
-  passwordValidation,
-  form
-} from '../form/signInForm'
+import { emailSchema, passwordSchema, type Form } from '../form/signInForm'
 
 export const SignInForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const form = createForm<Form>(() => ({
+    defaultValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: ({ value }) => signInMutation.mutate(value)
+  }))
   const signInMutation = createMutation(() => ({
     mutationFn: signInWithEmail,
     mutationKey: ['signIn'],
@@ -30,7 +32,7 @@ export const SignInForm = () => {
         },
         { throwOnError: true, cancelRefetch: true }
       )
-      reset(form)
+      form.reset()
       navigate(InternalLink.home, { replace: true })
     },
     onError: () => {
@@ -44,39 +46,58 @@ export const SignInForm = () => {
   }))
 
   return (
-    <Form
-      onSubmit={values => signInMutation.mutate(values)}
-      class="flex w-full max-w-96 flex-col gap-4"
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        form.handleSubmit()
+      }}
+      class="flex w-full max-w-96 flex-col gap-4 text-left"
     >
-      <Field
+      <form.Field
         name="email"
-        validate={emailValidation}
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: emailSchema
+        }}
+        mode="value"
       >
-        {(field, props) => (
+        {field => (
           <TextInput
+            type="email"
             label="Email"
             disabled={signInMutation.isPending}
-            {...field}
-            {...props}
-            type="email"
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
+      </form.Field>
 
-      <Field
+      <form.Field
         name="password"
-        validate={passwordValidation}
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: passwordSchema
+        }}
+        mode="value"
       >
-        {(field, props) => (
+        {field => (
           <TextInput
+            type="password"
             label="Password"
             disabled={signInMutation.isPending}
-            {...field}
-            {...props}
-            type="password"
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
+      </form.Field>
+
       <Button
         type="submit"
         class="mt-8"
@@ -85,6 +106,6 @@ export const SignInForm = () => {
         {signInMutation.isPending && <LoaderCircle />}
         Sign in
       </Button>
-    </Form>
+    </form>
   )
 }

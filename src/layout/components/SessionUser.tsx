@@ -44,6 +44,15 @@ export const SessionUser = () => {
           <p>Sign In</p>
         </Link>
       )}
+      notFoundFallback={
+        <Link
+          href={InternalLink.signIn}
+          class="font-secondary text-lg text-white/50 transition-colors duration-150 hover:text-white max-md:text-base"
+          activeClass="text-primary"
+        >
+          <p>Sign In</p>
+        </Link>
+      }
     >
       {({ user }) => (
         <>

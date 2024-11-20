@@ -23,7 +23,7 @@ export const SignUpForm = () => {
 
     validatorAdapter: zodValidator(),
     validators: {
-      onChange: signUpSchema
+      onSubmit: signUpSchema
     },
     onSubmit: ({ value }) =>
       signUpMutation.mutate({

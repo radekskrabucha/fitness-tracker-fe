@@ -16,7 +16,7 @@ export const ChangePasswordForm = () => {
     onSubmit: ({ value }) => changePasswordMutation.mutate(value),
     validatorAdapter: zodValidator(),
     validators: {
-      onChange: changePasswordSchema
+      onSubmit: changePasswordSchema
     }
   }))
   const changePasswordMutation = createMutation(() => ({

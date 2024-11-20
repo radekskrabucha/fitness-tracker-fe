@@ -23,7 +23,7 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
     onSubmit: ({ value }) => editUserMutation.mutate(value),
     validatorAdapter: zodValidator(),
     validators: {
-      onChange: editUserSchema
+      onSubmit: editUserSchema
     }
   }))
   const queryClient = useQueryClient()

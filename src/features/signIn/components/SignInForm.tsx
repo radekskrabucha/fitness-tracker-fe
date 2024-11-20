@@ -17,7 +17,7 @@ export const SignInForm = () => {
     onSubmit: ({ value }) => signInMutation.mutate(value),
     validatorAdapter: zodValidator(),
     validators: {
-      onChange: signInSchema
+      onSubmit: signInSchema
     }
   }))
   const signInMutation = createMutation(() => ({

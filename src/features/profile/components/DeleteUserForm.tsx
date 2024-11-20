@@ -23,7 +23,7 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
     onSubmit: ({ value }) => deleteUserMutation.mutate(value),
     validatorAdapter: zodValidator(),
     validators: {
-      onChange: deleteUserSchema
+      onSubmit: deleteUserSchema
     }
   }))
   const deleteUserMutation = createMutation(() => ({

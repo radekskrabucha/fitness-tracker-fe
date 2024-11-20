@@ -1,7 +1,7 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator } from '@tanstack/zod-form-adapter'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -10,7 +10,7 @@ import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { deleteUser, getUserFitnessProfileQueryOptions } from '../actions'
-import { passwordSchema, type Form } from '../form/deleteUserForm'
+import { deleteUserSchema, type Form } from '../form/deleteUserForm'
 
 type DeleteUserFormProps = {
   userId: string
@@ -19,8 +19,12 @@ type DeleteUserFormProps = {
 export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const form = createForm<Form>(() => ({
-    onSubmit: ({ value }) => deleteUserMutation.mutate(value)
+  const form = createForm<Form, ZodValidator>(() => ({
+    onSubmit: ({ value }) => deleteUserMutation.mutate(value),
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: deleteUserSchema
+    }
   }))
   const deleteUserMutation = createMutation(() => ({
     mutationFn: deleteUser,
@@ -70,13 +74,7 @@ export const DeleteUserForm: Component<DeleteUserFormProps> = props => {
       }}
       class="my-auto flex w-full max-w-96 flex-col gap-4 self-center"
     >
-      <form.Field
-        name="password"
-        validatorAdapter={zodValidator()}
-        validators={{
-          onChange: passwordSchema
-        }}
-      >
+      <form.Field name="password">
         {field => (
           <TextInput
             type="password"

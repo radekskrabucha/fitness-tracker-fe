@@ -1,8 +1,7 @@
 import { z } from 'zod'
 
-export const passwordSchema = z.string().min(1, 'Password is required')
 export const deleteUserSchema = z.object({
-  password: passwordSchema
+  password: z.string().min(1, 'Password is required')
 })
 
 export type Form = z.infer<typeof deleteUserSchema>

@@ -8,7 +8,7 @@ import { getWorkoutPlanQueryOptions } from './actions'
 import { ChooseWorkoutPlanForm } from './components/ChooseWorkoutPlanForm'
 import { workoutPlanToChooseWorkoutPlanFormInitialValues } from './utils'
 
-export const SelectWorkoutPlanPage = () => {
+export const ChooseWorkoutPlanPage = () => {
   const params = useParams<WorkoutPlanPageParams>()
   const getWorkoutPlanQuery = createQuery(() =>
     getWorkoutPlanQueryOptions(params.id)

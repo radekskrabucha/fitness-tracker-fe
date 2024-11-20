@@ -1,40 +1,24 @@
-import { createForm, custom, minLength, required } from '@modular-forms/solid'
-import type { Accessor } from 'solid-js'
+import { z } from 'zod'
 
-export type ChangePasswordForm = {
-  currentPassword: string
-  newPassword: string
-  confirmPassword: string
-}
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z
+      .string({ message: 'Current password is required' })
+      .min(8, {
+        message: 'Password must be at least 8 characters long'
+      }),
+    newPassword: z
+      .string({ message: 'New password is required' })
+      .min(8, { message: 'New password must be at least 8 characters long' }),
+    confirmPassword: z.string({ message: 'Confirm password is required' })
+  })
+  .refine(data => data.newPassword !== data.currentPassword, {
+    message: 'New password must be different from current password',
+    path: ['newPassword']
+  })
+  .refine(data => data.confirmPassword === data.currentPassword, {
+    message: 'Confirm password must match current password',
+    path: ['confirmPassword']
+  })
 
-export const [form, { Form, Field }] = createForm<ChangePasswordForm>({
-  initialValues: {
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  }
-})
-
-export const passwordValidation = [
-  required('Password is required'),
-  minLength(8, 'Password must be at least 8 characters')
-]
-
-const validateEqualPassword = (compareValue: Accessor<string>, error: string) =>
-  custom(value => value === compareValue(), error)
-const validateDifferentPassword = (
-  compareValue: Accessor<string>,
-  error: string
-) => custom(value => value !== compareValue(), error)
-
-export const newPasswordValidation = (compareValue: Accessor<string>) => [
-  ...passwordValidation,
-  validateDifferentPassword(
-    compareValue,
-    'New password must be different from the current one'
-  )
-]
-export const confirmPasswordValidation = (compareValue: Accessor<string>) => [
-  ...passwordValidation,
-  validateEqualPassword(compareValue, 'Passwords must be the same')
-]
+export type Form = z.infer<typeof changePasswordSchema>

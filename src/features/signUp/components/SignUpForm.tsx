@@ -1,6 +1,7 @@
-import { reset } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
@@ -10,17 +11,28 @@ import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { getNameFromEmail } from '~/utils/email'
 import { signUp } from '../actions'
 import {
-  Form,
-  Field,
-  emailValidation,
-  passwordValidation,
-  form,
-  nameValidation
+  emailSchema,
+  nameSchema,
+  passwordSchema,
+  type Form
 } from '../form/signUpForm'
 
 export const SignUpForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const form = createForm<Form>(() => ({
+    defaultValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: ({ value }) =>
+      signUpMutation.mutate({
+        ...value,
+        name: value.name
+          ? value.name
+          : getNameFromEmail(value.email) || value.email
+      })
+  }))
   const signUpMutation = createMutation(() => ({
     mutationFn: signUp,
     mutationKey: ['signUp'],
@@ -33,7 +45,7 @@ export const SignUpForm = () => {
         },
         { throwOnError: true, cancelRefetch: true }
       )
-      reset(form)
+      form.reset()
       navigate(InternalLink.createFitnessProfile, { replace: true })
     },
     onError: () => {
@@ -47,61 +59,78 @@ export const SignUpForm = () => {
   }))
 
   return (
-    <Form
-      onSubmit={values =>
-        signUpMutation.mutate({
-          ...values,
-          name: values.name
-            ? values.name
-            : getNameFromEmail(values.email) || values.email
-        })
-      }
-      class="flex w-full max-w-96 flex-col gap-4"
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        form.handleSubmit()
+      }}
+      class="flex w-full max-w-96 flex-col gap-4 text-left"
     >
-      <Field
-        name="email"
-        validate={emailValidation}
+      <form.Field
+        name="name"
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: nameSchema
+        }}
       >
-        {(field, props) => (
+        {field => (
           <TextInput
+            type="text"
+            label="Name"
+            description="Optional"
+            disabled={signUpMutation.isPending}
+            id={field().name}
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
+          />
+        )}
+      </form.Field>
+      <form.Field
+        name="email"
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: emailSchema
+        }}
+      >
+        {field => (
+          <TextInput
+            type="email"
             label="Email"
             disabled={signUpMutation.isPending}
-            {...field}
-            {...props}
-            type="email"
+            id={field().name}
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
-
-      <Field
-        name="name"
-        validate={nameValidation}
-      >
-        {(field, props) => (
-          <TextInput
-            label="Name"
-            disabled={signUpMutation.isPending}
-            {...field}
-            {...props}
-            type="text"
-          />
-        )}
-      </Field>
-
-      <Field
+      </form.Field>
+      <form.Field
         name="password"
-        validate={passwordValidation}
+        validatorAdapter={zodValidator()}
+        validators={{
+          onChange: passwordSchema
+        }}
       >
-        {(field, props) => (
+        {field => (
           <TextInput
+            type="password"
             label="Password"
             disabled={signUpMutation.isPending}
-            {...field}
-            {...props}
-            type="password"
+            id={field().name}
+            name={field().name}
+            value={field().state.value}
+            onBlur={field().handleBlur}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
           />
         )}
-      </Field>
+      </form.Field>
 
       <Button
         type="submit"
@@ -111,6 +140,6 @@ export const SignUpForm = () => {
         {signUpMutation.isPending && <LoaderCircle />}
         Create account
       </Button>
-    </Form>
+    </form>
   )
 }

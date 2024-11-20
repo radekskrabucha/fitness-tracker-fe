@@ -1,36 +1,14 @@
-import {
-  createForm,
-  email,
-  maxLength,
-  minLength,
-  required
-} from '@modular-forms/solid'
+import { z } from 'zod'
 
-export type SignUpForm = {
-  email: string
-  password: string
-  name?: string
-}
-
-export const [form, { Form, Field }] = createForm<SignUpForm>({
-  initialValues: {
-    email: '',
-    password: '',
-    name: ''
-  }
+export const emailSchema = z.string().email('Invalid email')
+export const passwordSchema = z
+  .string()
+  .min(8, 'Password must be at least 8 characters')
+export const nameSchema = z.string().optional()
+export const signInSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+  name: nameSchema
 })
 
-export const emailValidation = [
-  required('Email is required'),
-  email('Email is not valid')
-]
-
-export const passwordValidation = [
-  required('Password is required'),
-  minLength(8, 'Password must be at least 8 characters')
-]
-
-export const nameValidation = [
-  maxLength(50, 'Name must be at most 50 characters'),
-  minLength(2, 'Name must be at least 2 characters')
-]
+export type Form = z.infer<typeof signInSchema>

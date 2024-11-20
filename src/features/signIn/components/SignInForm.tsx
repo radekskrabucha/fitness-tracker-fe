@@ -60,13 +60,13 @@ export const SignInForm = () => {
         validators={{
           onChange: emailSchema
         }}
-        mode="value"
       >
         {field => (
           <TextInput
             type="email"
             label="Email"
             disabled={signInMutation.isPending}
+            id={field().name}
             name={field().name}
             value={field().state.value}
             onBlur={field().handleBlur}
@@ -82,13 +82,13 @@ export const SignInForm = () => {
         validators={{
           onChange: passwordSchema
         }}
-        mode="value"
       >
         {field => (
           <TextInput
             type="password"
             label="Password"
             disabled={signInMutation.isPending}
+            id={field().name}
             name={field().name}
             value={field().state.value}
             onBlur={field().handleBlur}

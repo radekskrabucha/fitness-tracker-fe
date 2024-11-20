@@ -1,6 +1,7 @@
-import { reset, setValue } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
@@ -14,25 +15,20 @@ import {
   fitnessProfileFitnessGoal,
   fitnessProfileGender
 } from '~/models/profile'
+import { nonNullable } from '~/utils/common'
 import {
   createFitnessProfile,
   getUserFitnessProfileQueryOptions
 } from '../actions'
 import {
-  Form,
-  Field,
-  form,
-  heightValidation,
-  genderValidation,
-  activityLevelValidation,
-  fitnessGoalValidation,
-  minHeight,
-  maxHeight,
-  weightValidation,
-  minWeight,
-  maxWeight,
+  createFitnessProfileSchema,
   maxDateOfBirthDate,
-  minDateOfBirthDate
+  minDateOfBirthDate,
+  maxWeight,
+  minWeight,
+  maxHeight,
+  minHeight,
+  type Form
 } from '../form/createFitnessProfileForm'
 import {
   getActivityLevelName,
@@ -44,6 +40,28 @@ import {
 export const CreateFitnessProfileForm = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+
+  // @ts-expect-error - default values only for height and weight
+  const form = createForm<Form, ZodValidator>(() => ({
+    defaultValues: {
+      height: '170',
+      weight: '70'
+    },
+    onSubmit: ({ value }) =>
+      createFitnessProfileMutation.mutate({
+        ...value,
+        dateOfBirth: new Date(value.dateOfBirth).toString(),
+        height: Number(value.height),
+        weight: Number(value.weight),
+        dietaryPreference: nonNullable(value.dietaryPreference)
+          ? value.dietaryPreference
+          : null
+      }),
+    validatorAdapter: zodValidator(),
+    validators: {
+      onSubmit: createFitnessProfileSchema
+    }
+  }))
   const createFitnessProfileMutation = createMutation(() => ({
     mutationFn: createFitnessProfile,
     mutationKey: ['createFitnessProfile'],
@@ -54,7 +72,7 @@ export const CreateFitnessProfileForm = () => {
         variant: 'success',
         priority: 'high'
       })
-      reset(form)
+      form.reset()
       queryClient.setQueryData(
         getUserFitnessProfileQueryOptions(data.userId).queryKey,
         () => data
@@ -72,28 +90,28 @@ export const CreateFitnessProfileForm = () => {
   }))
 
   return (
-    <Form
-      onSubmit={values => {
-        createFitnessProfileMutation.mutate({
-          ...values,
-          dateOfBirth: new Date(values.dateOfBirth).toString(),
-          height: Number(values.height),
-          weight: Number(values.weight)
-        })
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        form.handleSubmit()
       }}
       class="my-auto flex w-full max-w-xl flex-col gap-8 self-center text-left"
     >
       <div class="flex flex-1 flex-wrap gap-6">
-        <Field
-          name="height"
-          validate={heightValidation}
-        >
-          {(field, props) => (
+        <form.Field name="height">
+          {field => (
             <NumberInputWithSteps
               label="Your height"
               description="In centimeters"
               placeholder="0"
               disabled={createFitnessProfileMutation.isPending}
+              id={field().name}
+              name={field().name}
+              value={field().state.value}
+              onBlur={field().handleBlur}
+              onChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               minValue={minHeight}
               maxValue={maxHeight}
               step={1}
@@ -103,133 +121,98 @@ export const CreateFitnessProfileForm = () => {
                 maximumFractionDigits: 0,
                 useGrouping: false
               }}
-              required
-              {...field}
-              {...props}
-              onChange={value => {
-                setValue(form, 'height', value)
-              }}
             />
           )}
-        </Field>
-
-        <Field
-          name="weight"
-          validate={weightValidation}
-        >
-          {(field, props) => (
+        </form.Field>
+        <form.Field name="weight">
+          {field => (
             <NumberInputWithSteps
               label="Your weight"
               description="In kilograms"
               placeholder="0"
               disabled={createFitnessProfileMutation.isPending}
+              id={field().name}
+              name={field().name}
+              value={field().state.value}
+              onBlur={field().handleBlur}
+              onChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               minValue={minWeight}
               maxValue={maxWeight}
-              step={1}
               format
               formatOptions={{
                 maximumFractionDigits: 2,
                 useGrouping: false
               }}
-              required
-              {...field}
-              {...props}
-              onChange={value => {
-                setValue(form, 'weight', value)
-              }}
             />
           )}
-        </Field>
-
-        <Field name="dateOfBirth">
+        </form.Field>
+        <form.Field name="dateOfBirth">
           {field => (
             <DatePicker
-              value={field.value}
-              onValueChange={value => {
-                setValue(form, 'dateOfBirth', value)
-              }}
+              value={field().state.value}
+              onValueChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               min={minDateOfBirthDate}
               max={maxDateOfBirthDate}
               label="Date of Birth"
               disabled={createFitnessProfileMutation.isPending}
             />
           )}
-        </Field>
+        </form.Field>
       </div>
-
-      <Field
-        name="gender"
-        validate={genderValidation}
-      >
-        {(field, props) => (
+      <form.Field name="gender">
+        {field => (
           <RadioGroup
             label="Gender"
             disabled={createFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'gender', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileGender}
             transformLabel={getGenderName}
           />
         )}
-      </Field>
-
-      <Field
-        name="activityLevel"
-        validate={activityLevelValidation}
-      >
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="activityLevel">
+        {field => (
           <RadioGroup
-            label="Activity level"
+            label="Activity Level"
             disabled={createFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'activityLevel', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileActivityLevel}
             transformLabel={getActivityLevelName}
           />
         )}
-      </Field>
-
-      <Field
-        name="fitnessGoal"
-        validate={fitnessGoalValidation}
-      >
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="fitnessGoal">
+        {field => (
           <RadioGroup
-            label="Fitness goal"
+            label="Fitness Goal"
             disabled={createFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'fitnessGoal', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileFitnessGoal}
             transformLabel={getFitnessGoalName}
           />
         )}
-      </Field>
-
-      <Field name="dietaryPreference">
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="dietaryPreference">
+        {field => (
           <RadioGroup
-            label="Dietary preference (optional)"
+            label="Fitness Goal"
             disabled={createFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'dietaryPreference', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileDietaryPreference}
             transformLabel={getDietaryPreferenceName}
           />
         )}
-      </Field>
-
+      </form.Field>
       <Button
         type="submit"
         class="mt-8"
@@ -238,6 +221,6 @@ export const CreateFitnessProfileForm = () => {
         {createFitnessProfileMutation.isPending && <LoaderCircle />}
         Create fitness profile
       </Button>
-    </Form>
+    </form>
   )
 }

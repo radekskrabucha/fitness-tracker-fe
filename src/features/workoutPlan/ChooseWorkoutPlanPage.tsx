@@ -6,7 +6,6 @@ import { InternalLink } from '~/config/app'
 import type { WorkoutPlanPageParams } from './WorkoutPlanPage'
 import { getWorkoutPlanQueryOptions } from './actions'
 import { ChooseWorkoutPlanForm } from './components/ChooseWorkoutPlanForm'
-import { workoutPlanToChooseWorkoutPlanFormInitialValues } from './utils'
 
 export const ChooseWorkoutPlanPage = () => {
   const params = useParams<WorkoutPlanPageParams>()
@@ -25,9 +24,9 @@ export const ChooseWorkoutPlanPage = () => {
               description={data.description}
             >
               <ChooseWorkoutPlanForm
-                initialValues={workoutPlanToChooseWorkoutPlanFormInitialValues(
-                  data
-                )}
+                defaultValues={{
+                  workouts: data.workouts
+                }}
                 workoutPlanId={data.id}
               />
             </ModalPage>

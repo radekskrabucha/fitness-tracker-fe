@@ -1,6 +1,8 @@
 import { createQuery } from '@tanstack/solid-query'
 import type { Component } from 'solid-js'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { nonNullable } from '~/utils/common'
+import { getInitialFormDate } from '~/utils/date'
 import { getUserFitnessProfileQueryOptions } from '../actions'
 import { EditFitnessProfileForm } from './EditFitnessProfileForm'
 
@@ -21,12 +23,14 @@ export const EditFitnessProfileFormWrapper: Component<
         <EditFitnessProfileForm
           initialValues={{
             activityLevel: profile.activityLevel,
-            dietaryPreference: profile.dietaryPreference,
+            dietaryPreference: nonNullable(profile.dietaryPreference)
+              ? profile.dietaryPreference
+              : undefined,
             fitnessGoal: profile.fitnessGoal,
             gender: profile.gender,
-            height: profile.height,
-            weight: profile.weight,
-            dateOfBirth: profile.dateOfBirth
+            height: profile.height.toString(),
+            weight: profile.weight.toString(),
+            dateOfBirth: getInitialFormDate(profile.dateOfBirth)
           }}
           userId={props.userId}
         />

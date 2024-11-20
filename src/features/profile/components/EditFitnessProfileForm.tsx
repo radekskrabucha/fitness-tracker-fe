@@ -1,6 +1,7 @@
-import { reset, setValue } from '@modular-forms/solid'
 import { useNavigate } from '@solidjs/router'
+import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
+import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -13,8 +14,7 @@ import {
   fitnessProfileActivityLevel,
   fitnessProfileDietaryPreference,
   fitnessProfileFitnessGoal,
-  fitnessProfileGender,
-  type CreateFitnessProfile
+  fitnessProfileGender
 } from '~/models/profile'
 import { nonNullable } from '~/utils/common'
 import {
@@ -30,9 +30,8 @@ import {
   minWeight
 } from '../form/createFitnessProfileForm'
 import {
-  useEditFitnessProfileForm,
-  heightValidation,
-  weightValidation
+  editFitnessProfileSchema,
+  type Form
 } from '../form/editFitnessProfileForm'
 import {
   getActivityLevelName,
@@ -42,7 +41,7 @@ import {
 } from '../utils'
 
 type EditFitnessProfileFormProps = {
-  initialValues: CreateFitnessProfile
+  initialValues: Form
   userId: string
 }
 
@@ -51,7 +50,32 @@ export const EditFitnessProfileForm: Component<
 > = props => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const { form, Form, Field } = useEditFitnessProfileForm(props.initialValues)
+  const form = createForm<Form, ZodValidator>(() => ({
+    defaultValues: props.initialValues,
+
+    onSubmit: ({ value }) =>
+      editFitnessProfileMutation.mutate({
+        height: nonNullable(value.height) ? Number(value.height) : undefined,
+        dateOfBirth: nonNullable(value.dateOfBirth)
+          ? new Date(value.dateOfBirth).toString()
+          : undefined,
+        weight: nonNullable(value.weight) ? Number(value.weight) : undefined,
+        dietaryPreference: nonNullable(value.dietaryPreference)
+          ? value.dietaryPreference
+          : undefined,
+        fitnessGoal: nonNullable(value.fitnessGoal)
+          ? value.fitnessGoal
+          : undefined,
+        gender: nonNullable(value.gender) ? value.gender : undefined,
+        activityLevel: nonNullable(value.activityLevel)
+          ? value.activityLevel
+          : undefined
+      }),
+    validatorAdapter: zodValidator(),
+    validators: {
+      onSubmit: editFitnessProfileSchema
+    }
+  }))
   const editFitnessProfileMutation = createMutation(() => ({
     mutationFn: editFitnessProfile,
     mutationKey: ['editFitnessProfile'],
@@ -60,7 +84,7 @@ export const EditFitnessProfileForm: Component<
         getUserFitnessProfileQueryOptions(props.userId).queryKey,
         () => res
       )
-      reset(form)
+      form.reset()
       toast.show({
         title: 'Profile updated successfully!',
         description: 'Your fitness profile has been updated successfully.',
@@ -80,47 +104,28 @@ export const EditFitnessProfileForm: Component<
   }))
 
   return (
-    <Form
-      onSubmit={values => {
-        if (form.dirty) {
-          editFitnessProfileMutation.mutate({
-            height: nonNullable(values.height)
-              ? Number(values.height)
-              : undefined,
-            dateOfBirth: nonNullable(values.dateOfBirth)
-              ? new Date(values.dateOfBirth).toString()
-              : undefined,
-            weight: nonNullable(values.weight)
-              ? Number(values.weight)
-              : undefined,
-            dietaryPreference: nonNullable(values.dietaryPreference)
-              ? values.dietaryPreference
-              : undefined,
-            fitnessGoal: nonNullable(values.fitnessGoal)
-              ? values.fitnessGoal
-              : undefined,
-            gender: nonNullable(values.gender) ? values.gender : undefined,
-            activityLevel: nonNullable(values.activityLevel)
-              ? values.activityLevel
-              : undefined
-          })
-        }
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        e.stopPropagation()
+        form.handleSubmit()
       }}
       class="my-auto flex w-full max-w-xl flex-col gap-8 self-center text-left"
-      shouldTouched
-      shouldDirty
     >
       <div class="flex flex-1 flex-wrap gap-6">
-        <Field
-          name="height"
-          validate={heightValidation}
-        >
-          {(field, props) => (
+        <form.Field name="height">
+          {field => (
             <NumberInputWithSteps
               label="Your height"
               description="In centimeters"
               placeholder="0"
               disabled={editFitnessProfileMutation.isPending}
+              id={field().name}
+              name={field().name}
+              value={field().state.value}
+              onBlur={field().handleBlur}
+              onChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               minValue={minHeight}
               maxValue={maxHeight}
               step={1}
@@ -130,132 +135,106 @@ export const EditFitnessProfileForm: Component<
                 maximumFractionDigits: 0,
                 useGrouping: false
               }}
-              required
-              {...field}
-              {...props}
-              onChange={value => {
-                setValue(form, 'height', value)
-              }}
             />
           )}
-        </Field>
-
-        <Field
-          name="weight"
-          validate={weightValidation}
-        >
-          {(field, props) => (
+        </form.Field>
+        <form.Field name="weight">
+          {field => (
             <NumberInputWithSteps
               label="Your weight"
               description="In kilograms"
               placeholder="0"
               disabled={editFitnessProfileMutation.isPending}
+              id={field().name}
+              name={field().name}
+              value={field().state.value}
+              onBlur={field().handleBlur}
+              onChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               minValue={minWeight}
               maxValue={maxWeight}
-              step={1}
               format
               formatOptions={{
                 maximumFractionDigits: 2,
                 useGrouping: false
               }}
-              required
-              {...field}
-              {...props}
-              onChange={value => {
-                setValue(form, 'weight', value)
-              }}
             />
           )}
-        </Field>
-
-        <Field name="dateOfBirth">
+        </form.Field>
+        <form.Field name="dateOfBirth">
           {field => (
             <DatePicker
-              value={field.value}
-              onValueChange={value => {
-                setValue(form, 'dateOfBirth', value)
-              }}
+              value={field().state.value}
+              onValueChange={field().handleChange}
+              error={field().state.meta.errors[0]}
               min={minDateOfBirthDate}
               max={maxDateOfBirthDate}
               label="Date of Birth"
               disabled={editFitnessProfileMutation.isPending}
             />
           )}
-        </Field>
+        </form.Field>
       </div>
-
-      <Field name="gender">
-        {(field, props) => (
+      <form.Field name="gender">
+        {field => (
           <RadioGroup
             label="Gender"
             disabled={editFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'gender', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileGender}
             transformLabel={getGenderName}
           />
         )}
-      </Field>
-
-      <Field name="activityLevel">
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="activityLevel">
+        {field => (
           <RadioGroup
-            label="Activity level"
+            label="Activity Level"
             disabled={editFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'activityLevel', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileActivityLevel}
             transformLabel={getActivityLevelName}
           />
         )}
-      </Field>
-
-      <Field name="fitnessGoal">
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="fitnessGoal">
+        {field => (
           <RadioGroup
-            label="Fitness goal"
+            label="Fitness Goal"
             disabled={editFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'fitnessGoal', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileFitnessGoal}
             transformLabel={getFitnessGoalName}
           />
         )}
-      </Field>
-
-      <Field name="dietaryPreference">
-        {(field, props) => (
+      </form.Field>
+      <form.Field name="dietaryPreference">
+        {field => (
           <RadioGroup
-            label="Dietary preference (optional)"
+            label="Fitness Goal"
             disabled={editFitnessProfileMutation.isPending}
-            {...field}
-            {...props}
-            onChange={value => {
-              setValue(form, 'dietaryPreference', value)
-            }}
+            value={field().state.value}
+            onChange={field().handleChange}
+            error={field().state.meta.errors[0]}
             options={fitnessProfileDietaryPreference}
             transformLabel={getDietaryPreferenceName}
           />
         )}
-      </Field>
-
+      </form.Field>
       <Button
         type="submit"
         class="mt-8"
         disabled={editFitnessProfileMutation.isPending}
       >
         {editFitnessProfileMutation.isPending && <LoaderCircle />}
-        Edit fitness profile
+        edit fitness profile
       </Button>
-    </Form>
+    </form>
   )
 }

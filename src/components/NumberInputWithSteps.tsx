@@ -54,7 +54,7 @@ export const NumberInputWithSteps: Component<
   return (
     <NumberField
       {...rootProps}
-      validationState={props.error ? 'invalid' : 'valid'}
+      validationState={localProps.error ? 'invalid' : 'valid'}
       class={cn('flex flex-1 flex-col gap-2', localProps.class)}
     >
       <Show when={localProps.label}>

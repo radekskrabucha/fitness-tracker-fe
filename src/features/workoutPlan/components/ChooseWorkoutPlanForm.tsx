@@ -1,12 +1,18 @@
 import { createForm } from '@tanstack/solid-form'
 import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
-import { Index, Match, Switch, type Component, type JSXElement } from 'solid-js'
+import { Index, Match, Switch, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { Checkbox } from '~/components/Checkbox'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
+import { RadioGroup } from '~/components/RadioGroup'
+import {
+  intensityLevelOptions,
+  type WorkoutAttributeIntensityLevel
+} from '~/models/workoutAttributes'
 import { type Form } from '../form/chooseWorkoutPlanForm'
 import {
+  getWorkoutAttributeIntensityLevelName,
   getWorkoutAttributeName,
   getWorkoutExerciseAttributeName,
   transformFormToRequest
@@ -56,12 +62,28 @@ export const ChooseWorkoutPlanForm: Component<
                         <p>{attribute().value}</p>
                       </div>
                     </Match>
-                    {/* Handle intensity level */}
                     <Match when={attribute().name === 'intensity_level'}>
-                      <div>
-                        <h4>{attribute().name}</h4>
-                        <p>{attribute().value}</p>
-                      </div>
+                      <form.Field
+                        name={`workouts[${workoutIndex}].attributes[${attributeIndex}].value`}
+                      >
+                        {field => (
+                          <RadioGroup
+                            label={getWorkoutAttributeName(attribute().name)}
+                            disabled={mutation.isPending}
+                            id={field().name}
+                            name={field().name}
+                            value={
+                              field().state
+                                .value as WorkoutAttributeIntensityLevel
+                            }
+                            onChange={value => field().handleChange(value)}
+                            options={intensityLevelOptions}
+                            transformLabel={
+                              getWorkoutAttributeIntensityLevelName
+                            }
+                          />
+                        )}
+                      </form.Field>
                     </Match>
                     <Match
                       when={

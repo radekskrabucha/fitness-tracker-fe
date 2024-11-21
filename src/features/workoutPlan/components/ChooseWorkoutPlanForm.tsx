@@ -1,4 +1,6 @@
+import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
+import { createMutation } from '@tanstack/solid-query'
 import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Index, Match, Show, Switch, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
@@ -6,11 +8,14 @@ import { Checkbox } from '~/components/Checkbox'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
 import { RadioGroup } from '~/components/RadioGroup'
+import { toast } from '~/components/Toast'
+import { InternalLink } from '~/config/app'
 import {
   daysOfWeekOptions,
   intensityLevelOptions,
   type WorkoutAttributeIntensityLevel
 } from '~/models/workoutAttributes'
+import { chooseWorkoutPlan } from '../actions'
 import { type Form } from '../form/chooseWorkoutPlanForm'
 import {
   getWorkoutAttributeIntensityLevelName,
@@ -28,14 +33,38 @@ type ChooseWorkoutPlanForm = {
 export const ChooseWorkoutPlanForm: Component<
   ChooseWorkoutPlanForm
 > = props => {
+  const navigate = useNavigate()
   const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: props.defaultValues,
-    onSubmit: ({ value }) => console.log(transformFormToRequest(value)),
+    onSubmit: ({ value }) =>
+      chooseWorkoutPlanMutation.mutate({
+        workoutPlanId: props.workoutPlanId,
+        ...transformFormToRequest(value)
+      }),
     validatorAdapter: zodValidator()
   }))
-  const mutation = {
-    isPending: false
-  }
+  const chooseWorkoutPlanMutation = createMutation(() => ({
+    mutationFn: chooseWorkoutPlan,
+    mutationKey: ['chooseWorkoutPlan'],
+    onSuccess: () => {
+      form.reset()
+      toast.show({
+        title: "You've chosen a workout plan!",
+        description: 'Your workout plan has been chosen successfully.',
+        variant: 'success',
+        priority: 'high'
+      })
+      navigate(InternalLink.profile)
+    },
+    onError: () => {
+      return toast.show({
+        title: 'Oops! Something went wrong 🤓',
+        description: 'Please try again later.',
+        variant: 'error',
+        priority: 'high'
+      })
+    }
+  }))
 
   return (
     <form
@@ -67,6 +96,7 @@ export const ChooseWorkoutPlanForm: Component<
                         <Index each={daysOfWeekOptions}>
                           {dayOfWeek => (
                             <WeekDaySwitch
+                              disabled={chooseWorkoutPlanMutation.isPending}
                               dayOfWeek={dayOfWeek()}
                               onClick={({ dayOfWeek, index, isSelected }) => {
                                 if (isSelected) {
@@ -104,7 +134,7 @@ export const ChooseWorkoutPlanForm: Component<
                         {field => (
                           <RadioGroup
                             label={getWorkoutAttributeName(attribute().name)}
-                            disabled={mutation.isPending}
+                            disabled={chooseWorkoutPlanMutation.isPending}
                             id={field().name}
                             name={field().name}
                             value={
@@ -135,7 +165,7 @@ export const ChooseWorkoutPlanForm: Component<
                             label={getWorkoutAttributeName(attribute().name)}
                             description="In minutes"
                             placeholder="0"
-                            disabled={mutation.isPending}
+                            disabled={chooseWorkoutPlanMutation.isPending}
                             id={field().name}
                             name={field().name}
                             value={field().state.value.toString()}
@@ -169,7 +199,7 @@ export const ChooseWorkoutPlanForm: Component<
                         {field => (
                           <Checkbox
                             label={getWorkoutAttributeName(attribute().name)}
-                            disabled={mutation.isPending}
+                            disabled={chooseWorkoutPlanMutation.isPending}
                             id={field().name}
                             name={field().name}
                             value={field().state.value.toString()}
@@ -204,7 +234,7 @@ export const ChooseWorkoutPlanForm: Component<
                                     attribute().name
                                   )}
                                   placeholder="0"
-                                  disabled={mutation.isPending}
+                                  disabled={chooseWorkoutPlanMutation.isPending}
                                   id={field().name}
                                   name={field().name}
                                   value={field().state.value.toString()}
@@ -240,9 +270,9 @@ export const ChooseWorkoutPlanForm: Component<
       <Button
         type="submit"
         class="mt-8"
-        disabled={mutation.isPending}
+        disabled={chooseWorkoutPlanMutation.isPending}
       >
-        {mutation.isPending && <LoaderCircle />}
+        {chooseWorkoutPlanMutation.isPending && <LoaderCircle />}
         Start workout
       </Button>
     </form>

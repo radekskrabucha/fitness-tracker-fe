@@ -1,7 +1,8 @@
 import type {
   WorkoutAttributeDaysOfWeek,
   WorkoutAttributeIntensityLevel,
-  WorkoutAttributeName
+  WorkoutAttributeName,
+  WorkoutAttributeNameValuePair
 } from '~/models/workoutAttributes'
 import type { WorkoutExerciseAttributeName } from '~/models/workoutExerciseAttributes'
 import type { Form } from './form/chooseWorkoutPlanForm'
@@ -84,7 +85,7 @@ export const transformFormToRequest = (workoutPlan: Form) => ({
     attributes: workout.attributes.map(attribute => ({
       name: attribute.name,
       value: attribute.value
-    })),
+    })) as Array<WorkoutAttributeNameValuePair>,
     exercises: workout.exercises.map(exercise => ({
       id: exercise.id,
       attributes: exercise.attributes.map(attribute => ({

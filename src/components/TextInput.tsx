@@ -29,6 +29,7 @@ type TextFieldProps = Pick<
   | 'readOnly'
   | 'value'
   | 'defaultValue'
+  | 'onChange'
 >
 type TextFieldInputProps = Pick<
   ComponentProps<typeof TextField.Input>,

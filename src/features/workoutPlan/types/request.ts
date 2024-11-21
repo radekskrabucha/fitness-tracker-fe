@@ -1,3 +1,6 @@
+import type { WorkoutAttributeNameValuePair } from '~/models/workoutAttributes'
+import type { WorkoutExerciseAttributeName } from '~/models/workoutExerciseAttributes'
+
 export type ChooseWorkoutPlanRequest = {
   workoutPlanId: string
   workouts: Workout[]
@@ -7,15 +10,12 @@ type Workout = {
   attributes: WorkoutAttribute[]
   exercises: Exercise[]
 }
-type WorkoutAttribute = {
-  name: string
-  value: number | string | boolean
-}
+type WorkoutAttribute = WorkoutAttributeNameValuePair
 type Exercise = {
   id: string
   attributes: ExerciseAttribute[]
 }
 type ExerciseAttribute = {
-  name: string
+  name: WorkoutExerciseAttributeName
   value: number
 }

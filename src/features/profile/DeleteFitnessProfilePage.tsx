@@ -11,6 +11,7 @@ export const DeleteFitnessProfilePage = () => (
         <ModalPage
           href={InternalLink.profile}
           title="Delete fitness profile"
+          description="Are you sure you want to delete your fitness profile? This action is irreversible."
         >
           <DeleteFitnessProfile userId={user.id} />
         </ModalPage>

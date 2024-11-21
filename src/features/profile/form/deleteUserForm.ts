@@ -1,13 +1,7 @@
-import { createForm, required } from '@modular-forms/solid'
+import { z } from 'zod'
 
-export type DeleteUserForm = {
-  password: string
-}
-
-export const passwordValidation = [required('Password is required')]
-
-export const [form, { Form, Field }] = createForm<DeleteUserForm>({
-  initialValues: {
-    password: ''
-  }
+export const deleteUserSchema = z.object({
+  password: z.string().min(1, 'Password is required')
 })
+
+export type Form = z.infer<typeof deleteUserSchema>

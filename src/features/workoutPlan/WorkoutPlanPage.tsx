@@ -2,6 +2,7 @@ import { useParams } from '@solidjs/router'
 import { createQuery } from '@tanstack/solid-query'
 import { Index, Show, type FlowComponent } from 'solid-js'
 import { Badge } from '~/components/Badge'
+import { buttonVariants } from '~/components/Button'
 import { Header } from '~/components/Header'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
@@ -27,31 +28,49 @@ export const WorkoutPlanPage: FlowComponent = props => {
           {data => (
             <>
               <Header
-                title={data.name}
-                description={
-                  <>
-                    {data.description}{' '}
-                    {/* TODO temporary link here, should be placed in other place */}
-                    <Link href={InternalLink.selectWorkoutPlan(params.id)}>
-                      Select
-                    </Link>
-                  </>
+                title={
+                  <div class="flex flex-wrap-reverse items-center gap-x-4 gap-y-2">
+                    <h2>{data.name}</h2>
+                    <Show
+                      when={getWorkoutPlanDifficultyName(data.difficultyLevel)}
+                    >
+                      {difficultyName => (
+                        <Badge variant="white">{difficultyName()}</Badge>
+                      )}
+                    </Show>
+                  </div>
                 }
+                description={data.description}
                 variant="white"
-                class="flex-wrap-reverse"
+                class="flex-wrap gap-y-10"
                 icon={
-                  <Show
-                    when={getWorkoutPlanDifficultyName(data.difficultyLevel)}
+                  <Link
+                    href={InternalLink.chooseWorkoutPlan(params.id)}
+                    class={buttonVariants()}
+                    replace
                   >
-                    {difficultyName => (
-                      <Badge variant="black">{difficultyName()}</Badge>
-                    )}
-                  </Show>
+                    Start
+                  </Link>
                 }
               />
               <Index each={data.workouts}>
                 {workout => <WorkoutCard {...workout()} />}
               </Index>
+              <Header
+                class="max-sm:flex-wrap"
+                variant="white"
+                title="Start a workout plan"
+                description="Customize your workout plan and start your workout journey."
+                icon={
+                  <Link
+                    href={InternalLink.chooseWorkoutPlan(params.id)}
+                    class={buttonVariants()}
+                    replace
+                  >
+                    Start
+                  </Link>
+                }
+              />
             </>
           )}
         </QueryBoundary>

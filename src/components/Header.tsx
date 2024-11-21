@@ -15,9 +15,11 @@ export const Header: Component<HeaderSectionProps> = props => (
     class={cn(headerVariants({ variant: props.variant, class: props.class }))}
   >
     <div class="flex flex-col">
-      <h2 class="text-3xl font-bold text-current/90">{props.title}</h2>
+      <span class="text-3xl font-bold text-current/90">{props.title}</span>
       <Show when={props.description}>
-        {description => <p class="text-lg text-current/50">{description()}</p>}
+        {description => (
+          <span class="text-lg text-current/50">{description()}</span>
+        )}
       </Show>
     </div>
     <Show when={props.icon}>{icon => icon()}</Show>

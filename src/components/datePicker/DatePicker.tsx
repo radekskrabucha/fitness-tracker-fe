@@ -7,6 +7,7 @@ import {
   type JSXElement
 } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import { StatusMessage } from '../StatusMessage'
 import {
   DatePicker as DatePickerRoot,
   DatePickerContent,
@@ -36,6 +37,7 @@ type DatePickerProps = Pick<DatePickerRootProps, 'disabled'> & {
   max?: Date
   onValueChange?: (value: string) => void
   label?: JSXElement
+  error?: JSXElement
 }
 
 export const DatePicker: Component<DatePickerProps> = props => {
@@ -45,7 +47,8 @@ export const DatePicker: Component<DatePickerProps> = props => {
     'min',
     'max',
     'onValueChange',
-    'label'
+    'label',
+    'error'
   ])
 
   return (
@@ -77,6 +80,16 @@ export const DatePicker: Component<DatePickerProps> = props => {
         <DatePickerInput placeholder="yyyy/mm/dd" />
         <DatePickerTrigger />
       </DatePickerControl>
+      <Show when={localValues.error}>
+        {error => (
+          <StatusMessage
+            variant="error"
+            class="animate-reveal"
+          >
+            {error()}
+          </StatusMessage>
+        )}
+      </Show>
       <Portal>
         <DatePickerPositioner>
           <DatePickerContent>

@@ -51,4 +51,6 @@ export type WorkoutAttributeDaysOfWeek =
   | 'saturday'
   | 'sunday'
 
-export type WorkoutAttributeIntensityLevel = 'easy' | 'medium' | 'high'
+export const intensityLevelOptions = ['easy', 'medium', 'high'] as const
+export type WorkoutAttributeIntensityLevel =
+  (typeof intensityLevelOptions)[number]

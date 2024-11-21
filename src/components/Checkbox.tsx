@@ -10,7 +10,6 @@ import { cn } from '~/utils/styles'
 import { Icon } from './Icon'
 import { statusMessageVariants } from './StatusMessage'
 
-type A = ComponentProps<typeof KCheckbox>
 type CheckboxFieldProps = Pick<
   ComponentProps<typeof KCheckbox>,
   | 'checked'

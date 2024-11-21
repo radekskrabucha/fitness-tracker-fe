@@ -30,10 +30,25 @@ export const workoutAttributeDaysOfWeekMap: Record<
   saturday: 'Saturday',
   sunday: 'Sunday'
 } as const
+export const workoutAttributeDaysOfWeekAbbreviationMap: Record<
+  WorkoutAttributeDaysOfWeek,
+  string
+> = {
+  monday: 'M',
+  tuesday: 'T',
+  wednesday: 'W',
+  thursday: 'T',
+  friday: 'F',
+  saturday: 'S',
+  sunday: 'S'
+} as const
 
 export const getWorkoutAttributeDaysOfWeekName = (
   daysOfWeek: WorkoutAttributeDaysOfWeek
 ) => workoutAttributeDaysOfWeekMap[daysOfWeek]
+export const getWorkoutAttributeDaysOfWeekAbbreviation = (
+  daysOfWeek: WorkoutAttributeDaysOfWeek
+) => workoutAttributeDaysOfWeekAbbreviationMap[daysOfWeek]
 
 export const workoutAttributeIntensityLevelMap: Record<
   WorkoutAttributeIntensityLevel,

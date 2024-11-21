@@ -1,12 +1,13 @@
 import { createForm } from '@tanstack/solid-form'
 import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
-import { Index, Match, Switch, type Component } from 'solid-js'
+import { Index, Match, Show, Switch, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { Checkbox } from '~/components/Checkbox'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
 import { RadioGroup } from '~/components/RadioGroup'
 import {
+  daysOfWeekOptions,
   intensityLevelOptions,
   type WorkoutAttributeIntensityLevel
 } from '~/models/workoutAttributes'
@@ -17,6 +18,7 @@ import {
   getWorkoutExerciseAttributeName,
   transformFormToRequest
 } from '../utils'
+import { WeekDaySwitch } from './WeekDaySwitch'
 
 type ChooseWorkoutPlanForm = {
   defaultValues: Form
@@ -52,16 +54,49 @@ export const ChooseWorkoutPlanForm: Component<
               <p class="text-sm text-current/50">{workout().description}</p>
             </div>
             <div class="flex flex-col gap-4">
+              <h3 class="text-xl font-bold">Days of week</h3>
+              <div class="flex flex-wrap gap-4">
+                <form.Subscribe
+                  selector={state =>
+                    state.values.workouts[workoutIndex]?.attributes
+                  }
+                >
+                  {field => (
+                    <Show when={field()}>
+                      {attributes => (
+                        <Index each={daysOfWeekOptions}>
+                          {dayOfWeek => (
+                            <WeekDaySwitch
+                              dayOfWeek={dayOfWeek()}
+                              onClick={({ dayOfWeek, index, isSelected }) => {
+                                if (isSelected) {
+                                  return form.removeFieldValue(
+                                    `workouts[${workoutIndex}].attributes`,
+                                    index
+                                  )
+                                }
+
+                                return form.pushFieldValue(
+                                  `workouts[${workoutIndex}].attributes`,
+                                  {
+                                    id: dayOfWeek,
+                                    name: 'days_of_week',
+                                    value: dayOfWeek
+                                  }
+                                )
+                              }}
+                              attributes={attributes()}
+                            />
+                          )}
+                        </Index>
+                      )}
+                    </Show>
+                  )}
+                </form.Subscribe>
+              </div>
               <Index each={workout().attributes}>
                 {(attribute, attributeIndex) => (
                   <Switch>
-                    {/* Handle days of week */}
-                    <Match when={attribute().name === 'days_of_week'}>
-                      <div>
-                        <h4>{attribute().name}</h4>
-                        <p>{attribute().value}</p>
-                      </div>
-                    </Match>
                     <Match when={attribute().name === 'intensity_level'}>
                       <form.Field
                         name={`workouts[${workoutIndex}].attributes[${attributeIndex}].value`}

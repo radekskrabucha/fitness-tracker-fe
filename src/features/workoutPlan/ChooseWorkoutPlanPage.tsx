@@ -25,7 +25,7 @@ export const ChooseWorkoutPlanPage = () => {
             >
               <ChooseWorkoutPlanForm
                 defaultValues={{
-                  workouts: data.workouts
+                  workouts: JSON.parse(JSON.stringify(data.workouts))
                 }}
                 workoutPlanId={data.id}
               />

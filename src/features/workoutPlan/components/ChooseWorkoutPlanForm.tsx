@@ -8,7 +8,8 @@ import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
 import { type Form } from '../form/chooseWorkoutPlanForm'
 import {
   getWorkoutAttributeName,
-  getWorkoutExerciseAttributeName
+  getWorkoutExerciseAttributeName,
+  transformFormToRequest
 } from '../utils'
 
 type ChooseWorkoutPlanForm = {
@@ -21,7 +22,7 @@ export const ChooseWorkoutPlanForm: Component<
 > = props => {
   const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: props.defaultValues,
-    onSubmit: ({ value }) => console.log(value),
+    onSubmit: ({ value }) => console.log(transformFormToRequest(value)),
     validatorAdapter: zodValidator()
   }))
   const mutation = {

@@ -5,8 +5,7 @@ import type {
   WorkoutAttributeNameValuePair
 } from '~/models/workoutAttributes'
 import type { WorkoutExerciseAttributeName } from '~/models/workoutExerciseAttributes'
-import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
-import type { ChooseWorkoutPlanForm } from './form/chooseWorkoutPlanForm'
+import type { Form } from './form/chooseWorkoutPlanForm'
 
 export const workoutAttributeNameMap: Record<WorkoutAttributeName, string> = {
   days_of_week: 'Day of week',
@@ -65,8 +64,8 @@ export const getWorkoutExerciseAttributeName = (
   name: WorkoutExerciseAttributeName
 ) => workoutExerciseAttributeNameMap[name]
 
-export const workoutPlanToChooseWorkoutPlanFormInitialValues = (
-  workoutPlan: WorkoutPlanWithWorkouts
+export const transformFormToRequest = (
+  workoutPlan: Form
 ) =>
   ({
     workouts: workoutPlan.workouts.map(workout => ({
@@ -76,7 +75,7 @@ export const workoutPlanToChooseWorkoutPlanFormInitialValues = (
           ({
             name: attribute.name,
             value: attribute.value
-          }) as WorkoutAttributeNameValuePair
+          })
       ),
       exercises: workout.exercises.map(exercise => ({
         id: exercise.id,
@@ -86,4 +85,4 @@ export const workoutPlanToChooseWorkoutPlanFormInitialValues = (
         }))
       }))
     }))
-  }) satisfies ChooseWorkoutPlanForm
+  })

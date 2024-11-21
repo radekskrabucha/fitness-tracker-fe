@@ -87,7 +87,7 @@ export const transformFormToRequest = (workoutPlan: Form) => ({
       value: attribute.value
     })) as Array<WorkoutAttributeNameValuePair>,
     exercises: workout.exercises.map(exercise => ({
-      id: exercise.id,
+      id: exercise.workoutExerciseId,
       attributes: exercise.attributes.map(attribute => ({
         name: attribute.name,
         value: attribute.value

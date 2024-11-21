@@ -2,6 +2,7 @@ import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation } from '@tanstack/solid-query'
 import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
+import { FetchError } from 'ofetch'
 import { Index, Match, Show, Switch, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { Checkbox } from '~/components/Checkbox'
@@ -36,11 +37,12 @@ export const ChooseWorkoutPlanForm: Component<
   const navigate = useNavigate()
   const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: props.defaultValues,
-    onSubmit: ({ value }) =>
+    onSubmit: ({ value }) => {
       chooseWorkoutPlanMutation.mutate({
         workoutPlanId: props.workoutPlanId,
         ...transformFormToRequest(value)
-      }),
+      })
+    },
     validatorAdapter: zodValidator()
   }))
   const chooseWorkoutPlanMutation = createMutation(() => ({
@@ -56,7 +58,15 @@ export const ChooseWorkoutPlanForm: Component<
       })
       navigate(InternalLink.profile)
     },
-    onError: () => {
+    onError: error => {
+      if (error instanceof FetchError && error.status === 401) {
+        return toast.show({
+          title: 'Oops! You have to sign in first 🤓',
+          description: 'Please sign in to continue.',
+          variant: 'error',
+          priority: 'high'
+        })
+      }
       return toast.show({
         title: 'Oops! Something went wrong 🤓',
         description: 'Please try again later.',

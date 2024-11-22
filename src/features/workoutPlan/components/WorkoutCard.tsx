@@ -1,8 +1,8 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
+import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
-import type { GetWorkoutPlanResponse } from '../types/response'
 
 type WorkoutCardProps = GetWorkoutPlanResponse['workouts'][number]
 

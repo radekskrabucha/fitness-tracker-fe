@@ -1,8 +1,4 @@
-import type {
-  Workout,
-  WorkoutExtras,
-  WorkoutWithAttributesAndExercises
-} from './workout'
+import type { Workout, WorkoutWithAttributesAndExercises } from './workout'
 
 export const workoutPlanDifficultyLevel = [
   'beginner',

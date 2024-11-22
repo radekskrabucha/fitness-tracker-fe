@@ -1,3 +1,3 @@
-import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import type { WorkoutPlanWithWorkoutsWithDetails } from '~/models/workoutPlan'
 
-export type GetWorkoutPlanResponse = WorkoutPlanWithWorkouts
+export type GetWorkoutPlanResponse = WorkoutPlanWithWorkoutsWithDetails

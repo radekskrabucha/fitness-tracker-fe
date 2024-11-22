@@ -1,10 +1,10 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
-import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
 import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
+import type { GetWorkoutPlanResponse } from '../types/response'
 
-type WorkoutCardProps = WorkoutPlanWithWorkouts['workouts'][number]
+type WorkoutCardProps = GetWorkoutPlanResponse['workouts'][number]
 
 export const WorkoutCard: Component<WorkoutCardProps> = props => (
   <Card

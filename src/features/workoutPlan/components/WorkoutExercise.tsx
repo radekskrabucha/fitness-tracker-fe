@@ -1,10 +1,10 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
-import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutExerciseAttributeTile } from './WorkoutExerciseAttributeTile'
 
 type WorkoutExerciseProps =
-  WorkoutPlanWithWorkouts['workouts'][number]['exercises'][number] & {
+  GetWorkoutPlanResponse['workouts'][number]['exercises'][number] & {
     order: number
   }
 

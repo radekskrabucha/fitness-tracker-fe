@@ -1,20 +1,13 @@
-import { useParams } from '@solidjs/router'
-import { Header } from '~/components/Header'
-
-export type UserWorkoutPlanPageParams = {
-  id: string
-}
+import { ClientOnly } from '~/components/ClientOnly'
+import { WorkoutPlan } from './components/WorkoutPlan'
 
 export const UserWorkoutPlanPage = () => {
-  const params = useParams<UserWorkoutPlanPageParams>()
-
   return (
     <>
       <section class="layout-section gap-12">
-        <Header
-          title="Your Workout Plan"
-          description={params.id}
-        />
+        <ClientOnly>
+          <WorkoutPlan />
+        </ClientOnly>
       </section>
     </>
   )

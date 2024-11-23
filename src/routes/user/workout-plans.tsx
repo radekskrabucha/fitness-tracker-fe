@@ -1,5 +1,5 @@
 import { SEOTitle } from '~/components/Seo'
-import { UserWorkoutPlansPage } from '~/features/userWorkoutPlans/UserWorkoutPlansPage'
+import { UserWorkoutPlansPage } from '~/features/userWorkoutPlan/UserWorkoutPlansPage'
 
 const UserWorkoutPlans = () => (
   <>

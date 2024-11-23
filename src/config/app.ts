@@ -1,5 +1,6 @@
 export const InternalLink = {
   home: '/',
+  start: '/start',
   signIn: '/sign-in',
   signUp: '/sign-up',
   profile: '/profile',
@@ -18,6 +19,7 @@ export const InternalLink = {
 } as const
 
 export const RESTRICTED_ROUTES = [
+  InternalLink.start,
   InternalLink.profile,
   InternalLink.editProfile,
   InternalLink.changePassword,
@@ -26,7 +28,11 @@ export const RESTRICTED_ROUTES = [
   InternalLink.deleteProfile,
   InternalLink.deleteFitnessProfile
 ]
-export const AUTH_RESTRICTED_ROUTES = [InternalLink.signIn, InternalLink.signUp]
+export const AUTH_RESTRICTED_ROUTES = [
+  InternalLink.signIn,
+  InternalLink.signUp,
+  InternalLink.home
+]
 
 export const ownerEmail = 'rskrabucha13@gmail.com'
 

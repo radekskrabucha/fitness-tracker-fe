@@ -17,7 +17,7 @@ export default createMiddleware({
       const isAuthProtectedRoute = isAuthRestrictedRoute(path)
 
       if (isAuthProtectedRoute && authCookie) {
-        return redirect(InternalLink.home)
+        return redirect(InternalLink.start)
       }
     }
   ]

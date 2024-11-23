@@ -1,12 +1,18 @@
 import { createQuery } from '@tanstack/solid-query'
-import { Index } from 'solid-js'
+import { Index, type Component } from 'solid-js'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { WorkoutPlanCard } from '~/features/workoutPlans/components/WorkoutPlanCard'
 import { getUserWorkoutPlansQueryOptions } from '../actions'
 
-export const UserWorkoutPlans = () => {
-  const getUserWorkoutPlansQuery = createQuery(getUserWorkoutPlansQueryOptions)
+type UserWorkoutPlansProps = {
+  userId: string
+}
+
+export const UserWorkoutPlans: Component<UserWorkoutPlansProps> = props => {
+  const getUserWorkoutPlansQuery = createQuery(() =>
+    getUserWorkoutPlansQueryOptions(props.userId)
+  )
 
   return (
     <QueryBoundary query={getUserWorkoutPlansQuery}>

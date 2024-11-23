@@ -7,7 +7,7 @@ import { LoaderCircle } from './LoaderCircle'
 export interface QueryBoundaryProps<T = unknown, E extends Error = Error> {
   query: CreateQueryResult<T, E | unknown>
   loadingFallback?: JSXElement
-  notFoundFallback?: JSXElement
+  noDataFallback?: JSXElement
   errorFallback?: (errorFallbackProps: ErrorFallbackProps<E>) => JSXElement
   children: (data: Exclude<T, null | false | undefined>) => JSXElement
 }
@@ -52,10 +52,10 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
                 props.query.data.length === 0)
             }
           >
-            {props.notFoundFallback ? (
-              props.notFoundFallback
+            {props.noDataFallback ? (
+              props.noDataFallback
             ) : (
-              <DefaultNotFoundFallback />
+              <DefaultNoDataFallback />
             )}
           </Match>
 
@@ -111,7 +111,7 @@ const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
   </div>
 )
 
-const DefaultNotFoundFallback: Component = () => (
+const DefaultNoDataFallback: Component = () => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
     <h2 class="text-3xl font-bold">Upsss... not found 🤔</h2>
     <p class="text-white/50">

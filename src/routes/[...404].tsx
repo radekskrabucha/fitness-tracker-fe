@@ -11,7 +11,7 @@ export default function NotFound() {
       <SEOTitle title="Whoops! Page Not Found" />
       <HttpStatusCode code={404} />
       <section class="layout-section flex-1 items-center text-center">
-        <Card class="gap-10">
+        <Card class="items-center gap-10">
           <h2 class="text-3xl font-bold">
             Seems like you've stumbled upon a missing piece{' '}
           </h2>

@@ -4,18 +4,19 @@ import { buttonVariants } from '~/components/Button'
 import { cardVariants } from '~/components/Card'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
-import { InternalLink } from '~/config/app'
 import type { Workout } from '~/models/workout'
 import type { GetWorkoutPlansResponse } from '../types/response'
 import { getWorkoutPlanDifficultyName } from '../utils'
 
-type WorkoutPlanCardProps = GetWorkoutPlansResponse[number]
+type WorkoutPlanCardProps = {
+  href: (id: string) => string
+} & GetWorkoutPlansResponse[number]
 
 const WORKOUTS_LIMIT = 2
 
 export const WorkoutPlanCard: Component<WorkoutPlanCardProps> = props => (
   <Link
-    href={InternalLink.workoutPlan(props.id)}
+    href={props.href(props.id)}
     class={cardVariants({
       class: 'overflow-hidden !p-0'
     })}

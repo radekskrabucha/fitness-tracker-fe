@@ -30,6 +30,8 @@ export const EditFitnessProfileMenu: Component<
       <PopoverContent>
         <Link
           href={InternalLink.editFitnessProfile}
+          replace
+          noScroll
           class={buttonVariants({
             variant: 'link',
             class: 'justify-normal self-stretch'
@@ -43,6 +45,8 @@ export const EditFitnessProfileMenu: Component<
         </Link>
         <Link
           href={InternalLink.deleteFitnessProfile}
+          replace
+          noScroll
           class={buttonVariants({
             variant: 'link',
             class: 'text-error justify-normal self-stretch'

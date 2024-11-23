@@ -56,7 +56,7 @@ export const ChooseWorkoutPlanForm: Component<
         variant: 'success',
         priority: 'high'
       })
-      navigate(InternalLink.profile)
+      navigate(InternalLink.userWorkoutPlans)
     },
     onError: error => {
       if (error instanceof FetchError && error.status === 401) {

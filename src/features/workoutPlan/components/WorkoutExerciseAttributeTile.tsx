@@ -1,8 +1,12 @@
 import { Match, Switch, type Component } from 'solid-js'
 import { Icon } from '~/components/Icon'
 import type { WorkoutExerciseAttribute } from '~/models/workoutExerciseAttributes'
+import type { GetWorkoutPlanResponse } from '../types/response'
 import { getWorkoutExerciseAttributeName } from '../utils'
 import { AttributeBadge } from './AttributeBadge'
+
+type WorkoutExerciseAttributeTile =
+  GetWorkoutPlanResponse['workouts'][number]['exercises'][number]['attributes'][number]
 
 export const WorkoutExerciseAttributeTile: Component<
   WorkoutExerciseAttribute

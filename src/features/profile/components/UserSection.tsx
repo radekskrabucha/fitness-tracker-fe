@@ -48,8 +48,7 @@ export const UserSection: Component<UserSectionProps> = props => (
       </Card>
       <div class="flex flex-1 flex-col gap-6 max-md:col-span-3 max-md:flex-row max-md:flex-wrap md:row-span-3">
         <Link
-          href=""
-          disabled
+          href={InternalLink.userWorkoutPlans}
           class={cardVariants({
             class:
               'flex-1 items-center justify-center gap-3 !p-4 text-center aria-[disabled=true]:cursor-not-allowed'

@@ -1,10 +1,12 @@
-import { Index, Show, type Component } from 'solid-js'
+import { Index, Show, type JSXElement, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
-import type { WorkoutPlanWithWorkouts } from '~/models/workoutPlan'
+import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
 
-type WorkoutCardProps = WorkoutPlanWithWorkouts['workouts'][number]
+type WorkoutCardProps = {
+  children?: (id: string) => JSXElement
+} & GetWorkoutPlanResponse['workouts'][number]
 
 export const WorkoutCard: Component<WorkoutCardProps> = props => (
   <Card
@@ -32,5 +34,6 @@ export const WorkoutCard: Component<WorkoutCardProps> = props => (
         )}
       </Index>
     </div>
+    <Show when={props.children}>{children => children()(props.id)}</Show>
   </Card>
 )

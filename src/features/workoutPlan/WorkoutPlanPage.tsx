@@ -46,8 +46,9 @@ export const WorkoutPlanPage: FlowComponent = props => {
                 icon={
                   <Link
                     href={InternalLink.chooseWorkoutPlan(params.id)}
-                    class={buttonVariants()}
                     replace
+                    noScroll
+                    class={buttonVariants()}
                   >
                     Start
                   </Link>
@@ -64,8 +65,9 @@ export const WorkoutPlanPage: FlowComponent = props => {
                 icon={
                   <Link
                     href={InternalLink.chooseWorkoutPlan(params.id)}
-                    class={buttonVariants()}
                     replace
+                    noScroll
+                    class={buttonVariants()}
                   >
                     Start
                   </Link>

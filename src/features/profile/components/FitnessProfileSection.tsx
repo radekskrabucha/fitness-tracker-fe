@@ -42,7 +42,7 @@ export const FitnessProfileSection: Component<
         <QueryBoundary
           query={getUserFitnessProfileQuery}
           errorFallback={() => <NotFoundProfile />}
-          notFoundFallback={<NotFoundProfile />}
+          noDataFallback={<NotFoundProfile />}
         >
           {profile => (
             <div class="flex flex-row flex-wrap gap-10">

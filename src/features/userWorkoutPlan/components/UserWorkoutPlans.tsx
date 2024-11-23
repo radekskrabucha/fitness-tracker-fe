@@ -2,20 +2,20 @@ import { createQuery } from '@tanstack/solid-query'
 import { Index } from 'solid-js'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
-import { getWorkoutPlansQueryOptions } from '../actions'
-import { WorkoutPlanCard } from './WorkoutPlanCard'
+import { WorkoutPlanCard } from '~/features/workoutPlans/components/WorkoutPlanCard'
+import { getUserWorkoutPlansQueryOptions } from '../actions'
 
-export const WorkoutPlans = () => {
-  const getWorkoutPlansQuery = createQuery(getWorkoutPlansQueryOptions)
+export const UserWorkoutPlans = () => {
+  const getUserWorkoutPlansQuery = createQuery(getUserWorkoutPlansQueryOptions)
 
   return (
-    <QueryBoundary query={getWorkoutPlansQuery}>
+    <QueryBoundary query={getUserWorkoutPlansQuery}>
       {data => (
         <Index each={data}>
           {workoutPlan => (
             <WorkoutPlanCard
               {...workoutPlan()}
-              href={InternalLink.workoutPlan}
+              href={InternalLink.userWorkoutPlan}
             />
           )}
         </Index>

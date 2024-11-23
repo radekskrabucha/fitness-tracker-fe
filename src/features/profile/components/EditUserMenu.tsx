@@ -22,6 +22,8 @@ export const EditUserMenu = () => (
       <PopoverContent>
         <Link
           href={InternalLink.editProfile}
+          replace
+          noScroll
           class={buttonVariants({
             variant: 'link',
             class: 'justify-normal self-stretch'
@@ -35,6 +37,8 @@ export const EditUserMenu = () => (
         </Link>
         <Link
           href={InternalLink.changePassword}
+          replace
+          noScroll
           class={buttonVariants({
             variant: 'link',
             class: 'justify-normal self-stretch'
@@ -48,6 +52,8 @@ export const EditUserMenu = () => (
         </Link>
         <Link
           href={InternalLink.deleteProfile}
+          replace
+          noScroll
           class={buttonVariants({
             variant: 'link',
             class: 'text-error justify-normal self-stretch'

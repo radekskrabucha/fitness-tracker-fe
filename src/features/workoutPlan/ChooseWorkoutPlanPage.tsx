@@ -14,7 +14,7 @@ export const ChooseWorkoutPlanPage = () => {
   )
 
   return (
-    <section class="layout-section gap-12">
+    <section>
       <QueryBoundary query={getWorkoutPlanQuery}>
         {data => (
           <>

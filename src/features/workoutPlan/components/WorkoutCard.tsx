@@ -1,10 +1,4 @@
-import {
-  Index,
-  Show,
-  type JSXElement,
-  type Component,
-  children
-} from 'solid-js'
+import { Index, Show, type JSXElement, type Component } from 'solid-js'
 import { Card } from '~/components/Card'
 import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutAttributes } from './WorkoutAttributes'

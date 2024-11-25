@@ -1,6 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
-import { createMutation } from '@tanstack/solid-query'
+import { createMutation, useQueryClient } from '@tanstack/solid-query'
 import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { FetchError } from 'ofetch'
 import { Index, Match, Show, Switch, type Component } from 'solid-js'
@@ -11,6 +11,8 @@ import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
 import { RadioGroup } from '~/components/RadioGroup'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
+import { getSessionQueryOptions } from '~/features/signIn/actions'
+import { getUserWorkoutPlansQueryOptions } from '~/features/userWorkoutPlan/actions'
 import {
   daysOfWeekOptions,
   intensityLevelOptions,
@@ -35,6 +37,7 @@ export const ChooseWorkoutPlanForm: Component<
   ChooseWorkoutPlanForm
 > = props => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const form = createForm<Form, ZodValidator>(() => ({
     defaultValues: props.defaultValues,
     onSubmit: ({ value }) => {
@@ -48,13 +51,21 @@ export const ChooseWorkoutPlanForm: Component<
   const chooseWorkoutPlanMutation = createMutation(() => ({
     mutationFn: chooseWorkoutPlan,
     mutationKey: ['chooseWorkoutPlan'],
-    onSuccess: () => {
+    onSuccess: async () => {
       form.reset()
       toast.show({
         title: "You've chosen a workout plan!",
         description: 'Your workout plan has been chosen successfully.',
         variant: 'success',
         priority: 'high'
+      })
+      const userId =
+        queryClient.getQueryData(getSessionQueryOptions().queryKey)?.user.id ||
+        ''
+      await queryClient.invalidateQueries({
+        queryKey: getUserWorkoutPlansQueryOptions(userId).queryKey,
+        exact: true,
+        refetchType: 'all'
       })
       navigate(InternalLink.userWorkoutPlans)
     },

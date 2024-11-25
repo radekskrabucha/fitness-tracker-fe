@@ -1,17 +1,23 @@
 import { queryOptions } from '@tanstack/solid-query'
 import { fetchApiClient } from '~/lib/fetch'
+import type { PaginationParams } from '~/types/pagination'
 import type {
   GetUserWorkoutPlanResponse,
   GetUserWorkoutPlansResponse
 } from './types/response'
 
-export const getUserWorkoutPlans = () =>
-  fetchApiClient<GetUserWorkoutPlansResponse>('/user/workout-plans')
+export const getUserWorkoutPlans = (paginationParams: PaginationParams) =>
+  fetchApiClient<GetUserWorkoutPlansResponse>('/user/workout-plans', {
+    query: paginationParams
+  })
 
-export const getUserWorkoutPlansQueryOptions = (userId: string) =>
+export const getUserWorkoutPlansQueryOptions = (
+  userId: string,
+  paginationParams?: PaginationParams
+) =>
   queryOptions({
-    queryKey: ['getUserWorkoutPlans', userId],
-    queryFn: () => getUserWorkoutPlans(),
+    queryKey: ['getUserWorkoutPlans', userId, paginationParams],
+    queryFn: () => getUserWorkoutPlans(paginationParams),
     deferStream: true
   })
 

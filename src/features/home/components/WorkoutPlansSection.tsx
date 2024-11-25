@@ -16,7 +16,9 @@ export const WorkoutPlansSection: Component<
   WorkoutPlansSectionProps
 > = props => {
   const getUserWorkoutPlansQuery = createQuery(() =>
-    getUserWorkoutPlansQueryOptions(props.userId)
+    getUserWorkoutPlansQueryOptions(props.userId, {
+      limit: 2
+    })
   )
 
   return (
@@ -36,8 +38,8 @@ export const WorkoutPlansSection: Component<
       />
       <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
         <QueryBoundary query={getUserWorkoutPlansQuery}>
-          {data => (
-            <Index each={data}>
+          {workoutPlans => (
+            <Index each={workoutPlans.data}>
               {workoutPlan => (
                 <WorkoutPlanCard
                   {...workoutPlan()}

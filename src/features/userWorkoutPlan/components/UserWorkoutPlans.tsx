@@ -22,9 +22,9 @@ export const UserWorkoutPlans: Component<UserWorkoutPlansProps> = props => {
       query={getUserWorkoutPlansQuery}
       noDataFallback={<NoWorkoutPlans />}
     >
-      {data => (
+      {workoutPlans => (
         <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
-          <Index each={data}>
+          <Index each={workoutPlans.data}>
             {workoutPlan => (
               <WorkoutPlanCard
                 {...workoutPlan()}

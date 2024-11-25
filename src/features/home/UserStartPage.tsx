@@ -1,19 +1,16 @@
 import type { Component } from 'solid-js'
-import { Header } from '~/components/Header'
 import type { User } from '~/models/user'
+import { TodayWorkoutsSection } from './components/TodayWorkoutsSection'
 import { WorkoutPlansSection } from './components/WorkoutPlansSection'
 
-type UserStartPageProps = User
+type UserStartPageProps = Pick<User, 'id' | 'name'>
 
 export const UserStartPage: Component<UserStartPageProps> = props => (
   <>
-    <section class="layout-section">
-      <Header
-        title={`Welcome back, ${props.name}!`}
-        description="It's nice to see you again! Check the plan for today."
-        variant="black"
-      />
-    </section>
+    <TodayWorkoutsSection
+      userId={props.id}
+      userName={props.name}
+    />
     <WorkoutPlansSection userId={props.id} />
   </>
 )

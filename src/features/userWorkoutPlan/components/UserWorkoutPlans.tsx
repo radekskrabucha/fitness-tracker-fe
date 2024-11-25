@@ -2,6 +2,7 @@ import { createQuery } from '@tanstack/solid-query'
 import { Index, type Component } from 'solid-js'
 import { buttonVariants } from '~/components/Button'
 import { Card } from '~/components/Card'
+import { Header } from '~/components/Header'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
@@ -23,16 +24,33 @@ export const UserWorkoutPlans: Component<UserWorkoutPlansProps> = props => {
       noDataFallback={<NoWorkoutPlans />}
     >
       {workoutPlans => (
-        <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
-          <Index each={workoutPlans.data}>
-            {workoutPlan => (
-              <WorkoutPlanCard
-                {...workoutPlan()}
-                href={InternalLink.userWorkoutPlan}
-              />
-            )}
-          </Index>
-        </div>
+        <>
+          <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
+            <Index each={workoutPlans.data}>
+              {workoutPlan => (
+                <WorkoutPlanCard
+                  {...workoutPlan()}
+                  href={InternalLink.userWorkoutPlan}
+                />
+              )}
+            </Index>
+          </div>
+
+          <Header
+            variant="black"
+            title="Want to start a new workout plan?"
+            description="Check out all available workout plans."
+            icon={
+              <Link
+                href={InternalLink.workoutPlans}
+                class={buttonVariants()}
+              >
+                Browse all
+              </Link>
+            }
+            class="flex-wrap"
+          />
+        </>
       )}
     </QueryBoundary>
   )

@@ -9,7 +9,7 @@ export const UserStartPage: Component<UserStartPageProps> = props => (
   <>
     <section class="layout-section">
       <Header
-        title={`Welcome back ${props.name}!`}
+        title={`Welcome back, ${props.name}!`}
         description="It's nice to see you again! Check the plan for today."
         variant="black"
       />

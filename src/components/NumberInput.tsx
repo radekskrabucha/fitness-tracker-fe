@@ -55,7 +55,7 @@ export const NumberInput: Component<NumberInputProps> = props => {
       <NumberField.Input
         {...inputProps}
         placeholder=" "
-        class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
+        class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 transition-colors outline-none focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
       />
       <Show when={localProps.label}>
         {label => (

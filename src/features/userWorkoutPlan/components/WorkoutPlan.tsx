@@ -1,6 +1,6 @@
 import { useParams } from '@solidjs/router'
 import { createQuery } from '@tanstack/solid-query'
-import { Index, Show } from 'solid-js'
+import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
 import { buttonVariants } from '~/components/Button'
 import { Header } from '~/components/Header'
@@ -15,10 +15,14 @@ export type UserWorkoutPlanPageParams = {
   id: string
 }
 
-export const WorkoutPlan = () => {
+type WorkoutPlanProps = {
+  userId: string
+}
+
+export const WorkoutPlan: Component<WorkoutPlanProps> = props => {
   const params = useParams<UserWorkoutPlanPageParams>()
   const getUserWorkoutPlanQuery = createQuery(() =>
-    getUserWorkoutPlanQueryOptions(params.id)
+    getUserWorkoutPlanQueryOptions(params.id, props.userId)
   )
 
   return (

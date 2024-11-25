@@ -1,13 +1,5 @@
-export type User = {
-  id: string
-  email: string
-  emailVerified: boolean
-  name: string
-  createdAt: Date
-  updatedAt: Date
-  image?: string | undefined
-  banned: boolean | undefined
-  role?: string | undefined
-  banReason?: string | undefined
-  banExpires?: undefined
-}
+import type { authClient } from '~/lib/auth'
+
+export type User = NonNullable<
+  Awaited<ReturnType<typeof authClient.getSession>>
+>['user']

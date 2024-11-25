@@ -35,6 +35,7 @@ export const WorkoutPlansSection: Component<
           </Link>
         }
         class="flex-wrap"
+        variant="black"
       />
       <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
         <QueryBoundary query={getUserWorkoutPlansQuery}>

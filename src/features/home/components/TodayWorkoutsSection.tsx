@@ -1,7 +1,11 @@
 import { createQuery } from '@tanstack/solid-query'
 import { Index, type Component } from 'solid-js'
+import { buttonVariants } from '~/components/Button'
+import { Card } from '~/components/Card'
 import { Header } from '~/components/Header'
+import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { InternalLink } from '~/config/app'
 import { getUserWorkoutPlansQueryOptions } from '../actions'
 import { TodayWorkoutTile } from './TodayWorkoutTile'
 
@@ -26,7 +30,10 @@ export const TodayWorkoutsSection: Component<
       />
 
       <div class="flex flex-col gap-10">
-        <QueryBoundary query={getUserWorkoutPlansQuery}>
+        <QueryBoundary
+          query={getUserWorkoutPlansQuery}
+          noDataFallback={<NoWorkoutsYet />}
+        >
           {data => (
             <Index each={data}>
               {workout => <TodayWorkoutTile {...workout()} />}
@@ -37,3 +44,25 @@ export const TodayWorkoutsSection: Component<
     </section>
   )
 }
+
+const NoWorkoutsYet = () => (
+  <Card class="gap-10">
+    <div class="flex flex-col gap-2">
+      <h3 class="text-2xl font-bold text-current/80">
+        You don't have any workouts planned for today.
+      </h3>
+      <p class="text-lg text-current/50">
+        Today is your day off. Relax, take a nap, or just enjoy the sunshine.
+      </p>
+    </div>
+    <Link
+      href={InternalLink.userWorkoutPlans}
+      class={buttonVariants({
+        variant: 'primary',
+        class: 'w-full max-w-52 self-center'
+      })}
+    >
+      See my workout plans
+    </Link>
+  </Card>
+)

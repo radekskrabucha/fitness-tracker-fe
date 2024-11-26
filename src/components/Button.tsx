@@ -40,7 +40,7 @@ export const Button: Component<ButtonProps> = props => {
 }
 
 export const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center gap-1 rounded-md text-sm font-medium capitalize ring-offset-white transition-colors focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed',
+  'inline-flex cursor-pointer items-center justify-center gap-1 rounded-md text-center text-sm font-medium capitalize ring-offset-white transition-colors focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed',
   {
     variants: {
       variant: {

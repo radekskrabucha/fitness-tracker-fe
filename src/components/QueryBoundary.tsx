@@ -4,10 +4,11 @@ import { ErrorBoundary, Match, Show, Suspense, Switch } from 'solid-js'
 import { Button } from './Button'
 import { LoaderCircle } from './LoaderCircle'
 
-export interface QueryBoundaryProps<T = unknown, E extends Error = Error> {
+export type QueryBoundaryProps<T = unknown, E extends Error = Error> = {
   query: CreateQueryResult<T, E | unknown>
   loadingFallback?: JSXElement
   noDataFallback?: JSXElement
+  isDataEmpty?: (data: T | undefined) => boolean
   errorFallback?: (errorFallbackProps: ErrorFallbackProps<E>) => JSXElement
   children: (data: Exclude<T, null | false | undefined>) => JSXElement
 }
@@ -46,6 +47,9 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
         <Switch>
           <Match
             when={
+              (!props.query.isFetching &&
+                props.isDataEmpty &&
+                props.isDataEmpty(props.query.data)) ||
               (!props.query.isFetching && !props.query.data) ||
               (!props.query.isFetching &&
                 Array.isArray(props.query.data) &&

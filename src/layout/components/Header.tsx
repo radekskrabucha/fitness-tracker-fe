@@ -11,7 +11,7 @@ export const Header: Component = () => (
           class="text-4xl"
           href={InternalLink.home}
         >
-          🏋️‍♀️
+          🍑
         </Link>
         <HeaderMenu />
       </nav>

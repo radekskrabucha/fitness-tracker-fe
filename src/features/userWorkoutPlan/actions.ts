@@ -1,6 +1,7 @@
 import { queryOptions } from '@tanstack/solid-query'
 import { fetchApiClient } from '~/lib/fetch'
 import type { PaginationParams } from '~/types/pagination'
+import type { AddWorkoutSessionRequest } from './types/request'
 import type {
   GetUserWorkoutPlanResponse,
   GetUserWorkoutPlansResponse
@@ -29,4 +30,10 @@ export const getUserWorkoutPlanQueryOptions = (id: string, userId: string) =>
     queryKey: ['getUserWorkoutPlan', id, userId],
     queryFn: () => getUserWorkoutPlan(id),
     deferStream: true
+  })
+
+export const addWorkoutSession = (req: AddWorkoutSessionRequest) =>
+  fetchApiClient<undefined>('/user/workout-sessions', {
+    method: 'POST',
+    body: req
   })

@@ -2,14 +2,13 @@ import { useParams } from '@solidjs/router'
 import { createQuery } from '@tanstack/solid-query'
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
-import { buttonVariants } from '~/components/Button'
 import { Header } from '~/components/Header'
-import { Link } from '~/components/Link'
+import { Modal, ModalTrigger } from '~/components/Modal'
 import { QueryBoundary } from '~/components/QueryBoundary'
-import { InternalLink } from '~/config/app'
 import { WorkoutCard } from '~/features/workoutPlan/components/WorkoutCard'
 import { getWorkoutPlanDifficultyName } from '~/features/workoutPlans/utils'
 import { getUserWorkoutPlanQueryOptions } from '../actions'
+import { AddWorkoutSessionModalContent } from './AddWorkoutSessionModalContent'
 
 export type UserWorkoutPlanPageParams = {
   id: string
@@ -45,14 +44,19 @@ export const WorkoutPlan: Component<WorkoutPlanProps> = props => {
           <Index each={data.workouts}>
             {workout => (
               <WorkoutCard {...workout()}>
-                {id => (
-                  <Link
-                    href={InternalLink.userWorkoutPlan(id)}
-                    class={buttonVariants()}
+                <div class="flex flex-1 flex-col p-8">
+                  <Modal
+                    title="Add workout session"
+                    description="Add details below about your workout session."
+                    modal
+                    trigger={<ModalTrigger>Add workout session</ModalTrigger>}
                   >
-                    Add workout session
-                  </Link>
-                )}
+                    <AddWorkoutSessionModalContent
+                      {...workout()}
+                      workoutPlanId={params.id}
+                    />
+                  </Modal>
+                </div>
               </WorkoutCard>
             )}
           </Index>

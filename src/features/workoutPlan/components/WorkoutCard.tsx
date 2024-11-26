@@ -5,7 +5,7 @@ import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
 
 type WorkoutCardProps = {
-  children?: (id: string) => JSXElement
+  children?: JSXElement
 } & GetWorkoutPlanResponse['workouts'][number]
 
 export const WorkoutCard: Component<WorkoutCardProps> = props => (
@@ -34,6 +34,6 @@ export const WorkoutCard: Component<WorkoutCardProps> = props => (
         )}
       </Index>
     </div>
-    <Show when={props.children}>{children => children()(props.id)}</Show>
+    <Show when={props.children}>{props.children}</Show>
   </Card>
 )

@@ -1,14 +1,12 @@
-import { Index, Show, type JSXElement, type Component } from 'solid-js'
+import { Index, Show, type ParentComponent } from 'solid-js'
 import { Card } from '~/components/Card'
 import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutAttributes } from './WorkoutAttributes'
 import { WorkoutExercise } from './WorkoutExercise'
 
-type WorkoutCardProps = {
-  children?: JSXElement
-} & GetWorkoutPlanResponse['workouts'][number]
+type WorkoutCardProps = GetWorkoutPlanResponse['workouts'][number]
 
-export const WorkoutCard: Component<WorkoutCardProps> = props => (
+export const WorkoutCard: ParentComponent<WorkoutCardProps> = props => (
   <Card
     variant="black"
     class="gap-4 p-0"

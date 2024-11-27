@@ -1,5 +1,7 @@
 import type { Component } from 'solid-js'
 import type { GetWorkoutPlanResponse } from '~/features/workoutPlan/types/response'
+import { workoutToFormDefaultValues } from '../utils'
+import { AddWorkoutSessionForm } from './AddWorkoutSessionForm'
 
 type WorkoutCardProps = {
   workoutPlanId: string
@@ -13,5 +15,10 @@ export const AddWorkoutSessionModalContent: Component<
       <h2 class="text-2xl font-bold">{props.name}</h2>
       <p class="text-sm text-current/50">{props.description}</p>
     </div>
+    <AddWorkoutSessionForm
+      workoutId={props.id}
+      workoutPlanId={props.workoutPlanId}
+      defaultValues={workoutToFormDefaultValues(props.exercises)}
+    />
   </div>
 )

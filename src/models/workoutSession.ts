@@ -12,7 +12,10 @@ export type WorkoutSession<
   duration: number
 } & T
 
-export type WorkoutSessionWithExtras = WorkoutSession<WorkoutSessionExtras>
+export type WorkoutSessionWithDetails =
+  WorkoutSession<WorkoutSessionExtraDetails>
+export type WorkoutSessionWithOverview =
+  WorkoutSession<WorkoutSessionExtraOverview>
 
 export type WorkoutSessionExtraExercises = {
   exercises: Array<WorkoutSessionExerciseWithAttributes>
@@ -24,6 +27,11 @@ export type WorkoutSessionExtraWorkoutPlan = {
   workoutPlan: WorkoutPlan
 }
 
-export type WorkoutSessionExtras = WorkoutSessionExtraExercises &
-  WorkoutSessionExtraWorkout &
+export type WorkoutSessionExtraOverview = WorkoutSessionExtraWorkout &
   WorkoutSessionExtraWorkoutPlan
+export type WorkoutSessionExtraDetails = WorkoutSessionExtraOverview &
+  WorkoutSessionExtraExercises
+
+export type WorkoutSessionExtras =
+  | WorkoutSessionExtraDetails
+  | WorkoutSessionExtraOverview

@@ -1,3 +1,4 @@
+import { getNow, parseToDatePickerFormat } from '~/utils/date'
 import type { GetWorkoutPlanResponse } from '../workoutPlan/types/response'
 import type { Form } from './form/addWorkoutSessionForm'
 import type { AddWorkoutSessionRequest } from './types/request'
@@ -33,7 +34,7 @@ export const transformFormToRequest = ({
 export const workoutToFormDefaultValues = (
   exercises: GetWorkoutPlanResponse['workouts'][number]['exercises']
 ): Form => ({
-  date: '',
+  date: parseToDatePickerFormat(getNow()),
   duration: 60,
   notes: '',
   exercises: exercises.map(exercise => ({

@@ -1,3 +1,4 @@
+import { parseDate } from '@ark-ui/solid/date-picker'
 import {
   differenceInYears,
   lightFormat,
@@ -15,3 +16,6 @@ export const getFormattedDate = (date: DateArg<Date>) =>
 
 export const getInitialFormDate = (date: string) =>
   parseJSON(date) as unknown as string
+
+export const parseToDatePickerFormat = (date: Date) =>
+  parseDate(date).toString()

@@ -1,3 +1,5 @@
+import type { Workout } from './workout'
+import type { WorkoutPlan } from './workoutPlan'
 import type { WorkoutSessionExerciseWithAttributes } from './workoutSessionExercise'
 
 export type WorkoutSession<
@@ -10,8 +12,18 @@ export type WorkoutSession<
   duration: number
 } & T
 
+export type WorkoutSessionWithExtras = WorkoutSession<WorkoutSessionExtras>
+
 export type WorkoutSessionExtraExercises = {
   exercises: Array<WorkoutSessionExerciseWithAttributes>
 }
+export type WorkoutSessionExtraWorkout = {
+  workout: Workout
+}
+export type WorkoutSessionExtraWorkoutPlan = {
+  workoutPlan: WorkoutPlan
+}
 
-export type WorkoutSessionExtras = WorkoutSessionExtraExercises
+export type WorkoutSessionExtras = WorkoutSessionExtraExercises &
+  WorkoutSessionExtraWorkout &
+  WorkoutSessionExtraWorkoutPlan

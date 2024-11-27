@@ -9,17 +9,18 @@ type TransformFormToRequestParams = {
 }
 
 export const transformFormToRequest = ({
-  workout: { exercises, ...workout },
+  workout: { exercises, notes, ...workout },
   workoutPlanId,
   workoutId
 }: TransformFormToRequestParams): AddWorkoutSessionRequest => ({
   workoutPlanId,
   workoutId,
+  notes: notes ? notes : undefined,
   ...workout,
   exercises: exercises.map(exercise => ({
     exerciseId: exercise.id,
     completed: exercise.completed,
-    notes: exercise.notes,
+    notes: exercise.notes ? exercise.notes : undefined,
     attributes: exercise.completed
       ? exercise.attributes.map(attribute => ({
           name: attribute.name,

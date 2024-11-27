@@ -46,7 +46,7 @@ export const AddWorkoutSessionForm: Component<
   const addWorkoutSessionMutation = createMutation(() => ({
     mutationFn: addWorkoutSession,
     mutationKey: ['addWorkoutSession'],
-    onSuccess: async () => {
+    onSuccess: async ({ id }) => {
       form.reset()
       toast.show({
         title: 'Added workout session!',
@@ -54,9 +54,7 @@ export const AddWorkoutSessionForm: Component<
         variant: 'success',
         priority: 'high'
       })
-      // TODO - navigate to workout session page or invalidate queries
-      // of all workout sessions query once the page is ready
-      navigate(InternalLink.userWorkoutSessions)
+      navigate(InternalLink.userWorkoutSession(id))
     },
     onError: () => {
       toast.show({

@@ -10,12 +10,13 @@ type TransformFormToRequestParams = {
 }
 
 export const transformFormToRequest = ({
-  workout: { exercises, notes, ...workout },
+  workout: { exercises, notes, date, ...workout },
   workoutPlanId,
   workoutId
 }: TransformFormToRequestParams): AddWorkoutSessionRequest => ({
   workoutPlanId,
   workoutId,
+  date: new Date(date).toString(),
   notes: notes ? notes : undefined,
   ...workout,
   exercises: exercises.map(exercise => ({

@@ -30,7 +30,7 @@ export const WorkoutPlansSection: Component<
         icon={
           <Link
             href={InternalLink.userWorkoutPlans}
-            class={buttonVariants()}
+            class={buttonVariants({ variant: 'primaryWhite' })}
           >
             See all
           </Link>

@@ -59,6 +59,17 @@ export const UserSection: Component<UserSectionProps> = props => (
           </h3>
         </Link>
         <Link
+          href={InternalLink.userWorkoutSessions}
+          class={cardVariants({
+            class:
+              'flex-1 items-center justify-center gap-3 !p-4 text-center aria-[disabled=true]:cursor-not-allowed'
+          })}
+        >
+          <h3 class="text-lg font-bold break-keep text-current/80">
+            My sessions
+          </h3>
+        </Link>
+        <Link
           href={InternalLink.workoutPlans}
           class={cardVariants({
             class:
@@ -67,18 +78,6 @@ export const UserSection: Component<UserSectionProps> = props => (
         >
           <h3 class="text-lg font-bold break-keep text-current/80">
             Explore workouts
-          </h3>
-        </Link>
-        <Link
-          href=""
-          disabled
-          class={cardVariants({
-            class:
-              'flex-1 items-center justify-center gap-3 !p-4 text-center aria-[disabled=true]:cursor-not-allowed'
-          })}
-        >
-          <h3 class="text-lg font-bold break-keep text-current/80">
-            Coming soon
           </h3>
         </Link>
       </div>

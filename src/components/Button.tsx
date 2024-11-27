@@ -45,6 +45,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-black px-4 py-2 text-white disabled:bg-black/50',
+        primaryWhite:
+          'bg-white px-4 py-2 text-black hover:bg-white/80 disabled:bg-white/50',
         primaryDanger:
           'bg-error hover:bg-error/80 disabled:bg-error/50 px-4 py-2 text-white',
         outline:

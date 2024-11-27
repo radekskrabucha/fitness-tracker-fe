@@ -43,7 +43,7 @@ export const UserWorkoutPlans: Component<UserWorkoutPlansProps> = props => {
             icon={
               <Link
                 href={InternalLink.workoutPlans}
-                class={buttonVariants()}
+                class={buttonVariants({ variant: 'primaryWhite' })}
               >
                 Browse all
               </Link>

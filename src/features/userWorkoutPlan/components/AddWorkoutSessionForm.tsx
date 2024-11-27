@@ -46,7 +46,7 @@ export const AddWorkoutSessionForm: Component<
   const addWorkoutSessionMutation = createMutation(() => ({
     mutationFn: addWorkoutSession,
     mutationKey: ['addWorkoutSession'],
-    onSuccess: async ({ id }) => {
+    onSuccess: ({ id }) => {
       form.reset()
       toast.show({
         title: 'Added workout session!',

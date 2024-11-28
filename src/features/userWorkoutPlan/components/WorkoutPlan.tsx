@@ -3,7 +3,6 @@ import { createQuery } from '@tanstack/solid-query'
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
 import { Header } from '~/components/Header'
-import { Modal, ModalTrigger } from '~/components/Modal'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { WorkoutCard } from '~/features/workoutPlan/components/WorkoutCard'
 import { getWorkoutPlanDifficultyName } from '~/features/workoutPlans/utils'
@@ -43,19 +42,20 @@ export const WorkoutPlan: Component<WorkoutPlanProps> = props => {
           />
           <Index each={data.workouts}>
             {workout => (
-              <WorkoutCard {...workout()}>
+              <WorkoutCard
+                {...workout()}
+                action={
+                  <AddWorkoutSessionModalContent
+                    {...workout()}
+                    workoutPlanId={params.id}
+                  />
+                }
+              >
                 <div class="flex flex-1 flex-col p-8">
-                  <Modal
-                    title="Add workout session"
-                    description="Add details below about your workout session."
-                    modal
-                    trigger={<ModalTrigger>Add workout session</ModalTrigger>}
-                  >
-                    <AddWorkoutSessionModalContent
-                      {...workout()}
-                      workoutPlanId={params.id}
-                    />
-                  </Modal>
+                  <AddWorkoutSessionModalContent
+                    {...workout()}
+                    workoutPlanId={params.id}
+                  />
                 </div>
               </WorkoutCard>
             )}

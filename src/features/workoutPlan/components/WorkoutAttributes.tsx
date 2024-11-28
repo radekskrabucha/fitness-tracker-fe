@@ -33,7 +33,7 @@ export const WorkoutAttributes: Component<WorkoutAttributesProps> = props => {
   })
 
   return (
-    <div class="my-4 flex flex-col gap-8">
+    <div class="mt-4 flex flex-col gap-8">
       <Show when={sortedAttributes()[0].length}>
         <div class="flex flex-row flex-wrap gap-6">
           <Index each={sortedAttributes()[0]}>

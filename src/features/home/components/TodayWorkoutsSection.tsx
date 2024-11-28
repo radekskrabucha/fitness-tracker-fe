@@ -22,7 +22,7 @@ export const TodayWorkoutsSection: Component<
   )
 
   return (
-    <section class="layout-section gap-12">
+    <section class="layout-section gap-8">
       <Header
         title={`Welcome back, ${props.userName}!`}
         description="It's nice to see you again! Check the plan for today."

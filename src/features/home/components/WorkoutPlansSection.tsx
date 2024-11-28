@@ -23,14 +23,14 @@ export const WorkoutPlansSection: Component<
   )
 
   return (
-    <section class="layout-section gap-12">
+    <section class="layout-section gap-8">
       <Header
         title="Your Workout Plans"
         description="Below you can see your newest workout plans."
         icon={
           <Link
             href={InternalLink.userWorkoutPlans}
-            class={buttonVariants()}
+            class={buttonVariants({ variant: 'primaryWhite' })}
           >
             See all
           </Link>

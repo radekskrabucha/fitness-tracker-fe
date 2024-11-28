@@ -14,7 +14,9 @@ export const InternalLink = {
   chooseWorkoutPlan: (id: string) => `/workout-plans/${id}/choose`,
   userWorkoutPlans: '/user/workout-plans',
   userWorkoutPlan: (id: string) => `/user/workout-plans/${id}`,
-  addWorkoutSession: (id: string) => `/user/workout/${id}/add-session`
+  addWorkoutSession: (id: string) => `/user/workout/${id}/add-session`,
+  userWorkoutSessions: '/user/workout-sessions',
+  userWorkoutSession: (id: string) => `/user/workout-sessions/${id}`
 } as const
 
 export const RESTRICTED_ROUTES = [

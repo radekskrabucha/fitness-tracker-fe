@@ -1,5 +1,6 @@
 import type { Component } from 'solid-js'
 import type { User } from '~/models/user'
+import { LatestWorkoutSessionSection } from './components/LatestWorkoutSessionSection'
 import { TodayWorkoutsSection } from './components/TodayWorkoutsSection'
 import { WorkoutPlansSection } from './components/WorkoutPlansSection'
 
@@ -11,6 +12,7 @@ export const UserStartPage: Component<UserStartPageProps> = props => (
       userId={props.id}
       userName={props.name}
     />
+    <LatestWorkoutSessionSection userId={props.id} />
     <WorkoutPlansSection userId={props.id} />
   </>
 )

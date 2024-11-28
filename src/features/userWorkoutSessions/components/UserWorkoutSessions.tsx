@@ -3,6 +3,7 @@ import { Index, type Component } from 'solid-js'
 import { buttonVariants } from '~/components/Button'
 import { Card } from '~/components/Card'
 import { Header } from '~/components/Header'
+import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
@@ -33,7 +34,22 @@ export const UserWorkoutSessions: Component<
                 <Link
                   href={InternalLink.userWorkoutSession(workoutSession().id)}
                 >
-                  <WorkoutSessionTile {...workoutSession()} />
+                  <WorkoutSessionTile {...workoutSession()}>
+                    <div class="-mt-2 flex flex-wrap items-center justify-between gap-2 text-current/80">
+                      <span
+                        class={buttonVariants({
+                          variant: 'link',
+                          class: 'ml-auto'
+                        })}
+                      >
+                        See details{' '}
+                        <Icon
+                          icon="arrow"
+                          class="size-4 fill-current"
+                        />
+                      </span>
+                    </div>
+                  </WorkoutSessionTile>
                 </Link>
               )}
             </Index>

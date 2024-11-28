@@ -198,7 +198,7 @@ export const DatePickerInput = (props: DatePickerInputProps) => {
   return (
     <DatePickerPrimitive.Input
       class={cn(
-        'font-secondary w-28 min-w-0 flex-1 shrink rounded-md border-transparent bg-white px-4 py-2 text-sm font-medium outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        'font-secondary w-28 min-w-0 flex-1 shrink rounded-md border-transparent bg-white px-4 py-2 text-base font-medium outline-none disabled:cursor-not-allowed disabled:opacity-50',
         local.class
       )}
       {...rest}

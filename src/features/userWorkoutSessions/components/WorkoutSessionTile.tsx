@@ -1,4 +1,9 @@
-import { Show, type Component, type JSXElement } from 'solid-js'
+import {
+  Show,
+  type Component,
+  type JSXElement,
+  type ParentComponent
+} from 'solid-js'
 import { Badge } from '~/components/Badge'
 import { Card } from '~/components/Card'
 import { Icon } from '~/components/Icon'
@@ -7,7 +12,9 @@ import type { GetUserWorkoutSessionsResponse } from '../types/response'
 
 type WorkoutSessionTileProps = GetUserWorkoutSessionsResponse[number]
 
-export const WorkoutSessionTile: Component<WorkoutSessionTileProps> = props => (
+export const WorkoutSessionTile: ParentComponent<
+  WorkoutSessionTileProps
+> = props => (
   <Card
     variant="black"
     class="gap-4 p-0"
@@ -62,6 +69,7 @@ export const WorkoutSessionTile: Component<WorkoutSessionTileProps> = props => (
           </div>
         )}
       </Show>
+      {props.children}
     </div>
   </Card>
 )

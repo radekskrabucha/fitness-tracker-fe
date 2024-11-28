@@ -29,7 +29,13 @@ export const UserWorkoutSessions: Component<
         <>
           <div class="flex flex-col gap-10">
             <Index each={data}>
-              {workoutSession => <WorkoutSessionTile {...workoutSession()} />}
+              {workoutSession => (
+                <Link
+                  href={InternalLink.userWorkoutSession(workoutSession().id)}
+                >
+                  <WorkoutSessionTile {...workoutSession()} />
+                </Link>
+              )}
             </Index>
           </div>
 

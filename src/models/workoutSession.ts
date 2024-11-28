@@ -1,6 +1,6 @@
 import type { Workout } from './workout'
 import type { WorkoutPlan } from './workoutPlan'
-import type { WorkoutSessionExerciseWithAttributes } from './workoutSessionExercise'
+import type { WorkoutSessionExerciseWithExtras } from './workoutSessionExercise'
 
 export type WorkoutSession<
   // @ts-expect-error - we use empty object to make it work
@@ -18,7 +18,7 @@ export type WorkoutSessionWithOverview =
   WorkoutSession<WorkoutSessionExtraOverview>
 
 export type WorkoutSessionExtraExercises = {
-  exercises: Array<WorkoutSessionExerciseWithAttributes>
+  exercises: Array<WorkoutSessionExerciseWithExtras>
 }
 export type WorkoutSessionExtraWorkout = {
   workout: Workout

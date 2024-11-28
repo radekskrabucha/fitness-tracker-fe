@@ -28,7 +28,7 @@ export const MainLayout: FlowComponent = props => (
       />
       <Background />
       <Header />
-      <main class="layout-container isolate flex-1">
+      <main class="layout-container isolate flex-1 overflow-x-hidden">
         <Suspense>
           <ErrorBoundary
             fallback={(error, onReset) => (

@@ -169,7 +169,11 @@ export const DatePickerContent = (props: DatePickerContentProps) => {
 
   return (
     <DatePickerPrimitive.Content
-      class={cn(cardVariants(), 'rounded-md p-4', local.class)}
+      class={cn(
+        cardVariants(),
+        'rounded-md bg-white p-4 backdrop-blur-none',
+        local.class
+      )}
       {...rest}
     >
       {local.children}

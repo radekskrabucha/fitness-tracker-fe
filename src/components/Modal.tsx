@@ -38,11 +38,11 @@ export const Modal: FlowComponent<ModalProps> = props => {
     <Dialog {...dialogRootProps}>
       {localProps.trigger}
       <Dialog.Portal>
-        <Dialog.Overlay class="animate-show bg-background/10 fixed inset-0 isolate z-1000 backdrop-blur-sm" />
+        <Dialog.Overlay class="animate-show bg-background/10 fixed inset-0 z-1000 backdrop-blur-sm" />
         <Dialog.Content
           class={cardVariants({
             class:
-              'animate-show fixed top-[50%] left-[50%] z-20 z-1001 h-[min(80vh,var(--container-xl))] w-[min(calc(100vw-48px),var(--container-3xl))] translate-x-[-50%] translate-y-[-50%] overflow-hidden !bg-white/50 !p-0'
+              'animate-show fixed top-[50%] left-[50%] z-1001 h-[min(80vh,var(--container-xl))] w-[min(calc(100vw-48px),var(--container-3xl))] translate-x-[-50%] translate-y-[-50%] overflow-hidden !bg-white/50 !p-0'
           })}
         >
           <div class="flex flex-col gap-4 bg-white/50 px-6 py-8">

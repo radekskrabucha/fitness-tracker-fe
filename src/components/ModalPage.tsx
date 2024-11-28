@@ -4,6 +4,7 @@ import {
   type FlowComponent,
   type JSXElement
 } from 'solid-js'
+import { Portal } from 'solid-js/web'
 import { Card } from './Card'
 import { Icon } from './Icon'
 import { Link } from './Link'
@@ -16,14 +17,14 @@ type ModalPageProps = {
 }
 
 export const ModalPage: FlowComponent<ModalPageProps> = props => (
-  <>
+  <Portal>
     <Link
       href={props.href}
       replace
       noScroll
-      class="animate-show bg-background/10 fixed inset-0 backdrop-blur-sm"
+      class="animate-show bg-background/10 fixed inset-0 z-1000 backdrop-blur-sm"
     />
-    <Card class="animate-show fixed top-[50%] left-[50%] z-20 h-[min(80vh,var(--container-xl))] w-[min(calc(100vw-48px),var(--container-3xl))] translate-x-[-50%] translate-y-[-50%] overflow-hidden p-0">
+    <Card class="animate-show fixed top-[50%] left-[50%] z-1001 h-[min(80vh,var(--container-xl))] w-[min(calc(100vw-48px),var(--container-3xl))] translate-x-[-50%] translate-y-[-50%] overflow-hidden bg-white/50 p-0">
       <div class="flex flex-col gap-4 bg-white/50 px-6 py-8">
         <div class="flex items-center justify-between gap-2">
           <h2 class="line-clamp-2 text-3xl font-bold capitalize">
@@ -46,7 +47,7 @@ export const ModalPage: FlowComponent<ModalPageProps> = props => (
         {props.children}
       </div>
     </Card>
-  </>
+  </Portal>
 )
 
 type DefaultIconProps = Pick<ModalPageProps, 'href'>

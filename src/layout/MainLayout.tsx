@@ -39,13 +39,13 @@ export const MainLayout: FlowComponent = props => (
             )}
           >
             {props.children}
-            <Toast.Region>
-              <Toast.List class="fixed right-0 bottom-0 z-[9999] m-0 flex w-md max-w-full list-none flex-col gap-4 p-6 outline-none" />
-            </Toast.Region>
           </ErrorBoundary>
         </Suspense>
       </main>
       <Footer />
+      <Toast.Region class="z-9999">
+        <Toast.List class="fixed right-0 bottom-0 m-0 flex w-md max-w-full list-none flex-col gap-4 p-6 outline-none" />
+      </Toast.Region>
     </MetaProvider>
   </ErrorBoundary>
 )

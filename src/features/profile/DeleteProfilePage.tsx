@@ -1,7 +1,7 @@
 import { ClientOnly } from '~/components/ClientOnly'
 import { ModalPage } from '~/components/ModalPage'
 import { InternalLink } from '~/config/app'
-import { DeleteUserForm } from './components/DeleteUserForm'
+import { DeleteUser } from './components/DeleteUser'
 import { SessionWrapper } from './components/SessionWrapper'
 
 export const DeleteProfilePage = () => (
@@ -13,7 +13,7 @@ export const DeleteProfilePage = () => (
           title="Delete your profile"
           description="Are you sure you want to delete your account? This action is irreversible."
         >
-          <DeleteUserForm userId={user.id} />
+          <DeleteUser userId={user.id} />
         </ModalPage>
       )}
     </SessionWrapper>

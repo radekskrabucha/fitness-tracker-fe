@@ -1,3 +1,4 @@
+import { Style } from '@solidjs/meta'
 import {
   Show,
   type Component,
@@ -18,6 +19,14 @@ type ModalPageProps = {
 
 export const ModalPage: FlowComponent<ModalPageProps> = props => (
   <Portal>
+    <Style>
+      {`
+          body {
+            height: 100%;
+            overflow-y: hidden;
+          }
+        `}
+    </Style>
     <Link
       href={props.href}
       replace

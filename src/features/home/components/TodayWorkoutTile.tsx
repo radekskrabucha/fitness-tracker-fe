@@ -32,7 +32,6 @@ export const TodayWorkoutTile: Component<TodayWorkoutTileProps> = props => (
         )}
       </Show>
     </div>
-    <span class="w-" />
     <div class="mt-auto flex flex-col gap-6 p-8">
       <div class="grid grid-cols-2 gap-4">
         <Index each={props.workout.exercises}>

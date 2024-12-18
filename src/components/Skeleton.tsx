@@ -6,7 +6,9 @@ import { splitProps, type ParentComponent } from 'solid-js'
 import type { WithClass } from '~/types/common'
 import { cn } from '~/utils/styles'
 
-export const Skeleton: ParentComponent<WithClass<SkeletonRootProps>> = props => {
+export const Skeleton: ParentComponent<
+  WithClass<SkeletonRootProps>
+> = props => {
   const [localProps, others] = splitProps(props, ['class'])
 
   return (

@@ -5,7 +5,12 @@ import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
+import { getUserWorkoutPlansQueryOptions } from '~/features/home/actions'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
+import {
+  getUserLatestWorkoutSessionQueryOptions,
+  getUserWorkoutSessionsQueryOptions
+} from '~/features/userWorkoutSessions/actions'
 import { deleteUser, getUserFitnessProfileQueryOptions } from '../actions'
 
 type DeleteUserProps = {
@@ -37,6 +42,31 @@ export const DeleteUser: Component<DeleteUserProps> = props => {
       await queryClient.invalidateQueries(
         {
           queryKey: getSessionQueryOptions().queryKey,
+          exact: true,
+          refetchType: 'all'
+        },
+        { throwOnError: true, cancelRefetch: true }
+      )
+      await queryClient.invalidateQueries(
+        {
+          queryKey: getUserWorkoutPlansQueryOptions(props.userId).queryKey,
+          exact: true,
+          refetchType: 'all'
+        },
+        { throwOnError: true, cancelRefetch: true }
+      )
+      await queryClient.invalidateQueries(
+        {
+          queryKey: getUserWorkoutSessionsQueryOptions(props.userId).queryKey,
+          exact: true,
+          refetchType: 'all'
+        },
+        { throwOnError: true, cancelRefetch: true }
+      )
+      await queryClient.invalidateQueries(
+        {
+          queryKey: getUserLatestWorkoutSessionQueryOptions(props.userId)
+            .queryKey,
           exact: true,
           refetchType: 'all'
         },

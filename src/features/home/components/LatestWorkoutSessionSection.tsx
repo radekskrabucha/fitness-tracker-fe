@@ -40,6 +40,7 @@ export const LatestWorkoutSessionSection: Component<
       <QueryBoundary
         query={getUserLatestWorkoutSessionQuery}
         noDataFallback={<NoWorkoutSession />}
+        errorFallback={() => <NoWorkoutSession />}
       >
         {workoutSession => (
           <Link href={InternalLink.userWorkoutSession(workoutSession.id)}>

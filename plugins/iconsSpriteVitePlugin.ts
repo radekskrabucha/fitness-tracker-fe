@@ -47,10 +47,8 @@ const generateIconSprite = async (
 
   if (oldSprite !== sprite) {
     await removeOldSpriteIcons(spriteIconsDir, spriteIconFiles)
-    await writeSpriteIconsLinkWithTimestamp(timestamp, prefix)
     await writeIconsSprite(sprite, timestamp, prefix, spriteIconsDir)
-    await writeIconsTypes(idTypes)
-    await writeGetIconHrefUtils(timestamp, prefix)
+    await writeIconComponent(prefix, timestamp, idTypes)
   }
 }
 
@@ -117,22 +115,30 @@ const buildUpSvgSprite = async (files: Array<string>, iconsDir: string) => {
   }
 }
 
-const writeSpriteIconsLinkWithTimestamp = async (
+const writeIconComponent = async (
+  prefix: string,
   timestamp: number,
-  prefix: string
+  idTypes: string
 ) => {
-  // Write layout/components/SpriteIconsLink.tsx
-  const spriteIconsLink = `import { Link } from '@solidjs/meta'\n\nexport const SpriteIconsLink = () => (\n  <Link\n    rel="preload"\n    as="image"\n    href="/${prefix}-${timestamp}.svg"\n  />\n)\n`
+  const imports = `import { Link } from '@solidjs/meta'\nimport { splitProps, type Component, type ComponentProps } from 'solid-js'\nimport { getIconHref } from '~/utils/icons'`
+  const timestampVar = `export const timestamp = ${timestamp}`
+  const iconComponent = `export const Icon: Component<IconProps> = props => {\n  const [localProps, others] = splitProps(props, ['icon'])\n\n  return (\n    <svg {...others}>\n      <use href={getIconHref(localProps.icon, timestamp)} />\n    </svg>\n  )\n}`
+  const spriteIconsLink = `export const SpriteIconsLink = () => (\n  <Link\n    rel="preload"\n    as="image"\n    href={\`/${prefix}-\${timestamp}.svg\`}\n  />\n)` 
+  const iconProps = `type IconProps = {\n  icon: IconId\n} & ComponentProps<'svg'>`
+  const types = `export type IconId =\n${idTypes}`
+
+  const chunks = [
+    imports,
+    iconProps,
+    iconComponent,
+    spriteIconsLink,
+    timestampVar,
+    types
+  ]
 
   await fs.writeFile(
-    path.join(
-      process.cwd(),
-      'src',
-      'layout',
-      'components',
-      'SpriteIconsLink.tsx'
-    ),
-    spriteIconsLink
+    path.join(process.cwd(), 'src', 'components', 'Icon.tsx'),
+    chunks.join('\n\n')
   )
 }
 
@@ -147,22 +153,6 @@ const writeIconsSprite = async (
     path.join(spriteIconsDir, `${prefix}-${timestamp}.svg`),
     sprite
   )
-}
-
-const writeIconsTypes = async (idTypes: string) => {
-  // Write the types/icons.ts
-  const types = `export type IconId =\n${idTypes}`
-
-  await fs.writeFile(
-    path.join(process.cwd(), 'src', 'types', 'icons.ts'),
-    types
-  )
-}
-const writeGetIconHrefUtils = async (timestamp: number, prefix: string) => {
-  // Write src/utils/icon.ts
-  const file = `import type { IconId } from '~/types/icons'\n\nexport const getIconHref = (id: IconId) => \`/${prefix}-${timestamp}.svg#\${id}\`\n`
-
-  await fs.writeFile(path.join(process.cwd(), 'src', 'utils', 'icons.ts'), file)
 }
 
 export default IconSpritePlugin

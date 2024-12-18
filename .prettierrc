@@ -14,5 +14,6 @@
     "prettier-plugin-tailwindcss"
   ],
   "importOrder": ["^~/(.*)$", "^[./]", "^[../]"],
-  "importOrderSeparation": false
+  "importOrderSeparation": false,
+  "tailwindFunctions": ["clsx", "cn", "twmerge", "cva"]
 }

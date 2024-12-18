@@ -1,10 +1,25 @@
 import type { Component } from 'solid-js'
-import { AppName } from '~/config/app'
+import { Portal } from 'solid-js/web'
+import { ClientOnly } from '~/components/ClientOnly'
+import { SessionWrapper } from '~/features/profile/components/SessionWrapper'
+import { UserStartPage } from './UserStartPage'
+import { WelcomePage } from './WelcomePage'
 
 export const HomePage: Component = () => (
-  <>
-    <section class="layout-section flex-1 items-center justify-center gap-2 text-center">
-      <h1 class="mb-4 text-4xl font-bold">{AppName}</h1>
-    </section>
-  </>
+  <ClientOnly>
+    <SessionWrapper
+      noDataFallback={<WelcomePage />}
+      loadingFallback={<LoadingFallback />}
+    >
+      {UserStartPage}
+    </SessionWrapper>
+  </ClientOnly>
+)
+
+const LoadingFallback = () => (
+  <Portal>
+    <div class="animate-show bg-background/10 fixed inset-0 z-1000 flex items-center justify-center backdrop-blur-sm">
+      <span class="animate-bounce text-9xl font-bold">🍑</span>
+    </div>
+  </Portal>
 )

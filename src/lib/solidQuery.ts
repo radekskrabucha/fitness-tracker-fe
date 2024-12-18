@@ -11,7 +11,9 @@ export const queryClient = new QueryClient({
       gcTime: QUERY_CACHE_TIME,
       retry: false,
       throwOnError: true,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      experimental_prefetchInRender: true,
+      suspense: true
     },
     mutations: {
       gcTime: QUERY_CACHE_TIME

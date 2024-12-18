@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import IconSpritePlugin from './plugins/iconsSpriteVitePlugin'
 
 export default defineConfig({
+  middleware: 'src/utils/middleware',
   vite: {
     plugins: [ValidateEnv({}), tailwindcss(), IconSpritePlugin()]
   },

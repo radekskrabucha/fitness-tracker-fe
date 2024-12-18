@@ -10,7 +10,7 @@ export const SocialIcons: Component = () => (
       aria-label="Github"
     >
       <Icon
-        id="github"
+        icon="github"
         class="h-6 w-6 fill-current transition-colors duration-150 hover:text-white/50"
       />
     </Link>
@@ -19,7 +19,7 @@ export const SocialIcons: Component = () => (
       aria-label="Twitter"
     >
       <Icon
-        id="twitter"
+        icon="twitter"
         class="h-6 w-6 fill-current transition-colors duration-150 hover:text-white/50"
       />
     </Link>
@@ -28,7 +28,7 @@ export const SocialIcons: Component = () => (
       aria-label="Source Code"
     >
       <Icon
-        id="source-code"
+        icon="source-code"
         class="h-6 w-6 fill-current transition-colors duration-150 hover:text-white/50"
       />
     </Link>

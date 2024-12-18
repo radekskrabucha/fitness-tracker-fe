@@ -4,24 +4,33 @@ import { ErrorBoundary, Match, Show, Suspense, Switch } from 'solid-js'
 import { Button } from './Button'
 import { LoaderCircle } from './LoaderCircle'
 
-export interface QueryBoundaryProps<T = unknown> {
-  query: CreateQueryResult<T, Error | unknown>
+export type QueryBoundaryProps<T = unknown, E extends Error = Error> = {
+  query: CreateQueryResult<T, E | unknown>
   loadingFallback?: JSXElement
-  notFoundFallback?: JSXElement
-  errorFallback?: (err: Error, retry: () => void) => JSXElement
+  noDataFallback?: JSXElement
+  isDataEmpty?: (data: T | undefined) => boolean
+  errorFallback?: (errorFallbackProps: ErrorFallbackProps<E>) => JSXElement
   children: (data: Exclude<T, null | false | undefined>) => JSXElement
 }
 
-export function QueryBoundary<T>(props: QueryBoundaryProps<T>) {
+export function QueryBoundary<T = unknown, E extends Error = Error>(
+  props: QueryBoundaryProps<T, E>
+) {
   return (
     <Suspense fallback={props.loadingFallback}>
       <ErrorBoundary
-        fallback={(error: Error, reset) =>
-          props.errorFallback ? (
-            // eslint-disable-next-line solid/reactivity
-            props.errorFallback(error, async () => {
-              await props.query.refetch()
-              reset()
+        fallback={(error: E, reset) => {
+          console.error(error)
+
+          return props.errorFallback ? (
+            props.errorFallback({
+              error,
+              retry: async () => {
+                await props.query.refetch()
+                reset()
+              },
+              errorUpdateCount: props.query.errorUpdateCount,
+              isRefetching: props.query.isFetching
             })
           ) : (
             <DefaultErrorFallback
@@ -33,21 +42,24 @@ export function QueryBoundary<T>(props: QueryBoundaryProps<T>) {
               isRefetching={props.query.isFetching}
             />
           )
-        }
+        }}
       >
         <Switch>
           <Match
             when={
+              (!props.query.isFetching &&
+                props.isDataEmpty &&
+                props.isDataEmpty(props.query.data)) ||
               (!props.query.isFetching && !props.query.data) ||
               (!props.query.isFetching &&
                 Array.isArray(props.query.data) &&
                 props.query.data.length === 0)
             }
           >
-            {props.notFoundFallback ? (
-              props.notFoundFallback
+            {props.noDataFallback ? (
+              props.noDataFallback
             ) : (
-              <DefaultNotFoundFallback />
+              <DefaultNoDataFallback />
             )}
           </Match>
 
@@ -62,27 +74,27 @@ export function QueryBoundary<T>(props: QueryBoundaryProps<T>) {
   )
 }
 
-type DefaultErrorFallbackProps = {
-  error: Error
+type ErrorFallbackProps<E extends Error = Error> = {
+  error: E
   retry: () => void
   errorUpdateCount: number
   isRefetching: boolean
 }
 
-const DefaultErrorFallback: Component<DefaultErrorFallbackProps> = props => (
+const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
     <h2 class="text-3xl font-bold">Oopss... we've got an error! 🚧</h2>
     <Show
       when={props.errorUpdateCount < 4}
       fallback={
-        <p class="text-white/50">
+        <p class="text-current/50">
           Seems like an unexpected error has occurred during the data fetching.
           <br />
           Please try again later.
         </p>
       }
     >
-      <p class="text-white/50">
+      <p class="text-current/50">
         Seems like an unexpected error has occurred during the data fetching.
         <br />
         Click the button below or try again later.
@@ -103,7 +115,7 @@ const DefaultErrorFallback: Component<DefaultErrorFallbackProps> = props => (
   </div>
 )
 
-const DefaultNotFoundFallback: Component = () => (
+const DefaultNoDataFallback: Component = () => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
     <h2 class="text-3xl font-bold">Upsss... not found 🤔</h2>
     <p class="text-white/50">

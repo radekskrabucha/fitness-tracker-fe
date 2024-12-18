@@ -7,10 +7,15 @@ type NavLinksProps = {
 }
 
 export const NavLinks: Component<NavLinksProps> = props => (
-  <ul class="flex gap-2 max-md:flex-col">
+  <ul class="flex gap-x-6 gap-y-2 max-md:flex-col">
     <NavLink
       href={InternalLink.home}
       text="Home"
+      onClick={props.onNavLinkClick}
+    />
+    <NavLink
+      href={InternalLink.workoutPlans}
+      text="Explore Plans"
       onClick={props.onNavLinkClick}
     />
   </ul>

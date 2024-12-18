@@ -13,7 +13,7 @@ type ToastProps = {
 
 type ToastActionProps = Omit<ToastProps, 'toastId'>
 
-const ToastA: Component<ToastProps> = props => {
+const Toaster: Component<ToastProps> = props => {
   const [localProps, others] = splitProps(props, [
     'title',
     'description',
@@ -38,7 +38,7 @@ const ToastA: Component<ToastProps> = props => {
         </Toast.Title>
         <Toast.CloseButton class="cursor-pointer self-start text-white/50 hover:text-white">
           <Icon
-            id="close"
+            icon="close"
             class="h-5 w-5 translate-x-2 fill-current transition-colors"
           />
         </Toast.CloseButton>
@@ -58,7 +58,7 @@ const ToastA: Component<ToastProps> = props => {
 
 const show = (options: ToastActionProps) =>
   toaster.show(props => (
-    <ToastA
+    <Toaster
       {...options}
       toastId={props.toastId}
     />
@@ -69,7 +69,7 @@ export const toast = {
 }
 
 export const toastVariants = cva(
-  'toast bg-background/50 relative flex w-full flex-col gap-2 overflow-hidden rounded-md border border-current/50 p-4 pt-3 shadow-2xl backdrop-blur-2xl',
+  'toast bg-background/50 relative flex w-full flex-col gap-2 overflow-hidden rounded-lg border border-current/50 p-4 pt-3 shadow-lg backdrop-blur-2xl',
   {
     variants: {
       variant: {

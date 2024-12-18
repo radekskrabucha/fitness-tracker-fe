@@ -10,6 +10,13 @@ export const fetchBaseClient = ofetch.create({
   ...FETCH_DEFAULT_CONFIG
 })
 
+export const fetchApiClient = ofetch.create({
+  ...FETCH_DEFAULT_CONFIG,
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+  mode: 'cors',
+  credentials: 'include'
+})
+
 export const mockFetch = <TReq, TRes>({
   mockData,
   shouldReject = false,

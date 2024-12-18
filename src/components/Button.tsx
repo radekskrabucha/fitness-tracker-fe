@@ -3,42 +3,54 @@ import {
   type ButtonRootProps
 } from '@kobalte/core/button'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { type JSX, type Component } from 'solid-js'
+import { splitProps, type Component, type ComponentProps } from 'solid-js'
 import { cn } from '~/utils/styles'
 
-type ButtonElementProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>
-
-type ButtonProps = Pick<
-  ButtonElementProps,
+type ButtonElementProps = Pick<
+  ComponentProps<'button'>,
   'class' | 'children' | 'onClick' | 'id'
-> &
+>
+
+type ButtonProps = ButtonElementProps &
   VariantProps<typeof buttonVariants> &
   ButtonRootProps
 
-export const Button: Component<ButtonProps> = props => (
-  <KobalteButton
-    {...props}
-    type={props.type || 'button'}
-    class={cn(
-      buttonVariants({
-        variant: props.variant,
-        class: props.class
-      })
-    )}
-  >
-    {props.children}
-  </KobalteButton>
-)
+export const Button: Component<ButtonProps> = props => {
+  const [localProps, others] = splitProps(props, [
+    'variant',
+    'class',
+    'children',
+    'type'
+  ])
+
+  return (
+    <KobalteButton
+      {...others}
+      type={localProps.type || 'button'}
+      class={cn(
+        buttonVariants({
+          variant: localProps.variant,
+          class: localProps.class
+        })
+      )}
+    >
+      {localProps.children}
+    </KobalteButton>
+  )
+}
 
 export const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center justify-center gap-1 rounded-md text-sm font-medium capitalize ring-offset-white transition-colors focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed',
+  'inline-flex cursor-pointer items-center justify-center gap-1 rounded-md text-center text-sm font-medium capitalize ring-offset-white transition-colors focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
-        primary:
-          'bg-black py-2 px-4 text-white hover:bg-black/80 disabled:bg-black/50',
+        primary: 'bg-black px-4 py-2 text-white disabled:bg-black/50',
+        primaryWhite:
+          'bg-white px-4 py-2 text-black hover:bg-white/80 disabled:bg-white/50',
+        primaryDanger:
+          'bg-error hover:bg-error/80 disabled:bg-error/50 px-4 py-2 text-white',
         outline:
-          'border border-black py-2 px-4 text-black hover:border-black/60 hover:text-black/60 disabled:border-black/20 disabled:text-black/20',
+          'border border-black px-4 py-2 text-black hover:border-black/60 hover:text-black/60 disabled:border-black/20 disabled:text-black/20',
         link: 'underline underline-offset-2 disabled:opacity-50'
       }
     },

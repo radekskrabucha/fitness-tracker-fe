@@ -1,78 +1,111 @@
-import { TextField, type TextFieldRootProps } from '@kobalte/core/text-field'
-import { type JSX, Show, type Component, type JSXElement } from 'solid-js'
+import { TextField } from '@kobalte/core/text-field'
+import {
+  Show,
+  type Component,
+  type JSXElement,
+  type ComponentProps,
+  splitProps
+} from 'solid-js'
 import { statusMessageVariants } from './StatusMessage'
+
+type InputProps = Pick<
+  ComponentProps<'input'>,
+  | 'ref'
+  | 'onBlur'
+  | 'onFocus'
+  | 'autofocus'
+  | 'autoCapitalize'
+  | 'autocomplete'
+  | 'autocorrect'
+>
+
+type TextFieldProps = Pick<
+  ComponentProps<typeof TextField>,
+  | 'as'
+  | 'id'
+  | 'name'
+  | 'required'
+  | 'disabled'
+  | 'readOnly'
+  | 'value'
+  | 'defaultValue'
+  | 'onChange'
+>
+type TextFieldInputProps = Pick<
+  ComponentProps<typeof TextField.Input>,
+  'onInput'
+>
 
 type TextInputProps = {
   label?: JSXElement
   error?: JSXElement
   description?: JSXElement
-  inputId?: string
   type?: 'text' | 'email' | 'tel' | 'password' | 'url' | 'date'
-  wrapperRef?: TextFieldRootProps['ref']
-} & Pick<
-  JSX.InputHTMLAttributes<HTMLInputElement>,
-  | 'onBlur'
-  | 'onFocus'
-  | 'placeholder'
-  | 'onChange'
-  | 'autofocus'
-  | 'ref'
-  | 'onInput'
-> &
-  Omit<TextFieldRootProps, 'validationState' | 'onChange' | 'ref'>
+} & InputProps &
+  TextFieldProps &
+  TextFieldInputProps
 
-export const TextInput: Component<TextInputProps> = props => (
-  <TextField
-    defaultValue={props.defaultValue}
-    disabled={props.disabled}
-    required={props.required}
-    id={props.id}
-    name={props.name}
-    value={props.value}
-    readOnly={props.readOnly}
-    ref={props.wrapperRef}
-    validationState={props.error ? 'invalid' : 'valid'}
-    class="flex flex-col gap-2"
-  >
-    <Show when={props.description}>
-      <TextField.Description
-        as="span"
-        class={statusMessageVariants({ class: 'order-1' })}
-      >
-        {props.description}
-      </TextField.Description>
-    </Show>
+export const TextInput: Component<TextInputProps> = props => {
+  const [inputProps, localProps, rootProps] = splitProps(
+    props,
+    [
+      'autofocus',
+      'onBlur',
+      'ref',
+      'onFocus',
+      'type',
+      'autoCapitalize',
+      'autocomplete',
+      'autocorrect',
+      'onInput'
+    ],
+    ['label', 'description', 'error']
+  )
 
-    <TextField.Input
-      id={props.inputId}
-      onChange={props.onChange}
-      onBlur={props.onBlur}
-      onFocus={props.onFocus}
-      // @ts-expect-error incompatible types
-      onInput={props.onInput}
-      placeholder={props.placeholder}
-      type={props.type}
-      ref={props.ref}
-      autofocus={props.autofocus}
-      class="peer font-secondary data-[invalid]:!border-b-error order-3 !border-b border-transparent !border-b-black/50 bg-transparent py-2 outline-none transition-colors focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
-    />
+  return (
+    <TextField
+      {...rootProps}
+      validationState={localProps.error ? 'invalid' : 'valid'}
+      class="flex flex-col gap-2"
+    >
+      <Show when={localProps.description}>
+        {description => (
+          <TextField.Description
+            as="span"
+            class={statusMessageVariants({ class: 'order-3' })}
+          >
+            {description()}
+          </TextField.Description>
+        )}
+      </Show>
 
-    <Show when={props.label}>
-      <TextField.Label class="order-2 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
-        {props.label}
-      </TextField.Label>
-    </Show>
+      <TextField.Input
+        {...inputProps}
+        placeholder=" "
+        class="peer font-secondary data-[invalid]:!border-b-error order-2 !border-b border-transparent !border-b-black/50 bg-transparent py-2 transition-colors outline-none focus:!border-b-black disabled:cursor-not-allowed disabled:opacity-50"
+      />
 
-    <Show when={props.error}>
-      <TextField.ErrorMessage
-        as="span"
-        class={statusMessageVariants({
-          variant: 'error',
-          class: 'animate-show order-4'
-        })}
-      >
-        {props.error}
-      </TextField.ErrorMessage>
-    </Show>
-  </TextField>
-)
+      <Show when={localProps.label}>
+        {label => (
+          <TextField.Label class="order-1 -mb-4 origin-left translate-y-[25px] self-start text-black/50 transition-transform peer-not-placeholder-shown:translate-y-0 peer-not-placeholder-shown:scale-75 peer-focus:translate-y-0 peer-focus:scale-75">
+            {label()}
+          </TextField.Label>
+        )}
+      </Show>
+
+      <Show when={localProps.error}>
+        {error => (
+          <TextField.ErrorMessage
+            as="span"
+            class={statusMessageVariants({
+              variant: 'error',
+              class: 'animate-reveal order-4'
+            })}
+          >
+            {error()}
+          </TextField.ErrorMessage>
+        )}
+      </Show>
+    </TextField>
+  )
+}

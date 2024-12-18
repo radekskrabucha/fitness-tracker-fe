@@ -2,12 +2,11 @@ import {
   Skeleton as KobalteSkeleton,
   type SkeletonRootProps
 } from '@kobalte/core/skeleton'
-import type { Component } from 'solid-js'
-import { splitProps } from 'solid-js/types/server/index.js'
+import { splitProps, type ParentComponent } from 'solid-js'
 import type { WithClass } from '~/types/common'
 import { cn } from '~/utils/styles'
 
-export const Skeleton: Component<WithClass<SkeletonRootProps>> = props => {
+export const Skeleton: ParentComponent<WithClass<SkeletonRootProps>> = props => {
   const [localProps, others] = splitProps(props, ['class'])
 
   return (

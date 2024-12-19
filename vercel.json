@@ -22,7 +22,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://ricoculo-be.vercel.app/api/$1"
+      "destination": "https://fitness-tracker-be-fiq6.onrender.com/api/$1"
     }
   ]
 }

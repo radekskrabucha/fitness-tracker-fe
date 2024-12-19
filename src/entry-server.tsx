@@ -34,6 +34,9 @@ export default createHandler(() => (
         <body
           id="app"
           class="relative flex min-h-dvh w-full flex-col items-center overflow-x-hidden bg-white"
+          style={{
+            'min-height': '100dvh'
+          }}
         >
           {children}
           {scripts}

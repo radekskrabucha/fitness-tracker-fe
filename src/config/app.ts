@@ -38,7 +38,7 @@ export const ExternalLink = {
   sourceCode: 'https://github.com/radekskrabucha/fitness-tracker-fe'
 } as const
 
-export const AppName = 'Fitness Tracker'
+export const AppName = 'Rico Culo'
 
 export const defaultSeoTags = {
   description: 'Fitness Tracker app to track your workouts',

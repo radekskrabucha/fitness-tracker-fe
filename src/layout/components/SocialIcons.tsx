@@ -15,15 +15,6 @@ export const SocialIcons: Component = () => (
       />
     </Link>
     <Link
-      href={ExternalLink.twitter}
-      aria-label="Twitter"
-    >
-      <Icon
-        icon="twitter"
-        class="h-6 w-6 fill-current transition-colors duration-150 hover:text-white/50"
-      />
-    </Link>
-    <Link
       href={ExternalLink.sourceCode}
       aria-label="Source Code"
     >

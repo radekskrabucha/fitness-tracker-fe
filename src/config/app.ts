@@ -34,7 +34,6 @@ export const ownerEmail = 'rskrabucha13@gmail.com'
 
 export const ExternalLink = {
   github: 'https://github.com/radekskrabucha',
-  twitter: 'https://twitter.com/radek_1313',
   email: `mailto:${ownerEmail}`,
   sourceCode: 'https://github.com/radekskrabucha/fitness-tracker-fe'
 } as const

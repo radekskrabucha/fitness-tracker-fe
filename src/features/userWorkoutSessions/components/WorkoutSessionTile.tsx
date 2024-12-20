@@ -7,6 +7,7 @@ import {
 import { Badge } from '~/components/Badge'
 import { Card } from '~/components/Card'
 import { Icon } from '~/components/Icon'
+import { Skeleton } from '~/components/Skeleton'
 import { getDisplayDate } from '~/utils/date'
 import type { GetUserWorkoutSessionsResponse } from '../types/response'
 
@@ -97,3 +98,23 @@ export const WorkoutSessionAttribute: Component<
     </div>
   </div>
 )
+
+export const WorkoutSessionTileSkeleton: ParentComponent = props => (
+  <Skeleton class="flex flex-col gap-4 rounded-3xl bg-black/50">
+    <Skeleton class="flex flex-col gap-3 rounded-3xl bg-black/50 p-8">
+      <Skeleton class="min-h-[26px] max-w-[160px]" />
+      <Skeleton class="min-h-[36px] max-w-[180px]" />
+      <Skeleton class="min-h-[28px]" />
+    </Skeleton>
+    <div class="flex flex-col gap-10 p-8">
+      <div class="flex flex-row flex-wrap gap-10">
+        <WorkoutSessionAttributeSkeleton />
+        <WorkoutSessionAttributeSkeleton />
+      </div>
+      <Skeleton class="min-h-[100px]" />
+      {props.children}
+    </div>
+  </Skeleton>
+)
+
+const WorkoutSessionAttributeSkeleton = () => <Skeleton class="min-h-[72px]" />

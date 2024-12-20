@@ -1,7 +1,11 @@
 import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
+import { Skeleton } from '~/components/Skeleton'
 import type { GetWorkoutPlanResponse } from '../types/response'
-import { WorkoutExerciseAttributeTile } from './WorkoutExerciseAttributeTile'
+import {
+  WorkoutExerciseAttributeTile,
+  WorkoutExerciseAttributeTileSkeleton
+} from './WorkoutExerciseAttributeTile'
 
 type WorkoutExerciseProps =
   GetWorkoutPlanResponse['workouts'][number]['exercises'][number] & {
@@ -34,4 +38,20 @@ export const WorkoutExercise: Component<WorkoutExerciseProps> = props => (
       </div>
     </Show>
   </div>
+)
+
+export const WorkoutExerciseSkeleton = () => (
+  <Skeleton class="flex flex-col gap-4 rounded-3xl bg-black/50 px-8 py-6">
+    <Skeleton class="min-h-[28px] max-w-[200px]" />
+    <Skeleton class="min-h-[40px]" />
+    <div class="flex flex-wrap gap-4">
+      <Skeleton class="min-h-[26px] max-w-[60px]" />
+      <Skeleton class="min-h-[26px] max-w-[60px]" />
+      <Skeleton class="min-h-[26px] max-w-[60px]" />
+    </div>
+    <div class="mt-6 flex flex-row flex-wrap gap-6">
+      <WorkoutExerciseAttributeTileSkeleton />
+      <WorkoutExerciseAttributeTileSkeleton />
+    </div>
+  </Skeleton>
 )

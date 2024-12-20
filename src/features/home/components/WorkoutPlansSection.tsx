@@ -7,7 +7,10 @@ import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getUserWorkoutPlansQueryOptions } from '~/features/userWorkoutPlan/actions'
-import { WorkoutPlanCard } from '~/features/workoutPlans/components/WorkoutPlanCard'
+import {
+  WorkoutPlanCard,
+  WorkoutPlanCardSkeleton
+} from '~/features/workoutPlans/components/WorkoutPlanCard'
 
 type WorkoutPlansSectionProps = {
   userId: string
@@ -42,6 +45,7 @@ export const WorkoutPlansSection: Component<
         query={getUserWorkoutPlansQuery}
         isDataEmpty={res => res?.data.length === 0}
         noDataFallback={<NoWorkoutPlans />}
+        loadingFallback={<WorkoutPlansSkeleton />}
       >
         {workoutPlans => (
           <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
@@ -80,4 +84,11 @@ const NoWorkoutPlans = () => (
       Explore workout plans
     </Link>
   </Card>
+)
+
+const WorkoutPlansSkeleton = () => (
+  <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
+    <WorkoutPlanCardSkeleton />
+    <WorkoutPlanCardSkeleton />
+  </div>
 )

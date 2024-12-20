@@ -14,7 +14,7 @@ export const Skeleton: ParentComponent<
   return (
     <KobalteSkeleton
       class={cn(
-        'flex-1 rounded-lg bg-black/5 data-[animate=true]:animate-pulse data-[visible=false]:bg-transparent',
+        'flex-1 rounded-lg bg-white/50 data-[animate=true]:animate-pulse data-[visible=false]:bg-transparent',
         localProps.class
       )}
       {...others}

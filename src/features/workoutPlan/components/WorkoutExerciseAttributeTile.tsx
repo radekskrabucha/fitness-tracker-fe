@@ -1,5 +1,6 @@
 import { Match, Switch, type Component } from 'solid-js'
 import { Icon } from '~/components/Icon'
+import { Skeleton } from '~/components/Skeleton'
 import type { WorkoutExerciseAttribute } from '~/models/workoutExerciseAttributes'
 import type { GetWorkoutPlanResponse } from '../types/response'
 import { getWorkoutExerciseAttributeName } from '../utils'
@@ -91,4 +92,8 @@ export const WorkoutExerciseAttributeTile: Component<
       )}
     </Match>
   </Switch>
+)
+
+export const WorkoutExerciseAttributeTileSkeleton = () => (
+  <Skeleton class="min-h-[64px]" />
 )

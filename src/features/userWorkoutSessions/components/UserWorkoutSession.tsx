@@ -7,8 +7,14 @@ import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getUserWorkoutSessionQueryOptions } from '../actions'
-import { WorkoutSessionExercise } from './WorkoutSessionExercise'
-import { WorkoutSessionTile } from './WorkoutSessionTile'
+import {
+  WorkoutSessionExercise,
+  WorkoutSessionExerciseSkeleton
+} from './WorkoutSessionExercise'
+import {
+  WorkoutSessionTile,
+  WorkoutSessionTileSkeleton
+} from './WorkoutSessionTile'
 
 type UserWorkoutSessionPageParams = {
   id: string
@@ -24,7 +30,10 @@ export const UserWorkoutSession: Component<UserWorkoutSessionProps> = props => {
   )
 
   return (
-    <QueryBoundary query={getUserWorkoutSessionQuery}>
+    <QueryBoundary
+      query={getUserWorkoutSessionQuery}
+      loadingFallback={<UserWorkoutSessionSkeleton />}
+    >
       {data => (
         <>
           <WorkoutSessionTile {...data}>
@@ -59,3 +68,12 @@ export const UserWorkoutSession: Component<UserWorkoutSessionProps> = props => {
     </QueryBoundary>
   )
 }
+
+const UserWorkoutSessionSkeleton = () => (
+  <WorkoutSessionTileSkeleton>
+    <div class="grid grid-cols-1 gap-8">
+      <WorkoutSessionExerciseSkeleton />
+      <WorkoutSessionExerciseSkeleton />
+    </div>
+  </WorkoutSessionTileSkeleton>
+)

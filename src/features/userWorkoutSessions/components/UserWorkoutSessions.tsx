@@ -6,9 +6,13 @@ import { Header } from '~/components/Header'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
 import { getUserWorkoutSessionsQueryOptions } from '../actions'
-import { WorkoutSessionTile } from './WorkoutSessionTile'
+import {
+  WorkoutSessionTile,
+  WorkoutSessionTileSkeleton
+} from './WorkoutSessionTile'
 
 type UserWorkoutSessionsProps = {
   userId: string
@@ -25,6 +29,7 @@ export const UserWorkoutSessions: Component<
     <QueryBoundary
       query={getUserWorkoutSessionsQuery}
       noDataFallback={<NoWorkoutSessions />}
+      loadingFallback={<UserWorkoutSessionsSkeleton />}
     >
       {data => (
         <>
@@ -92,4 +97,25 @@ const NoWorkoutSessions = () => (
       Explore workout plans
     </Link>
   </Card>
+)
+
+const UserWorkoutSessionsSkeleton = () => (
+  <>
+    <div class="flex flex-col gap-10">
+      <WorkoutSessionTileSkeleton>
+        <Skeleton class="min-h-[20px] max-w-[88px] self-end" />
+      </WorkoutSessionTileSkeleton>
+      <WorkoutSessionTileSkeleton>
+        <Skeleton class="min-h-[20px] max-w-[88px] self-end" />
+      </WorkoutSessionTileSkeleton>
+    </div>
+
+    <Skeleton class="flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl bg-black/50 px-8 py-4">
+      <div class="flex flex-1 flex-col gap-4">
+        <Skeleton class="min-h-[36px] max-w-[400px]" />
+        <Skeleton class="min-h-[28px] max-w-[685px]" />
+      </div>
+      <Skeleton class="min-h-[36px] max-w-[64px]" />
+    </Skeleton>
+  </>
 )

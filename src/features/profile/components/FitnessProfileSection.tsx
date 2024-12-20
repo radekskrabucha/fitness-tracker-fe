@@ -5,6 +5,7 @@ import { Card } from '~/components/Card'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
 import { calculateAge } from '~/utils/date'
 import { getUserFitnessProfileQueryOptions } from '../actions'
@@ -43,6 +44,7 @@ export const FitnessProfileSection: Component<
           query={getUserFitnessProfileQuery}
           errorFallback={() => <NotFoundProfile />}
           noDataFallback={<NotFoundProfile />}
+          loadingFallback={<FitnessTilesSkeleton />}
         >
           {profile => (
             <div class="flex flex-row flex-wrap gap-10">
@@ -169,5 +171,25 @@ const NotFoundProfile = () => (
     >
       Create fitness profile
     </Link>
+  </div>
+)
+
+export const FitnessProfileSectionSkeleton = () => (
+  <section class="layout-section">
+    <Skeleton class="flex flex-col gap-10 rounded-3xl p-8">
+      <Skeleton class="min-h-[40px] max-w-[200px]" />
+      <FitnessTilesSkeleton />
+    </Skeleton>
+  </section>
+)
+
+const FitnessTilesSkeleton = () => (
+  <div class="flex flex-row flex-wrap gap-10">
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
+    <Skeleton class="min-h-[72px] min-w-[170px] flex-1" />
   </div>
 )

@@ -1,6 +1,7 @@
 import { createQuery } from '@tanstack/solid-query'
 import type { ComponentProps } from 'solid-js'
 import type { Component, JSXElement } from 'solid-js'
+import { Portal } from 'solid-js/web'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import type { User } from '~/models/user'
@@ -19,10 +20,18 @@ export const SessionWrapper: Component<SessionWrapperProps> = props => {
     <QueryBoundary
       query={getSessionQuery}
       noDataFallback={props.noDataFallback}
-      loadingFallback={props.loadingFallback}
+      loadingFallback={props.loadingFallback || <LoadingFallback />}
       errorFallback={props.errorFallback}
     >
       {({ user }) => props.children(user)}
     </QueryBoundary>
   )
 }
+
+const LoadingFallback = () => (
+  <Portal>
+    <div class="animate-show bg-background/10 fixed inset-0 z-1000 flex items-center justify-center backdrop-blur-sm">
+      <span class="animate-bounce text-9xl font-bold">🍑</span>
+    </div>
+  </Portal>
+)

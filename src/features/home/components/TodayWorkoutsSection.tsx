@@ -6,6 +6,7 @@ import { Header } from '~/components/Header'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
+import { WorkoutPlanCardSkeleton } from '~/features/workoutPlans/components/WorkoutPlanCard'
 import { getUserWorkoutPlansQueryOptions } from '../actions'
 import { TodayWorkoutTile } from './TodayWorkoutTile'
 
@@ -33,6 +34,7 @@ export const TodayWorkoutsSection: Component<
         <QueryBoundary
           query={getUserWorkoutPlansQuery}
           noDataFallback={<NoWorkoutsYet />}
+          loadingFallback={<WorkoutPlanCardSkeleton />}
         >
           {data => (
             <Index each={data}>

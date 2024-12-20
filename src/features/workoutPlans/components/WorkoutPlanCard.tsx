@@ -4,6 +4,7 @@ import { buttonVariants } from '~/components/Button'
 import { cardVariants } from '~/components/Card'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
+import { Skeleton } from '~/components/Skeleton'
 import type { Workout } from '~/models/workout'
 import type { GetWorkoutPlansResponse } from '../types/response'
 import { getWorkoutPlanDifficultyName } from '../utils'
@@ -31,7 +32,6 @@ export const WorkoutPlanCard: Component<WorkoutPlanCardProps> = props => (
         )}
       </Show>
     </div>
-    <span class="w-" />
     <div class="mt-auto flex flex-col gap-6 p-8">
       <Show when={getWorkoutPlanDifficultyName(props.difficultyLevel)}>
         {difficultyName => <Badge>{difficultyName()}</Badge>}
@@ -70,4 +70,20 @@ const Workout: Component<WorkoutProps> = props => (
       )}
     </Show>
   </div>
+)
+
+export const WorkoutPlanCardSkeleton = () => (
+  <Skeleton class="flex flex-col rounded-3xl">
+    <Skeleton class="flex flex-col gap-3 rounded-3xl bg-black/50 px-8 py-4">
+      <Skeleton class="min-h-[80px] rounded-xl" />
+      <Skeleton class="min-h-[48px] rounded-xl" />
+    </Skeleton>
+    <div class="mt-auto flex flex-col gap-6 p-8">
+      <div class="grid grid-cols-2 gap-4">
+        <Skeleton class="min-h-[88px]" />
+        <Skeleton class="min-h-[88px]" />
+      </div>
+      <Skeleton class="min-h-[20px] max-w-[88px] self-end" />
+    </div>
+  </Skeleton>
 )

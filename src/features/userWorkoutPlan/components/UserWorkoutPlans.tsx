@@ -5,8 +5,12 @@ import { Card } from '~/components/Card'
 import { Header } from '~/components/Header'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
-import { WorkoutPlanCard } from '~/features/workoutPlans/components/WorkoutPlanCard'
+import {
+  WorkoutPlanCard,
+  WorkoutPlanCardSkeleton
+} from '~/features/workoutPlans/components/WorkoutPlanCard'
 import { getUserWorkoutPlansQueryOptions } from '../actions'
 
 type UserWorkoutPlansProps = {
@@ -22,6 +26,7 @@ export const UserWorkoutPlans: Component<UserWorkoutPlansProps> = props => {
     <QueryBoundary
       query={getUserWorkoutPlansQuery}
       noDataFallback={<NoWorkoutPlans />}
+      loadingFallback={<WorkoutPlansSkeleton />}
     >
       {workoutPlans => (
         <>
@@ -73,4 +78,21 @@ const NoWorkoutPlans = () => (
       Explore workout plans
     </Link>
   </Card>
+)
+
+export const WorkoutPlansSkeleton = () => (
+  <>
+    <div class="grid grid-cols-2 gap-10 max-lg:grid-cols-1">
+      <WorkoutPlanCardSkeleton />
+      <WorkoutPlanCardSkeleton />
+    </div>
+
+    <Skeleton class="flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl bg-black/50 px-8 py-4">
+      <div class="flex flex-1 flex-col gap-4">
+        <Skeleton class="min-h-[36px] max-w-[400px]" />
+        <Skeleton class="min-h-[28px] max-w-[685px]" />
+      </div>
+      <Skeleton class="min-h-[36px] max-w-[64px]" />
+    </Skeleton>
+  </>
 )

@@ -4,7 +4,11 @@ import { Index, Show, type Component } from 'solid-js'
 import { Badge } from '~/components/Badge'
 import { Header } from '~/components/Header'
 import { QueryBoundary } from '~/components/QueryBoundary'
-import { WorkoutCard } from '~/features/workoutPlan/components/WorkoutCard'
+import { Skeleton } from '~/components/Skeleton'
+import {
+  WorkoutCard,
+  WorkoutCardSkeleton
+} from '~/features/workoutPlan/components/WorkoutCard'
 import { getWorkoutPlanDifficultyName } from '~/features/workoutPlans/utils'
 import { getUserWorkoutPlanQueryOptions } from '../actions'
 import { AddWorkoutSessionModalContent } from './AddWorkoutSessionModalContent'
@@ -24,7 +28,10 @@ export const WorkoutPlan: Component<WorkoutPlanProps> = props => {
   )
 
   return (
-    <QueryBoundary query={getUserWorkoutPlanQuery}>
+    <QueryBoundary
+      query={getUserWorkoutPlanQuery}
+      loadingFallback={<WorkoutPlanSkeleton />}
+    >
       {data => (
         <>
           <Header
@@ -65,3 +72,17 @@ export const WorkoutPlan: Component<WorkoutPlanProps> = props => {
     </QueryBoundary>
   )
 }
+
+const WorkoutPlanSkeleton = () => (
+  <>
+    <Skeleton class="flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl px-8 py-4">
+      <div class="flex flex-1 flex-col gap-4">
+        <Skeleton class="min-h-[36px] max-w-[400px]" />
+        <Skeleton class="min-h-[28px] max-w-[685px]" />
+      </div>
+      <Skeleton class="min-h-[36px] max-w-[64px]" />
+    </Skeleton>
+
+    <WorkoutCardSkeleton />
+  </>
+)

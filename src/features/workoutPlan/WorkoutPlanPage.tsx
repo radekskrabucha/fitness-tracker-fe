@@ -6,10 +6,11 @@ import { buttonVariants } from '~/components/Button'
 import { Header } from '~/components/Header'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
 import { getWorkoutPlanDifficultyName } from '~/features/workoutPlans/utils'
 import { getWorkoutPlanQueryOptions } from './actions'
-import { WorkoutCard } from './components/WorkoutCard'
+import { WorkoutCard, WorkoutCardSkeleton } from './components/WorkoutCard'
 
 export type WorkoutPlanPageParams = {
   id: string
@@ -24,7 +25,10 @@ export const WorkoutPlanPage: FlowComponent = props => {
   return (
     <>
       <section class="layout-section gap-12">
-        <QueryBoundary query={getWorkoutPlanQuery}>
+        <QueryBoundary
+          query={getWorkoutPlanQuery}
+          loadingFallback={<WorkoutPlanSkeleton />}
+        >
           {data => (
             <>
               <Header
@@ -81,3 +85,25 @@ export const WorkoutPlanPage: FlowComponent = props => {
     </>
   )
 }
+
+const WorkoutPlanSkeleton = () => (
+  <>
+    <Skeleton class="flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl px-8 py-4">
+      <div class="flex flex-1 flex-col gap-4">
+        <Skeleton class="min-h-[36px] max-w-[400px]" />
+        <Skeleton class="min-h-[28px] max-w-[685px]" />
+      </div>
+      <Skeleton class="min-h-[36px] max-w-[64px]" />
+    </Skeleton>
+
+    <WorkoutCardSkeleton />
+
+    <Skeleton class="flex items-center justify-between gap-x-8 gap-y-4 rounded-3xl px-8 py-4">
+      <div class="flex flex-1 flex-col gap-4">
+        <Skeleton class="min-h-[36px] max-w-[400px]" />
+        <Skeleton class="min-h-[28px] max-w-[685px]" />
+      </div>
+      <Skeleton class="min-h-[36px] max-w-[64px]" />
+    </Skeleton>
+  </>
+)

@@ -1,8 +1,9 @@
 import { Index, Show, type JSXElement, type ParentComponent } from 'solid-js'
 import { Card } from '~/components/Card'
+import { Skeleton } from '~/components/Skeleton'
 import type { GetWorkoutPlanResponse } from '../types/response'
 import { WorkoutAttributes } from './WorkoutAttributes'
-import { WorkoutExercise } from './WorkoutExercise'
+import { WorkoutExercise, WorkoutExerciseSkeleton } from './WorkoutExercise'
 
 type WorkoutCardProps = GetWorkoutPlanResponse['workouts'][number] & {
   action?: JSXElement
@@ -39,4 +40,25 @@ export const WorkoutCard: ParentComponent<WorkoutCardProps> = props => (
     </div>
     <Show when={props.children}>{props.children}</Show>
   </Card>
+)
+
+export const WorkoutCardSkeleton = () => (
+  <Skeleton class="flex flex-col gap-4 rounded-3xl bg-black/50">
+    <Skeleton class="flex flex-col gap-3 rounded-3xl bg-black/50 p-8">
+      <Skeleton class="min-h-[36px] max-w-[180px]" />
+      <Skeleton class="min-h-[28px]" />
+
+      <div class="mt-4 flex gap-8">
+        <Skeleton class="min-h-[64px]" />
+        <Skeleton class="min-h-[64px]" />
+        <Skeleton class="min-h-[64px]" />
+      </div>
+    </Skeleton>
+    <div class="grid grid-cols-2 gap-8 p-8 max-md:grid-cols-1">
+      <WorkoutExerciseSkeleton />
+      <WorkoutExerciseSkeleton />
+      <WorkoutExerciseSkeleton />
+      <WorkoutExerciseSkeleton />
+    </div>
+  </Skeleton>
 )

@@ -3,13 +3,23 @@ import { Index } from 'solid-js'
 import { QueryBoundary } from '~/components/QueryBoundary'
 import { InternalLink } from '~/config/app'
 import { getWorkoutPlansQueryOptions } from '../actions'
-import { WorkoutPlanCard } from './WorkoutPlanCard'
+import { WorkoutPlanCard, WorkoutPlanCardSkeleton } from './WorkoutPlanCard'
 
 export const WorkoutPlans = () => {
   const getWorkoutPlansQuery = createQuery(getWorkoutPlansQueryOptions)
 
   return (
-    <QueryBoundary query={getWorkoutPlansQuery}>
+    <QueryBoundary
+      query={getWorkoutPlansQuery}
+      loadingFallback={
+        <>
+          <WorkoutPlanCardSkeleton />
+          <WorkoutPlanCardSkeleton />
+          <WorkoutPlanCardSkeleton />
+          <WorkoutPlanCardSkeleton />
+        </>
+      }
+    >
       {data => (
         <Index each={data}>
           {workoutPlan => (

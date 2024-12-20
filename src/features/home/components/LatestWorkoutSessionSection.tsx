@@ -6,9 +6,13 @@ import { Header } from '~/components/Header'
 import { Icon } from '~/components/Icon'
 import { Link } from '~/components/Link'
 import { QueryBoundary } from '~/components/QueryBoundary'
+import { Skeleton } from '~/components/Skeleton'
 import { InternalLink } from '~/config/app'
 import { getUserLatestWorkoutSessionQueryOptions } from '~/features/userWorkoutSessions/actions'
-import { WorkoutSessionTile } from '~/features/userWorkoutSessions/components/WorkoutSessionTile'
+import {
+  WorkoutSessionTile,
+  WorkoutSessionTileSkeleton
+} from '~/features/userWorkoutSessions/components/WorkoutSessionTile'
 
 type LatestWorkoutSessionSectionProps = {
   userId: string
@@ -41,6 +45,7 @@ export const LatestWorkoutSessionSection: Component<
         query={getUserLatestWorkoutSessionQuery}
         noDataFallback={<NoWorkoutSession />}
         errorFallback={() => <NoWorkoutSession />}
+        loadingFallback={<LatestWorkoutSessionSkeleton />}
       >
         {workoutSession => (
           <Link href={InternalLink.userWorkoutSession(workoutSession.id)}>
@@ -84,4 +89,10 @@ const NoWorkoutSession = () => (
       See my workout plans
     </Link>
   </Card>
+)
+
+const LatestWorkoutSessionSkeleton = () => (
+  <WorkoutSessionTileSkeleton>
+    <Skeleton class="min-h-[20px] max-w-[88px] self-end" />
+  </WorkoutSessionTileSkeleton>
 )

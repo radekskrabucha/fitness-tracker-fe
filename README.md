@@ -13,7 +13,6 @@ The frontend app is built with [my SolidStart template](https://github.com/radek
 - **SolidStart**: A framework for building SolidJS applications.
 - **TypeScript**: A typed superset of JavaScript that adds optional static typing.
 - **Tailwind CSS v4**: A utility-first CSS framework that provides a simple and efficient way to style your web pages.
-- **Commitlint**: A tool for enforcing conventional commit messages.
 - **Prettier**: A code formatter that enforces a consistent style across your codebase.
 - **Tanstack SolidQuery**: A library for managing and querying data in SolidJS applications.
 - **Sprite Icons**: Automatically generate icon-sprite.svg from SVG files.
@@ -64,4 +63,3 @@ This template comes with a few useful scripts that can help you manage your Soli
 - `pnpm lint:fix`: Runs the ESLint tool to automatically fix any errors or warnings.
 - `pnpm format`: Formats your code using Prettier.
 - `pnpm type-check`: Runs the TypeScript compiler to check for any type errors.
-- `pnpm commit`: Runs the commitlint tool to check for any errors or warnings.

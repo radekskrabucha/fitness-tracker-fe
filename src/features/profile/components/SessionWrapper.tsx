@@ -2,7 +2,8 @@ import { createQuery } from '@tanstack/solid-query'
 import type { ComponentProps } from 'solid-js'
 import type { Component, JSXElement } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { QueryBoundary } from '~/components/QueryBoundary'
+import { Card } from '~/components/Card'
+import { DefaultErrorFallback, QueryBoundary } from '~/components/QueryBoundary'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import type { User } from '~/models/user'
 
@@ -34,4 +35,14 @@ const LoadingFallback = () => (
       <span class="animate-bounce text-9xl font-bold">🍑</span>
     </div>
   </Portal>
+)
+
+type ErrorFallbackProps = ComponentProps<typeof DefaultErrorFallback>
+
+export const ErrorCardFallback: Component<ErrorFallbackProps> = props => (
+  <section class="layout-section">
+    <Card>
+      <DefaultErrorFallback {...props} />
+    </Card>
+  </section>
 )

@@ -5,13 +5,16 @@ import {
   FitnessProfileSection,
   FitnessProfileSectionSkeleton
 } from './components/FitnessProfileSection'
-import { SessionWrapper } from './components/SessionWrapper'
+import { ErrorCardFallback, SessionWrapper } from './components/SessionWrapper'
 import { UserSection } from './components/UserSection'
 
 export const ProfilePage: FlowComponent = props => (
   <>
     <ClientOnly>
-      <SessionWrapper loadingFallback={<ProfileLoadingSkeleton />}>
+      <SessionWrapper
+        loadingFallback={<ProfileLoadingSkeleton />}
+        errorFallback={ErrorCardFallback}
+      >
         {user => (
           <>
             <UserSection user={user} />

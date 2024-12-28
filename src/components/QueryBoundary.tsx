@@ -19,10 +19,8 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
   return (
     <Suspense fallback={props.loadingFallback}>
       <ErrorBoundary
-        fallback={(error: E, reset) => {
-          console.error(error)
-
-          return props.errorFallback ? (
+        fallback={(error: E, reset) =>
+          props.errorFallback ? (
             props.errorFallback({
               error,
               retry: async () => {
@@ -42,7 +40,7 @@ export function QueryBoundary<T = unknown, E extends Error = Error>(
               isRefetching={props.query.isFetching}
             />
           )
-        }}
+        }
       >
         <Switch>
           <Match
@@ -81,7 +79,7 @@ type ErrorFallbackProps<E extends Error = Error> = {
   isRefetching: boolean
 }
 
-const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
+export const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
     <h2 class="text-3xl font-bold">Oopss... we've got an error! 🚧</h2>
     <Show
@@ -115,9 +113,9 @@ const DefaultErrorFallback: Component<ErrorFallbackProps> = props => (
   </div>
 )
 
-const DefaultNoDataFallback: Component = () => (
+export const DefaultNoDataFallback: Component = () => (
   <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center text-balance">
-    <h2 class="text-3xl font-bold">Upsss... not found 🤔</h2>
+    <h2 class="text-3xl font-bold">Oopss... not found 🤔</h2>
     <p class="text-white/50">
       Seems like there is nothing here yet.🤷
       <br />

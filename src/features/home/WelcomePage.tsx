@@ -129,7 +129,7 @@ type FeatureProps = {
 }
 
 const Feature: Component<FeatureProps> = props => (
-  <div class="flex items-center gap-6 not-even:flex-row-reverse not-even:text-right">
+  <div class="flex items-center gap-6 not-even:flex-row-reverse not-even:text-right max-sm:!flex-col max-sm:!text-left">
     <Image
       img={{
         src: props.imgSrc,

@@ -1,6 +1,12 @@
-# SolidStart App Template
+# Fitness Tracker App
 
-This is a starter template for SolidStart projects. It includes a basic layout and a few other features to get you started.
+Visit the [Live app](https://ricoculo.vercel.app) to see the app in action.
+
+This app is a part of the Fitness Tracker project, [here you can find the BE repo](https://github.com/radekskrabucha/fitness-tracker-be).
+
+The frontend app is built with [my SolidStart template](https://github.com/radekskrabucha/solid-start-template).
+
+⚠️ When visiting keep in mind that the BE app after some time of inactivity will be shut down. So probably you will need to refresh the page after ~30-60 seconds.
 
 ## Features
 
@@ -18,12 +24,12 @@ This is a starter template for SolidStart projects. It includes a basic layout a
 
 ## Getting Started
 
-To get started with this template, follow these steps:
+To get started with this app, follow these steps:
 
 1. **Clone the repository**: Use the following command to clone the repository:
 
 ```bash
-git clone git@github.com:radekskrabucha/solid-start-template.git
+git clone git@github.com:radekskrabucha/fitness-tracker-fe.git
 ```
 
 2. **Install dependencies**: Navigate to the project directory and run the following command to install the dependencies:
@@ -59,19 +65,3 @@ This template comes with a few useful scripts that can help you manage your Soli
 - `pnpm format`: Formats your code using Prettier.
 - `pnpm type-check`: Runs the TypeScript compiler to check for any type errors.
 - `pnpm commit`: Runs the commitlint tool to check for any errors or warnings.
-
-## Deployment
-
-Visit the [SolidStart documentation](https://docs.solidjs.com/guides/deploying-your-app#deploying-your-app) for more information on how to deploy your SolidStart App Template. Currently, this template is configured to deploy to Vercel. If you want to deploy to another platform, you will need to modify the app.config.ts file to include the necessary configuration for your platform.
-
-## Contributing
-
-If you have any questions or suggestions for this template, feel free to open an issue or submit a pull request. I'm always happy to help improve this template and make it even better for your SolidJS projects.
-
-## License
-
-This template is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-
-## Contact
-
-If you have any questions or suggestions, feel free to reach out to me at [rskrabucha13@gmail.com](mailto:rskrabucha13@gmail.com). I'm always happy to help improve this template and make it even better for your SolidJS projects. Thank you for using SolidStart App Template!

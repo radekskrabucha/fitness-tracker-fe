@@ -1,6 +1,6 @@
 import { ofetch, type FetchOptions } from 'ofetch'
 
-const FETCH_DEFAULT_TIMEOUT = 20000
+const FETCH_DEFAULT_TIMEOUT = 180_000 // 3 minutes
 const FETCH_DEFAULT_CONFIG: FetchOptions = {
   timeout: FETCH_DEFAULT_TIMEOUT,
   retry: 0

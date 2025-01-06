@@ -85,8 +85,8 @@ importers:
         specifier: 14.5.2
         version: 14.5.2(@testing-library/dom@10.4.0)
       '@trivago/prettier-plugin-sort-imports':
-        specifier: 5.2.0
-        version: 5.2.0(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)
+        specifier: 5.2.1
+        version: 5.2.1(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)
       eslint:
         specifier: 9.17.0
         version: 9.17.0(jiti@2.4.1)
@@ -107,7 +107,7 @@ importers:
         version: 3.4.2
       prettier-plugin-tailwindcss:
         specifier: 0.6.9
-        version: 0.6.9(@trivago/prettier-plugin-sort-imports@5.2.0(@vue/compiler-sfc@3.5.12)(prettier@3.4.2))(prettier@3.4.2)
+        version: 0.6.9(@trivago/prettier-plugin-sort-imports@5.2.1(@vue/compiler-sfc@3.5.12)(prettier@3.4.2))(prettier@3.4.2)
       tailwindcss:
         specifier: 4.0.0-beta.8
         version: 4.0.0-beta.8
@@ -1353,14 +1353,14 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
-  '@trivago/prettier-plugin-sort-imports@5.2.0':
-    resolution: {integrity: sha512-yEIJ7xMKYQwyNRjxSdi4Gs37iszikAjxfky+3hu9bn24u8eHLJNDMAoOTyowp8p6EpSl8IQMdkfBx+WnJTttsw==}
+  '@trivago/prettier-plugin-sort-imports@5.2.1':
+    resolution: {integrity: sha512-NDZndt0fmVThIx/8cExuJHLZagUVzfGCoVrwH9x6aZvwfBdkrDFTYujecek6X2WpG4uUFsVaPg5+aNQPSyjcmw==}
     engines: {node: '>18.12'}
     peerDependencies:
       '@vue/compiler-sfc': 3.x
       prettier: 2.x - 3.x
       prettier-plugin-svelte: 3.x
-      svelte: 4.x
+      svelte: 4.x || 5.x
     peerDependenciesMeta:
       '@vue/compiler-sfc':
         optional: true
@@ -3617,6 +3617,7 @@ packages:
 
   shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
+    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
 
   shikiji@0.9.19:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
@@ -4398,7 +4399,7 @@ snapshots:
       '@babel/parser': 7.26.2
       '@babel/template': 7.25.9
       '@babel/types': 7.26.0
-      debug: 4.3.7
+      debug: 4.4.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -5334,7 +5335,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.0
 
-  '@trivago/prettier-plugin-sort-imports@5.2.0(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)':
+  '@trivago/prettier-plugin-sort-imports@5.2.1(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)':
     dependencies:
       '@babel/generator': 7.26.2
       '@babel/parser': 7.26.2
@@ -5456,7 +5457,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.15.0
       '@typescript-eslint/visitor-keys': 8.15.0
-      debug: 4.3.7
+      debug: 4.4.0
       fast-glob: 3.3.2
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -6238,13 +6239,13 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.3.7
+      debug: 4.4.0
     transitivePeerDependencies:
       - supports-color
 
   agent-base@7.1.1:
     dependencies:
-      debug: 4.3.7
+      debug: 4.4.0
     transitivePeerDependencies:
       - supports-color
 
@@ -7161,7 +7162,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.7
+      debug: 4.4.0
     transitivePeerDependencies:
       - supports-color
 
@@ -7217,7 +7218,7 @@ snapshots:
     dependencies:
       '@ioredis/commands': 1.2.0
       cluster-key-slot: 1.1.2
-      debug: 4.3.7
+      debug: 4.4.0
       denque: 2.1.0
       lodash.defaults: 4.2.0
       lodash.isarguments: 3.1.0
@@ -7835,11 +7836,11 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.9(@trivago/prettier-plugin-sort-imports@5.2.0(@vue/compiler-sfc@3.5.12)(prettier@3.4.2))(prettier@3.4.2):
+  prettier-plugin-tailwindcss@0.6.9(@trivago/prettier-plugin-sort-imports@5.2.1(@vue/compiler-sfc@3.5.12)(prettier@3.4.2))(prettier@3.4.2):
     dependencies:
       prettier: 3.4.2
     optionalDependencies:
-      '@trivago/prettier-plugin-sort-imports': 5.2.0(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)
+      '@trivago/prettier-plugin-sort-imports': 5.2.1(@vue/compiler-sfc@3.5.12)(prettier@3.4.2)
 
   prettier@3.4.2: {}
 

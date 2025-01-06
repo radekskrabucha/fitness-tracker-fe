@@ -39,8 +39,8 @@ importers:
         specifier: 0.41.0
         version: 0.41.0(zod@3.24.1)
       better-auth:
-        specifier: 1.1.6
-        version: 1.1.6
+        specifier: 1.1.10
+        version: 1.1.10
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -1950,11 +1950,11 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  better-auth@1.1.6:
-    resolution: {integrity: sha512-avoj9TxEm4K1IE8E4PBcGNQdoHaY8LR3O4vEiLK78l1CyM7lK1frd9NVqUbxz8RR95mR9SF87FKlyorQ+SW0Og==}
+  better-auth@1.1.10:
+    resolution: {integrity: sha512-glVx/Kd08nupFlXO2+bN6pYMoK2Y7rr04Jrix45S9dLr+sTQw/ysVNW/88Nf+Q/VoAL8MuXaUxTP3PhFYrlBBg==}
 
-  better-call@0.3.3-beta.4:
-    resolution: {integrity: sha512-txigUTFsjOlE4dfkfhDhu6Gk0I1Xo3S4Nye+nfMKJXknb+WsymcWtqoRUSUGdhOMumM3LT9R3QttTUxwny9lWQ==}
+  better-call@0.3.3:
+    resolution: {integrity: sha512-N4lDVm0NGmFfDJ0XMQ4O83Zm/3dPlvIQdxvwvgSLSkjFX5PM4GUYSVAuxNzXN27QZMHDkrJTWUqxBrm4tPC3eA==}
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -3601,9 +3601,6 @@ packages:
   set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
 
-  set-cookie-parser@2.7.1:
-    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
-
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
@@ -3617,6 +3614,7 @@ packages:
 
   shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
+    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
 
   shikiji@0.9.19:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
@@ -6361,7 +6359,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  better-auth@1.1.6:
+  better-auth@1.1.10:
     dependencies:
       '@better-auth/utils': 0.2.3
       '@better-fetch/fetch': 1.1.12
@@ -6369,7 +6367,7 @@ snapshots:
       '@noble/hashes': 1.6.1
       '@simplewebauthn/browser': 13.0.0
       '@simplewebauthn/server': 13.0.0
-      better-call: 0.3.3-beta.4
+      better-call: 0.3.3
       defu: 6.1.4
       jose: 5.9.6
       kysely: 0.27.4
@@ -6378,11 +6376,10 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  better-call@0.3.3-beta.4:
+  better-call@0.3.3:
     dependencies:
       '@better-fetch/fetch': 1.1.12
       rou3: 0.5.1
-      set-cookie-parser: 2.7.1
       uncrypto: 0.1.3
       zod: 3.24.1
 
@@ -8069,8 +8066,6 @@ snapshots:
       - supports-color
 
   set-blocking@2.0.0: {}
-
-  set-cookie-parser@2.7.1: {}
 
   setprototypeof@1.2.0: {}
 

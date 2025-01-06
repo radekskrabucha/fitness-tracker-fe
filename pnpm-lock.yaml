@@ -33,8 +33,8 @@ importers:
         specifier: 0.41.0
         version: 0.41.0(solid-js@1.9.3)
       '@tanstack/solid-query':
-        specifier: 5.62.10
-        version: 5.62.10(solid-js@1.9.3)
+        specifier: 5.62.12
+        version: 5.62.12(solid-js@1.9.3)
       '@tanstack/zod-form-adapter':
         specifier: 0.41.0
         version: 0.41.0(zod@3.24.1)
@@ -1313,16 +1313,16 @@ packages:
   '@tanstack/form-core@0.41.0':
     resolution: {integrity: sha512-626Xfi0C2xB9StzykIOXR/ugx/dUiwY/nY5opCovgXwBNqPEPrN3vMepC//rnGt1/jZmm3/7MW+02Ntc64UAmw==}
 
-  '@tanstack/query-core@5.62.9':
-    resolution: {integrity: sha512-lwePd8hNYhyQ4nM/iRQ+Wz2cDtspGeZZHFZmCzHJ7mfKXt+9S301fULiY2IR2byJYY6Z03T427E5PoVfMexHjw==}
+  '@tanstack/query-core@5.62.12':
+    resolution: {integrity: sha512-6igFeBgymHkCxVgaEk+yiLwkMf9haui/EQLmI3o9CatOyDThEoFKe8toLWvWliZC/Jf+h7NwHi/zjfyLArr1ow==}
 
   '@tanstack/solid-form@0.41.0':
     resolution: {integrity: sha512-xFwC+REaC7yP9k8rjrR4RwfmyRWIWyvoZeqRddCvQmmuPamPnPt6nPDGW7TzfK2MTiOR8rNRVAyg7GOu5AFQpw==}
     peerDependencies:
       solid-js: ^1.6.0
 
-  '@tanstack/solid-query@5.62.10':
-    resolution: {integrity: sha512-C7zUowaY6Sprsk5tGZ85FS0e6CAPDonPvPXnzpSsQoSLMmDyG98MPq8F+u2uroR1T0jLBidHIn+gd1WOc3Y/2Q==}
+  '@tanstack/solid-query@5.62.12':
+    resolution: {integrity: sha512-4XDLhNZ/jLDJQdE5HVxd7VtISbYVJ6AdCnjJd9gslBItmhlWC3u6ih2m1zN3icw/TniWjrEPtRtgWil8wxxYSg==}
     peerDependencies:
       solid-js: ^1.6.0
 
@@ -3617,6 +3617,7 @@ packages:
 
   shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
+    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
 
   shikiji@0.9.19:
     resolution: {integrity: sha512-Kw2NHWktdcdypCj1GkKpXH4o6Vxz8B8TykPlPuLHOGSV8VkhoCLcFOH4k19K4LXAQYRQmxg+0X/eM+m2sLhAkg==}
@@ -5284,7 +5285,7 @@ snapshots:
     dependencies:
       '@tanstack/store': 0.7.0
 
-  '@tanstack/query-core@5.62.9': {}
+  '@tanstack/query-core@5.62.12': {}
 
   '@tanstack/solid-form@0.41.0(solid-js@1.9.3)':
     dependencies:
@@ -5292,9 +5293,9 @@ snapshots:
       '@tanstack/solid-store': 0.7.0(solid-js@1.9.3)
       solid-js: 1.9.3
 
-  '@tanstack/solid-query@5.62.10(solid-js@1.9.3)':
+  '@tanstack/solid-query@5.62.12(solid-js@1.9.3)':
     dependencies:
-      '@tanstack/query-core': 5.62.9
+      '@tanstack/query-core': 5.62.12
       solid-js: 1.9.3
 
   '@tanstack/solid-store@0.7.0(solid-js@1.9.3)':

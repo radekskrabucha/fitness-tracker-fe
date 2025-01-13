@@ -30,8 +30,8 @@ importers:
         specifier: 1.0.11
         version: 1.0.11(@testing-library/jest-dom@6.6.3)(solid-js@1.9.4)(vinxi@0.4.3(@types/node@22.8.5)(ioredis@5.4.1)(lightningcss@1.27.0)(terser@5.36.0))(vite@5.4.10(@types/node@22.8.5)(lightningcss@1.27.0)(terser@5.36.0))
       '@tanstack/solid-form':
-        specifier: 0.41.0
-        version: 0.41.0(solid-js@1.9.4)
+        specifier: 0.41.1
+        version: 0.41.1(solid-js@1.9.4)
       '@tanstack/solid-query':
         specifier: 5.62.16
         version: 5.62.16(solid-js@1.9.4)
@@ -1313,11 +1313,14 @@ packages:
   '@tanstack/form-core@0.41.0':
     resolution: {integrity: sha512-626Xfi0C2xB9StzykIOXR/ugx/dUiwY/nY5opCovgXwBNqPEPrN3vMepC//rnGt1/jZmm3/7MW+02Ntc64UAmw==}
 
+  '@tanstack/form-core@0.41.1':
+    resolution: {integrity: sha512-dLaLxATbaXfEVjqXQcqSXekGtZIU3dxVwbvIgEIeN9tCn02vd41w0F9qGXFzTsudPffbUKYXolCJKPqknHM0/A==}
+
   '@tanstack/query-core@5.62.16':
     resolution: {integrity: sha512-9Sgft7Qavcd+sN0V25xVyo0nfmcZXBuODy3FVG7BMWTg1HMLm8wwG5tNlLlmSic1u7l1v786oavn+STiFaPH2g==}
 
-  '@tanstack/solid-form@0.41.0':
-    resolution: {integrity: sha512-xFwC+REaC7yP9k8rjrR4RwfmyRWIWyvoZeqRddCvQmmuPamPnPt6nPDGW7TzfK2MTiOR8rNRVAyg7GOu5AFQpw==}
+  '@tanstack/solid-form@0.41.1':
+    resolution: {integrity: sha512-hApiHs+VH/2N3+zqRGX8sk9S27HXgMTP0UUR25LxvlrTYdc0fsdOvQhg1xkCcllxNeY+PR4aXzE2VVgmWq2sVQ==}
     peerDependencies:
       solid-js: ^1.6.0
 
@@ -5288,11 +5291,15 @@ snapshots:
     dependencies:
       '@tanstack/store': 0.7.0
 
+  '@tanstack/form-core@0.41.1':
+    dependencies:
+      '@tanstack/store': 0.7.0
+
   '@tanstack/query-core@5.62.16': {}
 
-  '@tanstack/solid-form@0.41.0(solid-js@1.9.4)':
+  '@tanstack/solid-form@0.41.1(solid-js@1.9.4)':
     dependencies:
-      '@tanstack/form-core': 0.41.0
+      '@tanstack/form-core': 0.41.1
       '@tanstack/solid-store': 0.7.0(solid-js@1.9.4)
       solid-js: 1.9.4
 

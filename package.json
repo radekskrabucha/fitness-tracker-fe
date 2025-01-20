@@ -17,7 +17,7 @@
     "@modular-forms/solid": "0.25.0",
     "@solid-primitives/lifecycle": "0.0.102",
     "@solidjs/meta": "0.29.4",
-    "@solidjs/router": "0.15.2",
+    "@solidjs/router": "0.15.3",
     "@solidjs/start": "1.0.11",
     "@tanstack/solid-form": "0.41.1",
     "@tanstack/solid-query": "5.64.0",

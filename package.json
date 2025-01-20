@@ -22,7 +22,7 @@
     "@tanstack/solid-form": "0.41.1",
     "@tanstack/solid-query": "5.64.0",
     "@tanstack/zod-form-adapter": "0.41.1",
-    "better-auth": "1.1.11",
+    "better-auth": "1.1.14",
     "class-variance-authority": "0.7.1",
     "date-fns": "4.1.0",
     "ofetch": "1.4.1",

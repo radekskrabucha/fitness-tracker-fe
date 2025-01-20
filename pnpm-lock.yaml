@@ -33,8 +33,8 @@ importers:
         specifier: 0.41.1
         version: 0.41.1(solid-js@1.9.4)
       '@tanstack/solid-query':
-        specifier: 5.64.0
-        version: 5.64.0(solid-js@1.9.4)
+        specifier: 5.64.2
+        version: 5.64.2(solid-js@1.9.4)
       '@tanstack/zod-form-adapter':
         specifier: 0.41.1
         version: 0.41.1(zod@3.24.1)
@@ -203,6 +203,11 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+  '@babel/parser@7.26.5':
+    resolution: {integrity: sha512-SRJ4jYmXRqV1/Xc+TIVG84WjHBXKlxO9sHQnA2Pf12QQEAp1LOh6kDzNHXcUnbH1QI0FDoPPVOt+vyUDucxpaw==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
   '@babel/plugin-syntax-jsx@7.25.9':
     resolution: {integrity: sha512-ld6oezHQMZsZfp6pWtbjaNDF2tiiCYYDqQszHt5VV437lewP9aSi2Of99CK0D0XB21k7FLgnLcmQKyKzynfeAA==}
     engines: {node: '>=6.9.0'}
@@ -229,6 +234,10 @@ packages:
 
   '@babel/types@7.26.0':
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.26.5':
+    resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
 
   '@better-auth/utils@0.2.3':
@@ -1344,16 +1353,16 @@ packages:
   '@tanstack/form-core@0.41.1':
     resolution: {integrity: sha512-dLaLxATbaXfEVjqXQcqSXekGtZIU3dxVwbvIgEIeN9tCn02vd41w0F9qGXFzTsudPffbUKYXolCJKPqknHM0/A==}
 
-  '@tanstack/query-core@5.64.0':
-    resolution: {integrity: sha512-/MPJt/AaaMzdWJZTafgMyYhEX/lGjQrNz8+NDQSk8fNoU5PHqh05FhQaBrEQafW2PeBHsRbefEf//qKMiSAbQQ==}
+  '@tanstack/query-core@5.64.2':
+    resolution: {integrity: sha512-hdO8SZpWXoADNTWXV9We8CwTkXU88OVWRBcsiFrk7xJQnhm6WRlweDzMD+uH+GnuieTBVSML6xFa17C2cNV8+g==}
 
   '@tanstack/solid-form@0.41.1':
     resolution: {integrity: sha512-hApiHs+VH/2N3+zqRGX8sk9S27HXgMTP0UUR25LxvlrTYdc0fsdOvQhg1xkCcllxNeY+PR4aXzE2VVgmWq2sVQ==}
     peerDependencies:
       solid-js: ^1.6.0
 
-  '@tanstack/solid-query@5.64.0':
-    resolution: {integrity: sha512-ZjOHFYXkCNkUDBQ/KlNWleC8lWHHUXe9+TIsnnKgVPcQbyRVRKvlaQ97jE3NZ0e2ICuQrPcGloAFwJgZRwwNPQ==}
+  '@tanstack/solid-query@5.64.2':
+    resolution: {integrity: sha512-SxYRxU4hU4fBNBrFujxpohVdAcjeivCY0hZh+YkdBsyZ7NphJq6VulS4TKGt8LsGyOtMSullvsCvIlOza0n/iQ==}
     peerDependencies:
       solid-js: ^1.6.0
 
@@ -3052,6 +3061,9 @@ packages:
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
 
+  magic-string@0.30.17:
+    resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
+
   magicast@0.2.11:
     resolution: {integrity: sha512-6saXbRDA1HMkqbsvHOU6HBjCVgZT460qheRkLhJQHWAbhXoWESI3Kn/dGGXyKs15FFKR85jsUqFx2sMK0wy/5g==}
 
@@ -3156,6 +3168,11 @@ packages:
 
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nanoid@3.3.8:
+    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -3341,6 +3358,10 @@ packages:
 
   postcss@8.4.47:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
+  postcss@8.5.1:
+    resolution: {integrity: sha512-6oz2beyjc5VMn/KV1pPw8fliQkhBXrVn1Z3TVyqZxU8kZpzEKhBdmCFqI6ZbmGtamQvQGuU1sgPTk8ZrXDD7jQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -4392,6 +4413,11 @@ snapshots:
     dependencies:
       '@babel/types': 7.26.0
 
+  '@babel/parser@7.26.5':
+    dependencies:
+      '@babel/types': 7.26.5
+    optional: true
+
   '@babel/plugin-syntax-jsx@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
@@ -4428,6 +4454,12 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
+
+  '@babel/types@7.26.5':
+    dependencies:
+      '@babel/helper-string-parser': 7.25.9
+      '@babel/helper-validator-identifier': 7.25.9
+    optional: true
 
   '@better-auth/utils@0.2.3':
     dependencies:
@@ -5328,7 +5360,7 @@ snapshots:
     dependencies:
       '@tanstack/store': 0.7.0
 
-  '@tanstack/query-core@5.64.0': {}
+  '@tanstack/query-core@5.64.2': {}
 
   '@tanstack/solid-form@0.41.1(solid-js@1.9.4)':
     dependencies:
@@ -5336,9 +5368,9 @@ snapshots:
       '@tanstack/solid-store': 0.7.0(solid-js@1.9.4)
       solid-js: 1.9.4
 
-  '@tanstack/solid-query@5.64.0(solid-js@1.9.4)':
+  '@tanstack/solid-query@5.64.2(solid-js@1.9.4)':
     dependencies:
-      '@tanstack/query-core': 5.64.0
+      '@tanstack/query-core': 5.64.2
       solid-js: 1.9.4
 
   '@tanstack/solid-store@0.7.0(solid-js@1.9.4)':
@@ -5705,7 +5737,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.12':
     dependencies:
-      '@babel/parser': 7.26.2
+      '@babel/parser': 7.26.5
       '@vue/shared': 3.5.12
       entities: 4.5.0
       estree-walker: 2.0.2
@@ -5720,14 +5752,14 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.12':
     dependencies:
-      '@babel/parser': 7.26.2
+      '@babel/parser': 7.26.5
       '@vue/compiler-core': 3.5.12
       '@vue/compiler-dom': 3.5.12
       '@vue/compiler-ssr': 3.5.12
       '@vue/shared': 3.5.12
       estree-walker: 2.0.2
-      magic-string: 0.30.12
-      postcss: 8.4.47
+      magic-string: 0.30.17
+      postcss: 8.5.1
       source-map-js: 1.2.1
     optional: true
 
@@ -7486,6 +7518,11 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  magic-string@0.30.17:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.0
+    optional: true
+
   magicast@0.2.11:
     dependencies:
       '@babel/parser': 7.26.2
@@ -7568,6 +7605,9 @@ snapshots:
   ms@2.1.3: {}
 
   nanoid@3.3.7: {}
+
+  nanoid@3.3.8:
+    optional: true
 
   natural-compare@1.4.0: {}
 
@@ -7817,6 +7857,13 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postcss@8.5.1:
+    dependencies:
+      nanoid: 3.3.8
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+    optional: true
 
   prelude-ls@1.2.1: {}
 

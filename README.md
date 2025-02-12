@@ -6,8 +6,6 @@ This app is a part of the Fitness Tracker project, [here you can find the BE rep
 
 The frontend app is built with [my SolidStart template](https://github.com/radekskrabucha/solid-start-template).
 
-⚠️ When visiting keep in mind that the BE app after some time of inactivity will be shut down. So probably you will need to refresh the page after ~30-60 seconds.
-
 ## Features
 
 - **SolidStart**: A framework for building SolidJS applications.

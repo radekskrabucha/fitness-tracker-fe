@@ -19,7 +19,7 @@
     "@solidjs/meta": "0.29.4",
     "@solidjs/router": "0.15.3",
     "@solidjs/start": "1.1.0",
-    "@tanstack/solid-form": "0.41.4",
+    "@tanstack/solid-form": "0.42.0",
     "@tanstack/solid-query": "5.66.0",
     "@tanstack/zod-form-adapter": "0.41.4",
     "better-auth": "1.1.17",

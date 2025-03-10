@@ -50,6 +50,6 @@
     "typescript": "5.8.2",
     "typescript-eslint": "8.26.0",
     "vite-plugin-solid": "2.11.6",
-    "vitest": "3.0.7"
+    "vitest": "3.0.8"
   }
 }

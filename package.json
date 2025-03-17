@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ark-ui/solid": "5.0.0",
+    "@ark-ui/solid": "5.1.0",
     "@kobalte/core": "0.13.9",
     "@solid-primitives/lifecycle": "0.1.0",
     "@solidjs/meta": "0.29.4",

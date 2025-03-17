@@ -12,16 +12,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ark-ui/solid": "5.0.0",
+    "@ark-ui/solid": "5.1.0",
     "@kobalte/core": "0.13.9",
     "@solid-primitives/lifecycle": "0.1.0",
     "@solidjs/meta": "0.29.4",
     "@solidjs/router": "0.15.3",
     "@solidjs/start": "1.1.3",
     "@tanstack/solid-form": "0.42.0",
-    "@tanstack/solid-query": "5.67.2",
+    "@tanstack/solid-query": "5.68.0",
     "@tanstack/zod-form-adapter": "0.42.1",
-    "better-auth": "1.2.3",
+    "better-auth": "1.2.4",
     "class-variance-authority": "0.7.1",
     "date-fns": "4.1.0",
     "ofetch": "1.4.1",
@@ -34,8 +34,8 @@
     "@eslint/js": "9.22.0",
     "@julr/vite-plugin-validate-env": "1.3.0",
     "@solidjs/testing-library": "0.8.10",
-    "@tailwindcss/vite": "4.0.12",
-    "@tanstack/eslint-plugin-query": "5.67.2",
+    "@tailwindcss/vite": "4.0.14",
+    "@tanstack/eslint-plugin-query": "5.68.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/user-event": "14.6.1",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
@@ -46,10 +46,10 @@
     "jsdom": "26.0.0",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
-    "tailwindcss": "4.0.12",
+    "tailwindcss": "4.0.14",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.26.0",
+    "typescript-eslint": "8.26.1",
     "vite-plugin-solid": "2.11.6",
-    "vitest": "3.0.8"
+    "vitest": "3.0.9"
   }
 }

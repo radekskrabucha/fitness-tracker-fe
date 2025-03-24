@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
@@ -10,18 +9,17 @@ import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions } from '~/features/signIn/actions'
 import { getNameFromEmail } from '~/utils/email'
 import { signUp } from '../actions'
-import { signUpSchema, type Form } from '../form/signUpForm'
+import { signUpSchema } from '../form/signUpForm'
 
 export const SignUpForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      name: ''
     },
-
-    validatorAdapter: zodValidator(),
     validators: {
       onSubmit: signUpSchema
     },
@@ -79,7 +77,7 @@ export const SignUpForm = () => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>
@@ -94,7 +92,7 @@ export const SignUpForm = () => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>
@@ -109,7 +107,7 @@ export const SignUpForm = () => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>

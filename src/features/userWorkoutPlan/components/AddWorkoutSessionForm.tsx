@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Index, Show, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { Checkbox } from '~/components/Checkbox'
@@ -30,7 +29,7 @@ export const AddWorkoutSessionForm: Component<
   AddWorkoutSessionFormProps
 > = props => {
   const navigate = useNavigate()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: props.defaultValues,
     onSubmit: ({ value }) => {
       addWorkoutSessionMutation.mutate(
@@ -40,8 +39,7 @@ export const AddWorkoutSessionForm: Component<
           workoutId: props.workoutId
         })
       )
-    },
-    validatorAdapter: zodValidator()
+    }
   }))
   const addWorkoutSessionMutation = createMutation(() => ({
     mutationFn: addWorkoutSession,

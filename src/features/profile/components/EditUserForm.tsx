@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -18,10 +17,9 @@ type EditUserFormProps = {
 
 export const EditUserForm: Component<EditUserFormProps> = props => {
   const navigate = useNavigate()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: props.initialValues,
     onSubmit: ({ value }) => editUserMutation.mutate(value),
-    validatorAdapter: zodValidator(),
     validators: {
       onSubmit: editUserSchema
     }
@@ -79,7 +77,7 @@ export const EditUserForm: Component<EditUserFormProps> = props => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>

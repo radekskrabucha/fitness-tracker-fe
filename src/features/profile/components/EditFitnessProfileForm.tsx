@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import type { Component } from 'solid-js'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
@@ -50,7 +49,7 @@ export const EditFitnessProfileForm: Component<
 > = props => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: props.initialValues,
 
     onSubmit: ({ value }) =>
@@ -71,7 +70,6 @@ export const EditFitnessProfileForm: Component<
           ? value.activityLevel
           : undefined
       }),
-    validatorAdapter: zodValidator(),
     validators: {
       onSubmit: editFitnessProfileSchema
     }
@@ -125,7 +123,7 @@ export const EditFitnessProfileForm: Component<
               value={field().state.value}
               onBlur={field().handleBlur}
               onChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               minValue={minHeight}
               maxValue={maxHeight}
               step={1}
@@ -150,7 +148,7 @@ export const EditFitnessProfileForm: Component<
               value={field().state.value}
               onBlur={field().handleBlur}
               onChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               minValue={minWeight}
               maxValue={maxWeight}
               format
@@ -166,7 +164,7 @@ export const EditFitnessProfileForm: Component<
             <DatePicker
               value={field().state.value}
               onValueChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               min={minDateOfBirthDate}
               max={maxDateOfBirthDate}
               label="Date of Birth"
@@ -182,7 +180,7 @@ export const EditFitnessProfileForm: Component<
             disabled={editFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileGender}
             transformLabel={getGenderName}
           />
@@ -195,7 +193,7 @@ export const EditFitnessProfileForm: Component<
             disabled={editFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileActivityLevel}
             transformLabel={getActivityLevelName}
           />
@@ -208,7 +206,7 @@ export const EditFitnessProfileForm: Component<
             disabled={editFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileFitnessGoal}
             transformLabel={getFitnessGoalName}
           />
@@ -221,7 +219,7 @@ export const EditFitnessProfileForm: Component<
             disabled={editFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileDietaryPreference}
             transformLabel={getDietaryPreferenceName}
           />

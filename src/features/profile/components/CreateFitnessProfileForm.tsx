@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { NumberInputWithSteps } from '~/components/NumberInputWithSteps'
@@ -13,7 +12,11 @@ import {
   fitnessProfileActivityLevel,
   fitnessProfileDietaryPreference,
   fitnessProfileFitnessGoal,
-  fitnessProfileGender
+  fitnessProfileGender,
+  type FitnessProfileActivityLevel,
+  type FitnessProfileDietaryPreference,
+  type FitnessProfileFitnessGoal,
+  type FitnessProfileGender
 } from '~/models/profile'
 import { nonNullable } from '~/utils/common'
 import {
@@ -27,8 +30,7 @@ import {
   maxWeight,
   minWeight,
   maxHeight,
-  minHeight,
-  type Form
+  minHeight
 } from '../form/createFitnessProfileForm'
 import {
   getActivityLevelName,
@@ -41,11 +43,15 @@ export const CreateFitnessProfileForm = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
-  // @ts-expect-error - default values only for height and weight
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: {
+      gender: '' as FitnessProfileGender,
+      activityLevel: '' as FitnessProfileActivityLevel,
+      fitnessGoal: '' as FitnessProfileFitnessGoal,
+      dateOfBirth: '',
       height: '170',
-      weight: '70'
+      weight: '70',
+      dietaryPreference: '' as FitnessProfileDietaryPreference
     },
     onSubmit: ({ value }) =>
       createFitnessProfileMutation.mutate({
@@ -57,7 +63,6 @@ export const CreateFitnessProfileForm = () => {
           ? value.dietaryPreference
           : null
       }),
-    validatorAdapter: zodValidator(),
     validators: {
       onSubmit: createFitnessProfileSchema
     }
@@ -111,7 +116,7 @@ export const CreateFitnessProfileForm = () => {
               value={field().state.value}
               onBlur={field().handleBlur}
               onChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               minValue={minHeight}
               maxValue={maxHeight}
               step={1}
@@ -136,7 +141,7 @@ export const CreateFitnessProfileForm = () => {
               value={field().state.value}
               onBlur={field().handleBlur}
               onChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               minValue={minWeight}
               maxValue={maxWeight}
               format
@@ -152,7 +157,7 @@ export const CreateFitnessProfileForm = () => {
             <DatePicker
               value={field().state.value}
               onValueChange={field().handleChange}
-              error={field().state.meta.errors[0]}
+              error={field().state.meta.errors[0]?.message}
               min={minDateOfBirthDate}
               max={maxDateOfBirthDate}
               label="Date of Birth"
@@ -168,7 +173,7 @@ export const CreateFitnessProfileForm = () => {
             disabled={createFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileGender}
             transformLabel={getGenderName}
           />
@@ -181,7 +186,7 @@ export const CreateFitnessProfileForm = () => {
             disabled={createFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileActivityLevel}
             transformLabel={getActivityLevelName}
           />
@@ -194,7 +199,7 @@ export const CreateFitnessProfileForm = () => {
             disabled={createFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileFitnessGoal}
             transformLabel={getFitnessGoalName}
           />
@@ -207,7 +212,7 @@ export const CreateFitnessProfileForm = () => {
             disabled={createFitnessProfileMutation.isPending}
             value={field().state.value}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
             options={fitnessProfileDietaryPreference}
             transformLabel={getDietaryPreferenceName}
           />

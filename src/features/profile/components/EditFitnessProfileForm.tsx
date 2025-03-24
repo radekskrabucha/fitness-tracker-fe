@@ -13,7 +13,8 @@ import {
   fitnessProfileActivityLevel,
   fitnessProfileDietaryPreference,
   fitnessProfileFitnessGoal,
-  fitnessProfileGender
+  fitnessProfileGender,
+  type FitnessProfileDietaryPreference
 } from '~/models/profile'
 import { nonNullable } from '~/utils/common'
 import {
@@ -39,8 +40,12 @@ import {
   getGenderName
 } from '../utils'
 
+type InitialValues = Omit<Form, 'dietaryPreference'> & {
+  dietaryPreference: FitnessProfileDietaryPreference | undefined
+}
+
 type EditFitnessProfileFormProps = {
-  initialValues: Form
+  initialValues: InitialValues
   userId: string
 }
 

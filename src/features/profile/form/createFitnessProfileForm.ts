@@ -22,7 +22,9 @@ export const createFitnessProfileSchema = z.object({
   fitnessGoal: z.enum(fitnessProfileFitnessGoal, {
     message: 'Fitness goal is required'
   }),
-  dateOfBirth: z.string({ message: 'Date of birth is required' }),
+  dateOfBirth: z
+    .string({ message: 'Date of birth is required' })
+    .min(1, 'Date of birth is required'),
   height: z
     .string({ message: 'Height is required' })
     .refine(
@@ -51,7 +53,7 @@ export const createFitnessProfileSchema = z.object({
       },
       { message: `Weight must be less than or equal to ${maxWeight}` }
     ),
-  dietaryPreference: z.enum(fitnessProfileDietaryPreference).optional()
+  dietaryPreference: z.enum(fitnessProfileDietaryPreference)
 })
 
 export type Form = z.infer<typeof createFitnessProfileSchema>

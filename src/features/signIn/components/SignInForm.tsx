@@ -1,21 +1,23 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { Button } from '~/components/Button'
 import { LoaderCircle } from '~/components/LoaderCircle'
 import { TextInput } from '~/components/TextInput'
 import { toast } from '~/components/Toast'
 import { InternalLink } from '~/config/app'
 import { getSessionQueryOptions, signInWithEmail } from '../actions'
-import { signInSchema, type Form } from '../form/signInForm'
+import { signInSchema } from '../form/signInForm'
 
 export const SignInForm = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     onSubmit: ({ value }) => signInMutation.mutate(value),
-    validatorAdapter: zodValidator(),
+    defaultValues: {
+      email: '',
+      password: ''
+    },
     validators: {
       onSubmit: signInSchema
     }
@@ -65,7 +67,7 @@ export const SignInForm = () => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>
@@ -81,7 +83,7 @@ export const SignInForm = () => {
             value={field().state.value}
             onBlur={field().handleBlur}
             onChange={field().handleChange}
-            error={field().state.meta.errors[0]}
+            error={field().state.meta.errors[0]?.message}
           />
         )}
       </form.Field>

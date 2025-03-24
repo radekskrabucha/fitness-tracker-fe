@@ -1,7 +1,6 @@
 import { useNavigate } from '@solidjs/router'
 import { createForm } from '@tanstack/solid-form'
 import { createMutation, useQueryClient } from '@tanstack/solid-query'
-import { zodValidator, type ZodValidator } from '@tanstack/zod-form-adapter'
 import { FetchError } from 'ofetch'
 import { Index, Match, Show, Switch, type Component } from 'solid-js'
 import { Button } from '~/components/Button'
@@ -38,15 +37,14 @@ export const ChooseWorkoutPlanForm: Component<
 > = props => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const form = createForm<Form, ZodValidator>(() => ({
+  const form = createForm(() => ({
     defaultValues: props.defaultValues,
     onSubmit: ({ value }) => {
       chooseWorkoutPlanMutation.mutate({
         workoutPlanId: props.workoutPlanId,
         ...transformFormToRequest(value)
       })
-    },
-    validatorAdapter: zodValidator()
+    }
   }))
   const chooseWorkoutPlanMutation = createMutation(() => ({
     mutationFn: chooseWorkoutPlan,
